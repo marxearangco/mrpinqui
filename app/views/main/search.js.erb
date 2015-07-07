@@ -1,0 +1,23 @@
+$(".showpanel").html("<%= escape_javascript(render 'search') %>")
+
+
+    $("#search").keyup(function(){
+        _this = this;
+        $.each($("#table tbody").find("tr"), function() {
+            if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) == -1)
+               $(this).hide();
+            else
+                $(this).show();
+                
+        });
+        
+    }); 
+
+$("#table tr").not(':first').hover(
+  function () {
+  $(this).css("background","#C0C0C0");
+  }, 
+  function () {
+    $(this).css("background","");
+  }
+);

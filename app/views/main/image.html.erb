@@ -1,0 +1,10 @@
+
+<h5 id="addpic1"><i>Select picture for Code: <%= @id %> to upload</i></h5>
+<%= form_for(@img, :url=>{:action=>'addimg'}, html: {multipart: :true}) do |f| %>
+<%= f.hidden_field :code, :value=>@id %>
+<%= f.file_field :photo, :required=>true %>
+  <%= submit_tag "Select", :id=> "update", :class=> "button alert radius", data: { disable_with: "wait...", remote: true}  %>
+<% end %>
+ 
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+

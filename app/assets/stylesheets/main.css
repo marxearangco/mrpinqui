@@ -1,0 +1,140 @@
+.highlight{
+  border: red;
+  background-color: yellow;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+@media only screen and (min-width: 0) and (max-width: 64em) {
+  img, form, .button {
+    padding: 20px;
+  }
+  .button {
+    margin: 20px;
+  }
+}
+
+.row {
+  max-width: 80rem;
+  margin-bottom: 20px;
+}
+
+.alert-box {
+  margin-bottom: 0;
+}
+
+#myModal {
+  /*margin-top:-80px;*/
+
+}
+
+table.scroll {
+    /* width: 100%; */ /* Optional */
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+    border: 2px solid gray;
+}
+
+table.scroll tbody,
+table.scroll thead { display: block; }
+
+thead tr th { 
+    height: 30px;
+    line-height: 30px;
+    /* text-align: left; */
+}
+
+table.scroll tbody {
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+tbody.scrollbody { border-top: 2px solid gray; }
+
+tbody td, thead th {
+    /* width: 20%; */ /* Optional */
+    /*border-right: 1px solid black;
+    /* white-space: nowrap; */
+}
+
+tbody td:last-child, thead th:last-child {
+    border-right: none;
+}
+
+.tab { 
+    
+    width: 400px;
+    display: inline;
+}
+
+ .imgborder {
+  border: 1px solid #C0C0C0;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  }
+
+/*for image grid */
+.g {
+      padding: 0.25em;
+      overflow: hidden;
+    }
+    .g li {
+      float: left;
+      width: 50%;
+      padding: 1em;
+    }
+    .g img {
+      display: block;
+    }
+    .g li:nth-child(odd) {
+      clear: left;
+    }
+  
+    @media screen and (min-width: 40em) {
+      .g li {
+          width: 33.3333333333333333%; 
+        }
+        .g li:nth-child(3n+1) {
+          clear: left;
+        }
+        .g li:nth-child(odd) {
+        clear: none;
+      }
+    }
+    @media screen and (min-width: 55em) {
+      .g li {
+          width: 25%; 
+        }
+        .g li:nth-child(4n+1) {
+          clear: left;
+        }
+        .g li:nth-child(3n+1) {
+        clear: none;
+      }
+    }
+    @media screen and (min-width: 72em) {
+      .g li {
+          width: 20%; 
+        }
+        .g li:nth-child(5n+1) {
+          clear: left;
+        }
+        .g li:nth-child(4n+1) {
+        clear: none;
+      }
+    }
+    @media screen and (min-width: 90em) {
+      .g li {
+          width: 16.666666666%; 
+        }
+        .g li:nth-child(6n+1) {
+          clear: left;
+        }
+        .g li:nth-child(5n+1) {
+        clear: none;
+      }
+    }
