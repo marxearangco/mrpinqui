@@ -6,14 +6,13 @@ DMS::Application.routes.draw do
       get 'view'
       get 'user'
       get 'image'
-      post 'addimg'
-      get 'addimg'
-      get 'show'
-      get 'edit'
       post 'save'
-      get 'secondview'
+      post 'create'
+      get 'create'
     end
   end
+
+
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

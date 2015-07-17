@@ -13,9 +13,9 @@
 
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <title><%= content_for?(:title) ? yield(:title) : "DMS Inquiry" %></title>
-
+    <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
@@ -24,10 +24,10 @@
   <body>
 <%= render 'layouts/topbar' %>
 <br>
-<div class="row small" style="margin-left: 0px">
+<div class="row" style="margin-left: 0px">
   <div class="small-3 columns"><%= render 'main/tree' %></div>
   <div class="small-9 columns"><%= yield %></div>
 </div>
-<%= javascript_include_tag 'application' %>
+
 </body>
 </html>

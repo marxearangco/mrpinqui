@@ -1,0 +1,56 @@
+<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+
+
+<ul class="pricing-table">
+<% @item.each do |i| %>
+  <li class="title"><%= i.itemname %></li>
+  <li class="price">
+  <% if @img %> 
+  	<%= image_tag @img, :id=>"image", :style => "margin: 0 0 auto; max-height: 200px; max-width: 200px" %>
+  <% else %>
+  	<%= image_tag 'ring.png', :style => "margin: 0 0 auto; height: 200px; width: 200px" %>
+  <% end %>
+  </li>
+  <li class="description" style="font-style: italic">Details: <b><%= i.detail %></b></li>
+  <li class="bullet-item" id="detailsform">
+      <table style="border: 1px solid white; margin-left: 30px">
+      <tr>
+        <td style="width:150px; margin-left: 0px">Part Number: </td>
+        <td><%= i.partnum %></td>
+        <td width="80px"></td>
+        <td width="100px">SRP:</td>
+        <td><%= number_with_precision(i.srp, precision: 2, separator: '.', delimiter: ',') %></td>
+      </tr>
+      <tr>
+        <td style="width:150px; margin-left: 0px">Qty. Available: </td>
+        <td><%= i.qtyEnd %></td>
+        <td width="80px"></td>
+        <td width="100px">Unit Cost:</td>
+        <td><%= number_with_precision(i.cost, precision: 2, separator: '.', delimiter: ',') %></td>
+      <tr>
+    </table>
+  </li>
+  <li class="bullet-item" style="text-align: center" id="buttonsform">
+    <!--%= link_to "photo", image_main_path(i.code), remote: true %>-->
+        <div id="upload">
+          <a href="/main/<%= i.code %>/image" data-remote="true" class="medium button alert radius">
+        <% if @img %> 
+          Edit Photo
+        <% else %>
+          Add Photo
+        <% end %>
+        </a>
+        
+      <a href="/main/<%= i.code %>/edit" data-reveal-id="inventory" data-reveal-ajax="true" data-remote="true" class="medium button alert radius">
+       Inventory
+      </a>
+        </div>
+      
+
+  </li>
+  
+
+<% end %>
+</ul>
+
+

@@ -35,6 +35,7 @@ end
 gem 'zurb-foundation'
 gem "paperclip"
 gem 'coffee-script-source', '1.8.0'
+gem 'simple_form', '~> 3.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

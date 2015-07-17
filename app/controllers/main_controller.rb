@@ -1,7 +1,7 @@
 class MainController < ApplicationController
   #caches_page :index, :show  
   skip_before_filter :verify_authenticity_token, :only => [:index, :search]
-  respond_to :html, :js
+  
   def index
   	tree
   end
@@ -36,28 +36,10 @@ class MainController < ApplicationController
       @photogrid << '</li>'
     end
   end
-  
+
   def search
     parm = params[:id].split('-')
-    if parm[0]=='0'
-      @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=?',parm[1])    
-    else
-      @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm[0],parm[1])
-    end
-    @photogrid = ''
-    @items.each do |i|
-      @c = i.code
-      @photo = '/assets/ring.png'
-      @photogrid << '<li><a href="/main/'<< @c.to_s<<'/view" data-reveal-id="myModal" data-reveal-ajax="true" data-remote="true">'
-      @image = Image.where("code = ?", i.code)
-        if @image
-          @image.each do |p|
-            @photo = p.photo.url(:medium)
-          end
-        end
-      @photogrid << '<img src="' << @photo << '" style="vertical-align: middle;" />'
-      @photogrid << '</a><p style="font-size: 85%; text-align: center">' << i.itemname << '</p></li>'
-    end
+    find_item(parm[0],parm[1])
   end
 
   def view
@@ -80,16 +62,22 @@ class MainController < ApplicationController
   	 brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
   	 @treeview << "<ul>\n"
   	 brand.each do |b|
-  	 	@treeview <<"<li><span class='leaf'><a href='main/#{c.idCategory}-#{b.idBrand}/search' data-remote=true>#{b.brandName}</a></span></li>"
+  	 	@treeview <<"<li><span class='leaf'><a href='main/#{c.idCategory}-#{b.idBrand}/search' data-remote='true'>#{b.brandName}</a></span></li>"
   	 end
   	 @treeview << "</ul>\n" << "</li></ul>"
   	end
+    respond_to do |format|
+      format.html
+      format.json
+    end
+
   end
 
   def image
     @id = params[:id]
     @img = Image.new
-    render layout: false
+    #render layout: false
+
   end
 
   def edit
@@ -110,28 +98,49 @@ class MainController < ApplicationController
      redirect_to request.env["HTTP_REFERER"]
   end
 
-  def addimg
-   photo = Image.find_by(code: params[:id])
-   
-    if photo
+  def create
+    photo = Image.find_by(code: params[:id])
+     if photo
       photo.destroy
-    end
-      i = params.require(:image).permit(:code,:photo)  
-      @img = Image.create(i)
-      @img.save
-      view
-    
-      respond_to do |format|
-        format.js
-      end
-    
+     end
+     i = params.require(:image).permit(:code,:photo)  
+     @i = Image.create(i)
+     @i.save
+
   end
- 
-  
+    
   def show
     
   end
   
+  private
+
+  def find_item(parm0, parm1)
+    if parm0=='0'
+      @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=?',parm1)    
+    else
+      @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm0,parm1)
+    end
+    @photogrid = ''
+    @items.each do |i|
+      @c = i.code
+      @photo = '/assets/ring.png'
+      @photogrid << '<li><a href="/main/'<< @c.to_s<<'/view" data-reveal-id="myModal" data-remote="true">'
+      @image = Image.where("code = ?", i.code)
+        if @image
+          @image.each do |p|
+            @photo = p.photo.url(:thumb)
+          end
+        end
+      @photogrid << '<img src="' << @photo << '" style="vertical-align: middle;" />'
+      @photogrid << '</a><p style="font-size: 85%; text-align: center">' << i.itemname << '</p></li>'
+    end
+    respond_to do |format|
+      format.html
+      format.js
+      
+    end
+  end 
 
 end
 

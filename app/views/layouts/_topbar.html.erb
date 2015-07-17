@@ -1,29 +1,61 @@
-<div class="contain-to-grid sticky">
-<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
-  <ul class="title-area" style="margin-left: 10px">
-    <li>
-      <span><%= image_tag 'logo.png' %></span>
-    </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="active"><%= link_to 'Motor Related Product', root_path %></a></li>
-      <li class="divider"></li>
-      <li class="has-dropdown">
-        <a href="">Menu</a>
-        <ul class="dropdown">
-          <li><a href="#">Inquire</a></li>
-          <li class="active"><a href="#">Logout</a></li>
-        </ul>
+<div class="contain-to-grid sticky">
+<nav class="top-bar" data-topbar="" data-options="sticky_on: large">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#">
+            <span>NORMINRING</span> <span style="color: red">MOTORBIKES</span>
+          </a>
+        </h1>
       </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
     </ul>
 
-    <!-- Left Nav Section -->
     
-  </section>
-</nav>
+  <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li class="has-dropdown not-click">
+          <a href="#">Main Item 1</a>
+          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Main Item 1</a></li>
+            <li><label>Section Name</label></li>
+            <li class="has-dropdown not-click">
+              <a href="#" class="">Has Dropdown, Level 1</a>
+              <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Has Dropdown, Level 1</a></li>
+                <li><a href="#">Dropdown Options</a></li>
+                <li><a href="#">Dropdown Options</a></li>
+                <li><a href="#">Level 2</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+                <li><a href="#">Subdropdown Option</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><label>Section Name</label></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><a href="#">See all →</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="has-dropdown not-click">
+          <a href="#">Main Item 2</a>
+          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Main Item 2</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li><a href="#">Dropdown Option</a></li>
+            <li class="divider"></li>
+            <li><a href="#">See all →</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
 </div>

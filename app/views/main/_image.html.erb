@@ -1,0 +1,7 @@
+
+<%= form_for @img, url: {action: "create"}, remote: true, :html => {:multipart => true} do |f| %>
+<%= f.hidden_field :code, :value=> @id %>
+<%= f.file_field :photo, :required=> true %>
+  <%= f.button "upload", :id=>'select', :class=> "button radius" %>
+<% end %>
+
