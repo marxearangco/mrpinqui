@@ -1,6 +1,4 @@
 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-
-
 <ul class="pricing-table">
 <% @item.each do |i| %>
   <li class="title"><%= i.itemname %></li>
@@ -31,7 +29,7 @@
     </table>
   </li>
   <li class="bullet-item" style="text-align: center" id="buttonsform">
-    <!--%= link_to "photo", image_main_path(i.code), remote: true %>-->
+   
         <div id="upload">
           <a href="/main/<%= i.code %>/image" data-remote="true" class="medium button alert radius">
         <% if @img %> 

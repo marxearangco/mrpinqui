@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  #caches_page :index, :show  
+  
   skip_before_filter :verify_authenticity_token, :only => [:index, :search]
   
   def index
@@ -26,9 +26,6 @@ class MainController < ApplicationController
             @photo = p.photo.url(:medium)
           end
         end
-          #@photo = "/assets/ring.png"
-          #@photogrid << '<img src="/assets/ring.png" style="height: 100px; width: 100px" />'
-        #end
       @photogrid << '<img src="' << @photo << '" style="height: 100px; width: 100px" />'
       @photogrid << '</a></li>'
       @photogrid << '<li style="list-style: none; font: italic 10px gray">' << i.itemname << '</li>'
@@ -51,7 +48,8 @@ class MainController < ApplicationController
         @img = i.photo.url(:medium)
       end
     end
-    render layout: false
+
+    #render layout: false
   end
   
   def tree
@@ -125,7 +123,7 @@ class MainController < ApplicationController
     @items.each do |i|
       @c = i.code
       @photo = '/assets/ring.png'
-      @photogrid << '<li><a href="/main/'<< @c.to_s<<'/view" data-reveal-id="myModal" data-remote="true">'
+      @photogrid << '<li><a href="/main/'<< @c<<'/view" data-reveal-id="myModal" data-remote="true">'
       @image = Image.where("code = ?", i.code)
         if @image
           @image.each do |p|
@@ -135,11 +133,11 @@ class MainController < ApplicationController
       @photogrid << '<img src="' << @photo << '" style="vertical-align: middle;" />'
       @photogrid << '</a><p style="font-size: 85%; text-align: center">' << i.itemname << '</p></li>'
     end
-    respond_to do |format|
-      format.html
-      format.js
+    #respond_to do |format|
+    #  format.html
+    #  format.js
       
-    end
+   # end
   end 
 
 end

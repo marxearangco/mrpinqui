@@ -11,7 +11,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: invndccdo_MCA
+  database: invndccdo
   pool: 5000
   username: ndccdo
   password: ndccdo
@@ -23,7 +23,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: invndccdo_MCA
+  database: invndccdo
   pool: 5000
   username: ndccdo
   password: 
@@ -32,8 +32,17 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: invndccdo_MCA
+  database: invndccdo
   pool: 5000
   username: root
   password: 
   host: 192.168.1.88
+
+localdb:
+  adapter: mysql2
+  encoding: utf8
+  database: iMRP
+  pool: 5000
+  username: root
+  password: 
+  host: 127.0.0.1
