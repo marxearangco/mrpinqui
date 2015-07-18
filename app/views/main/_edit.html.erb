@@ -1,20 +1,6 @@
-<script>
-
-	var qtybeg = $('#beg').val();
-		qtyin = $('#in').val();
-		qtyout = $('#out').val();
-		qtyend = $('#end').val();
-	$('#beg').keyup(function() {
-		var res = qtybeg + qtyin - qtyOut;
-		$('#end').val(res);
-		alert( "Handler for .keyup() called." );
-	});
-
-
-</script>
 <% @inv.each do |i| %>
-<h5 id="inventory" style="text-align: center"><b>Code: &nbsp;&nbsp;&nbsp;<%= i.code %></b></h5>
-	<%= form_tag(save_main_path(i.code), :multipart=> true) do %>
+<h5 id="inventory" style="text-align: center"><b>Item Code: &nbsp;&nbsp;&nbsp;<%= i.code %></b></h5>
+	<%= form_tag(save_main_path(i.code), remote: true, id: 'updateinv') do %>
 	<div class="row">
 			<div class="large-12 columns">
 			<div class="row collapse">
@@ -62,7 +48,7 @@
           				<span class="prefix">SRP</span>
         			</div>
         			<div class="small-8 columns">
-          				<%= text_field_tag :srp, i.srp, style: "text-align: center" %> 
+          				<%= number_field_tag :srp, i.srp, style: "text-align: center" %> 
         			</div>
         		</div>
 
@@ -71,7 +57,7 @@
 	          			<span class="prefix">cost</span>
 	        		</div>
 	        		<div class="small-8 columns">
-	          			<%= text_field_tag :cost, i.cost, style: "text-align: center" %> 
+	          			<%= number_field_tag :cost, i.cost, style: "text-align: center" %> 
 	        		</div>
 	        	</div>
             </div>
@@ -85,7 +71,7 @@
 	          			<span class="prefix">Beg</span>
 	        		</div>
 	        		<div class="small-9 columns">
-	          			<%= text_field_tag :beg, i.qtyBeg, style: "text-align: center" %>
+	          			<%= number_field_tag :beg, i.qtyBeg, style: "text-align: center" %>
 	        		</div>
             	</div>
 
@@ -94,7 +80,7 @@
 	          			<span class="prefix">In</span>
 	        		</div>
 	        		<div class="small-9 columns">
-	          			<%= text_field_tag :in, i.qtyIn, style: "text-align: center" %> 
+	          			<%= number_field_tag :in, i.qtyIn, style: "text-align: center" %> 
 	        		</div>
             	</div>
 
@@ -103,7 +89,7 @@
 	          			<span class="prefix">Out</span>
 	        		</div>
 	        		<div class="small-9 columns">
-	          			<%= text_field_tag :out, i.qtyOut, style: "text-align: center" %> 
+	          			<%= number_field_tag :out, i.qtyOut, style: "text-align: center" %> 
 	        		</div>
 	            </div>
 
@@ -112,18 +98,17 @@
 	          			<span class="prefix">End</span>
 	        		</div>
 	        		<div class="small-9 columns" >
-	          			<%= text_field_tag :end, i.qtyEnd, style: "text-align: center" %> 
+	          			<%= number_field_tag :end, i.qtyEnd, style: "text-align: center" %> 
 	        		</div>
             	</div>
 
 			</div>
-        </div>
-   
-
-	</div>
-		<%= submit_tag "Update", :style=> "float: right", :class=> "button alert radius" %>
+       </div>
+   </div>
+		<%= submit_tag "Update", id: 'btnupdate', :style=> "float: right", :class=> "button alert radius", data:{ disable_with: 'wait' }%>
 	<% end %>
 <% end %>
+<%= link_to "Back", view_main_path(params[:id]), remote: true, data: {reveal_id: 'myModal'}, class: 'medium button alert radius' %>
 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 
 

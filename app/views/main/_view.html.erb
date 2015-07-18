@@ -29,20 +29,19 @@
     </table>
   </li>
   <li class="bullet-item" style="text-align: center" id="buttonsform">
-   
+        <% 
+          if @img 
+            @label= 'Edit Photo'
+          else
+            @label= 'Add Photo'
+         end 
+        -%>
+
         <div id="upload">
-          <a href="/main/<%= i.code %>/image" data-remote="true" class="medium button alert radius">
-        <% if @img %> 
-          Edit Photo
-        <% else %>
-          Add Photo
-        <% end %>
+          <%= link_to @label, image_main_path(params[:id]), remote: true %>
         </a>
         
-      <a href="/main/<%= i.code %>/edit" data-reveal-id="inventory" data-reveal-ajax="true" data-remote="true" class="medium button alert radius">
-       Inventory
-      </a>
-        </div>
+      <%= link_to "Inventory", edit_main_path(params[:id]), remote: true, data: {reveal_id: 'inventory'}, class: 'medium button radius' %>
       
 
   </li>

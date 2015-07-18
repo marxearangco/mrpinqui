@@ -1,0 +1,19 @@
+$('#inventory').html('<%= escape_javascript (render "edit") %>');
+
+$('#updateinv').submit(function(event) {
+  var form = $(this);
+  $.ajax({
+			type: 'POST',
+			url: '<%= save_main_path(params[:id]) %>',
+			data: form.serialize(),
+			//processData: false,
+        	//contentType: false,
+			success: function(){
+				$('#btnupdate').attr('dislay','none');
+        	},
+						
+		});
+  
+  event.preventDefault();
+  
+});

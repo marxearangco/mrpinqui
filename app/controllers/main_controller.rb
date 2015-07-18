@@ -81,11 +81,15 @@ class MainController < ApplicationController
   def edit
     sql = 'tblinventory.code, a.partnum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
     @inv = Inventory.select(sql).joins('Left Join tblitem a on a.code = tblinventory.code').where('tblinventory.code=?',params[:id])
-    render layout: false
+    respond_to do |format|
+      format.js
+      format.html
+    end
+    
   end
 
   def save
-     @inv = Inventory.where("code=?",params[:id])
+     @inv = Inventory.where("code=?", params[:id])
      @inv.each do |i|
       i.qtyBeg = params[:beg]
       i.qtyIn = params[:in]
@@ -93,7 +97,20 @@ class MainController < ApplicationController
       i.qtyEnd = params[:end]
       i.save
      end
-     redirect_to request.env["HTTP_REFERER"]
+     @item = Item.where("code=?", params[:id])
+     @item.each do |j|
+      j.itemName = params[:itemname]
+      j.detail = params[:detail]
+      j.partNum = params[:partnum]
+      j.vin = params[:location]
+      j.sellingPrice = params[:srp]
+      j.cost = params[:cost]
+      j.save
+    end
+    respond_to do |format|
+      format.js
+      format.html {render layout: false}
+    end
   end
 
   def create
