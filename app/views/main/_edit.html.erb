@@ -37,7 +37,8 @@
 	          			<span class="prefix">Location</span>
 	        		</div>
 	        		<div class="small-8 columns">
-	          			<%= text_field_tag :location, i.vin, style: "text-align: center" %> 
+	          			<!--%= text_field_tag :location, i.vin, style: "text-align: center" %--> 
+	          			<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.vin) %>
 	        		</div>
 	        	</div>
             </div>
@@ -105,10 +106,12 @@
 			</div>
        </div>
    </div>
-		<%= submit_tag "Update", id: 'btnupdate', :style=> "float: right", :class=> "button alert radius", data:{ disable_with: 'wait' }%>
+		<%= link_to "<<", view_main_path(params[:id]), remote: true, data: {reveal_id: 'myModal'}, class: 'btn alert' %>
+		<%= submit_tag "Update", id: 'btnupdate', class: "btn alert" %>
+
 	<% end %>
 <% end %>
-<%= link_to "Back", view_main_path(params[:id]), remote: true, data: {reveal_id: 'myModal'}, class: 'medium button alert radius' %>
+
 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 
 

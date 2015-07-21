@@ -1,2 +1,5 @@
-<%= link_to "Edit Photo", image_main_path(params[:id]), remote: true, class: 'medium button alert radius' %>
-<%= link_to "Inventory", edit_main_path(params[:id]), remote: true, class: 'small success radius' %>
+
+
+<%= link_to 'Edit Photo', image_main_path(params[:id]), remote: true, class: 'btn danger text-shadow' %>
+<%= link_to "Inventory", edit_main_path(params[:id]), remote: true, data: {reveal_id: 'inventory'}, class: 'btn danger text-shadow' %>
+

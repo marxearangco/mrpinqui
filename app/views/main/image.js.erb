@@ -1,5 +1,10 @@
 $('#upload').html("<%= escape_javascript(render 'image') %>");
 
+$('#back').click(function(){
+	$('#upload').html("<%= escape_javascript(render 'button') %>");
+});
+
+
 $('#new_image').submit(function(event) {
   var form = $(this).parent('form');
   var fd = new FormData();

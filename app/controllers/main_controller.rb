@@ -52,18 +52,37 @@ class MainController < ApplicationController
     #render layout: false
   end
   
-  def tree
+  def tree1
   	cat = Category.order(:category).where("idCategory<>'8'") 
-  	@treeview = ''
-  	cat.each do |c|
-  	 @treeview << "<ul><li class='node collapsed'>\n" << "<span class='leaf'><a href='main/0-#{c.idCategory}/search' data-remote=true>#{c.Category}</a></span>\n"  << "<span class='node-toggle'></span>\n"
-  	 brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
-  	 @treeview << "<ul>\n"
-  	 brand.each do |b|
-  	 	@treeview <<"<li><span class='leaf'><a href='main/#{c.idCategory}-#{b.idBrand}/search' data-remote='true'>#{b.brandName}</a></span></li>"
-  	 end
-  	 @treeview << "</ul>\n" << "</li></ul>"
-  	end
+    @treeview = ''
+    cat.each do |c|
+     @treeview << "<ul><li class='node collapsed'>\n" << "<span class='leaf'><a href='main/0-#{c.idCategory}/search' data-remote=true>#{c.Category}</a></span>\n"  << "<span class='node-toggle'></span>\n"
+     brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
+     @treeview << "<ul>\n"
+     brand.each do |b|
+      @treeview <<"<li><span class='leaf'><a href='main/#{c.idCategory}-#{b.idBrand}/search' data-remote='true'>#{b.brandName}</a></span></li>"
+     end
+     @treeview << "</ul>\n" << "</li></ul>"
+    end
+    respond_to do |format|
+      format.html
+      format.json
+    end
+
+  end
+
+  def tree
+    cat = Category.order(:category).where("idCategory<>'8'") 
+    @treeview = ''
+    cat.each do |c|
+     @treeview << "<ul><li class='node collapsed'>\n" << "<span class='leaf'><a href='main/0-#{c.idCategory}/search' data-remote=true>#{c.Category}</a></span>\n"  << "<span class='node-toggle'></span>\n"
+     brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
+     @treeview << "<ul>\n"
+     brand.each do |b|
+      @treeview <<"<li><span class='leaf'><a href='main/#{c.idCategory}-#{b.idBrand}/search' data-remote='true'>#{b.brandName}</a></span></li>"
+     end
+     @treeview << "</ul>\n" << "</li></ul>"
+    end
     respond_to do |format|
       format.html
       format.json
@@ -81,6 +100,7 @@ class MainController < ApplicationController
   def edit
     sql = 'tblinventory.code, a.partnum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
     @inv = Inventory.select(sql).joins('Left Join tblitem a on a.code = tblinventory.code').where('tblinventory.code=?',params[:id])
+    @location = Location.all
     respond_to do |format|
       format.js
       format.html

@@ -11,7 +11,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: invndccdo_MCA
+  database: invndccdo
   pool: 5000
   username: ndccdo
   password: ndccdo

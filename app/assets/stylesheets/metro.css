@@ -3916,8 +3916,8 @@ a.tag {
 .app-bar .app-bar-menu > li > a > .input-control.password input {
   border-color: transparent;
 }
-.app-bar .app-bar-menu > li > .button,
-.app-bar .app-bar-menu > li > a > .button {
+.app-bar .app-bar-menu > li > .btn,
+.app-bar .app-bar-menu > li > a > .btn {
   margin-top: -0.15rem;
 }
 .app-bar .app-bar-menu > li > .image-button,
@@ -4031,7 +4031,7 @@ a.tag {
 .app-bar .app-bar-element > .input-control.password input {
   border-color: transparent;
 }
-.app-bar .app-bar-element > .button {
+.app-bar .app-bar-element > .btn {
   margin-top: -0.15rem;
 }
 .app-bar .app-bar-element > .image-button {
@@ -4116,7 +4116,7 @@ a.tag {
 .app-bar .app-bar-pullbutton > .input-control.password input {
   border-color: transparent;
 }
-.app-bar .app-bar-pullbutton > .button {
+.app-bar .app-bar-pullbutton > .btn {
   margin-top: -0.15rem;
 }
 .app-bar .app-bar-pullbutton > .image-button {
@@ -4280,7 +4280,7 @@ a.tag {
   color: #ffffff;
 }
 .h-menu > li .input-control,
-.h-menu > li .button {
+.h-menu > li .btn {
   margin-top: 10px;
 }
 .h-menu > li.active a {
@@ -5060,7 +5060,7 @@ a.tag {
   position: absolute;
   z-index: 1000;
 }
-.button {
+.btn {
   padding: 0 1rem;
   height: 2.125rem;
   text-align: center;
@@ -5076,44 +5076,44 @@ a.tag {
   margin: .15625rem 0;
   position: relative;
 }
-.button.default {
+.btn.default {
   background-color: #008287;
   color: #fff;
 }
-.button:hover {
+.btn:hover {
   border-color: #787878;
 }
-.button:active {
+.btn:active {
   background: #eeeeee;
   color: #262626;
   box-shadow: none;
 }
-.button:focus {
+.btn:focus {
   outline: 0;
 }
-.button:disabled,
-.button.disabled {
+.btn:disabled,
+.btn.disabled {
   background-color: #eaeaea;
   color: #bebebe;
   cursor: default;
   border-color: transparent;
 }
-.button * {
+.btn * {
   color: inherit;
 }
-.button *:hover {
+.btn *:hover {
   color: inherit;
 }
-.button.rounded {
+.btn.rounded {
   border-radius: .325rem;
 }
-.button > [class*=mif-] {
+.btn > [class*=mif-] {
   vertical-align: middle;
 }
-.button.button-shadow {
+.btn.btn-shadow {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
 }
-.button img {
+.btn img {
   height: .875rem;
   vertical-align: middle;
   margin: 0;
@@ -5370,21 +5370,21 @@ a.tag {
 .square-button {
   border-radius: 0;
 }
-a.button,
+a.btn,
 a.round-button,
 a.square-button {
   color: inherit;
 }
-a.button:hover,
+a.btn:hover,
 a.round-button:hover,
 a.square-button:hover {
   text-decoration: none;
 }
-.button.loading-pulse {
+.btn.loading-pulse {
   position: relative;
   padding: 0 1.325rem;
 }
-.button.loading-pulse:before {
+.btn.loading-pulse:before {
   position: absolute;
   content: "";
   left: 0;
@@ -5397,15 +5397,15 @@ a.square-button:hover {
   -webkit-animation: scaleout 1s infinite ease-in-out;
           animation: scaleout 1s infinite ease-in-out;
 }
-.button.loading-pulse.lighten:before {
+.btn.loading-pulse.lighten:before {
   background-color: #fff;
 }
-.button.loading-cube {
+.btn.loading-cube {
   position: relative;
   padding: 0 1.325rem;
 }
-.button.loading-cube:before,
-.button.loading-cube:after {
+.btn.loading-cube:before,
+.btn.loading-cube:after {
   content: "";
   background-color: #333;
   width: 5px;
@@ -5417,12 +5417,12 @@ a.square-button:hover {
   -webkit-animation: cubemove 1.8s infinite ease-in-out;
           animation: cubemove 1.8s infinite ease-in-out;
 }
-.button.loading-cube:after {
+.btn.loading-cube:after {
   -webkit-animation-delay: -0.9s;
           animation-delay: -0.9s;
 }
-.button.loading-cube.lighten:before,
-.button.loading-cube.lighten:after {
+.btn.loading-cube.lighten:before,
+.btn.loading-cube.lighten:after {
   background-color: #fff;
 }
 .command-button {
@@ -6026,11 +6026,11 @@ a.image-button {
 a.shortcut-button {
   padding-top: 10px;
 }
-.button.dropdown-toggle {
+.btn.dropdown-toggle {
   padding-right: 1.625rem;
 }
-.button.dropdown-toggle.drop-marker-light:before,
-.button.dropdown-toggle.drop-marker-light:after {
+.btn.dropdown-toggle.drop-marker-light:before,
+.btn.dropdown-toggle.drop-marker-light:after {
   background-color: #ffffff;
 }
 .nav-button {
@@ -6099,12 +6099,12 @@ a.shortcut-button {
 .nav-button.light span:after {
   background-color: #ffffff;
 }
-.group-of-buttons .button.active,
+.group-of-buttons .btn.active,
 .group-of-buttons .toolbar-button.active {
   background-color: #00ccff;
   color: #ffffff;
 }
-.group-of-buttons .button:active,
+.group-of-buttons .btn:active,
 .group-of-buttons .toolbar-button:active {
   background-color: #1ba1e2;
   color: #ffffff;
@@ -6121,7 +6121,7 @@ a.shortcut-button {
 .split-button:after {
   clear: both;
 }
-.split-button .button,
+.split-button .btn,
 .split-button .split {
   display: block;
   float: left;
@@ -6282,68 +6282,68 @@ a.shortcut-button {
   width: 3.125rem;
   height: 3.125rem;
 }
-.button.primary {
+.btn.primary {
   background: #2086bf;
   color: #ffffff;
   border-color: #2086bf;
 }
-.button.primary:active {
+.btn.primary:active {
   background: #1b6eae;
   color: #ffffff;
 }
-.button.success {
+.btn.success {
   background: #60a917;
   color: #ffffff;
   border-color: #60a917;
 }
-.button.success:active {
+.btn.success:active {
   background: #128023;
   color: #ffffff;
 }
-.button.danger,
-.button.alert {
+.btn.danger,
+.btn.alert {
   background: #ce352c;
   color: #ffffff;
   border-color: #ce352c;
 }
-.button.danger:active,
-.button.alert:active {
+.btn.danger:active,
+.btn.alert:active {
   background: #9a1616;
   color: #ffffff;
 }
-.button.info {
+.btn.info {
   background: #59cde2;
   color: #ffffff;
   border-color: #59cde2;
 }
-.button.info:active {
+.btn.info:active {
   background: #1ba1e2;
   color: #ffffff;
 }
-.button.warning {
+.btn.warning {
   background: #fa6800;
   color: #ffffff;
   border-color: #fa6800;
 }
-.button.warning:active {
+.btn.warning:active {
   background: #bf5a15;
   color: #ffffff;
 }
-.button.link {
+.btn.link {
   background: transparent;
   color: #2086bf;
   border-color: transparent;
   text-decoration: underline;
 }
-.button.link:hover,
-.button.link:active {
+.btn.link:hover,
+.btn.link:active {
   background: transparent;
   color: #114968;
   border-color: transparent;
 }
-a.button,
-span.button,
-div.button,
+a.btn,
+span.btn,
+div.btn,
 a.round-button,
 span.round-button,
 div.round-button,
@@ -6355,9 +6355,9 @@ span.square-button,
 div.square-button {
   padding-top: .53125rem;
 }
-a.button.big-button,
-span.button.big-button,
-div.button.big-button,
+a.btn.big-button,
+span.btn.big-button,
+div.btn.big-button,
 a.round-button.big-button,
 span.round-button.big-button,
 div.round-button.big-button,
@@ -6615,8 +6615,8 @@ div.square-button.big-button {
 .toolbar-section.condensed:after {
   clear: both;
 }
-.toolbar-group.condensed .button,
-.toolbar-section.condensed .button,
+.toolbar-group.condensed .btn,
+.toolbar-section.condensed .btn,
 .toolbar-group.condensed .toolbar-button,
 .toolbar-section.condensed .toolbar-button {
   display: block;
@@ -7156,13 +7156,13 @@ div.square-button.big-button {
 .input-control.tel {
   width: 10.875rem;
 }
-.input-control.text .button,
-.input-control.select .button,
-.input-control.file .button,
-.input-control.password .button,
-.input-control.number .button,
-.input-control.email .button,
-.input-control.tel .button {
+.input-control.text .btn,
+.input-control.select .btn,
+.input-control.file .btn,
+.input-control.password .btn,
+.input-control.number .btn,
+.input-control.email .btn,
+.input-control.tel .btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -7188,13 +7188,13 @@ div.square-button.big-button {
   top: -1rem;
   font-size: .875rem;
 }
-.input-control.text > input:disabled + .button,
-.input-control.select > input:disabled + .button,
-.input-control.file > input:disabled + .button,
-.input-control.password > input:disabled + .button,
-.input-control.number > input:disabled + .button,
-.input-control.email > input:disabled + .button,
-.input-control.tel > input:disabled + .button {
+.input-control.text > input:disabled + .btn,
+.input-control.select > input:disabled + .btn,
+.input-control.file > input:disabled + .btn,
+.input-control.password > input:disabled + .btn,
+.input-control.number > input:disabled + .btn,
+.input-control.email > input:disabled + .btn,
+.input-control.tel > input:disabled + .btn {
   display: none;
 }
 .input-control.text .prepend-icon,
@@ -7281,7 +7281,7 @@ div.square-button.big-button {
   font-size: 1.875rem;
   padding-left: 1.25rem ;
 }
-.input-control.big-input .button {
+.input-control.big-input .btn {
   height: 3.25rem;
   top: 50%;
   margin-top: -1.625rem;
@@ -7402,14 +7402,14 @@ textarea.required {
   height: 0.0625rem;
 }
 .input-control.file input[type=file]:disabled ~ input[type=text],
-.input-control.file input[type=file]:disabled ~ .button {
+.input-control.file input[type=file]:disabled ~ .btn {
   background-color: #EBEBE4;
 }
 .input-control.file:hover input[type=text],
 .input-control.file:hover button {
   border-color: #787878;
 }
-.input-control .button-group {
+.input-control .btn-group {
   position: absolute;
   right: 0;
   top: 0;
@@ -7417,21 +7417,21 @@ textarea.required {
   padding: 0;
   z-index: 2;
 }
-.input-control .button-group:before,
-.input-control .button-group:after {
+.input-control .btn-group:before,
+.input-control .btn-group:after {
   display: table;
   content: "";
 }
-.input-control .button-group:after {
+.input-control .btn-group:after {
   clear: both;
 }
-.input-control .button-group .button {
+.input-control .btn-group .btn {
   position: relative;
   float: left;
   margin: 0;
 }
 .input-control > .helper-button,
-.input-control > .button-group > .helper-button {
+.input-control > .btn-group > .helper-button {
   visibility: hidden;
   margin: 0;
   border: 0;
@@ -7440,25 +7440,25 @@ textarea.required {
   z-index: 100;
   font-size: .75rem;
 }
-.input-control > .button.helper-button {
+.input-control > .btn.helper-button {
   margin: 2px 2px 0;
 }
-.input-control > .button-group > .button.helper-button {
+.input-control > .btn-group > .btn.helper-button {
   margin: 2px 0 ;
 }
-.input-control > .button-group > .button.helper-button:last-child {
+.input-control > .btn-group > .btn.helper-button:last-child {
   margin-right: 2px ;
 }
 .input-control input:focus ~ .helper-button,
-.input-control input:focus ~ .button-group > .helper-button {
+.input-control input:focus ~ .btn-group > .helper-button {
   visibility: visible;
 }
 .input-control input ~ .helper-button:active,
-.input-control input ~ .button-group > .helper-button:active {
+.input-control input ~ .btn-group > .helper-button:active {
   visibility: visible;
 }
 .input-control input:disabled ~ .helper-button,
-.input-control input:disabled ~ .button-group > .helper-button {
+.input-control input:disabled ~ .btn-group > .helper-button {
   display: none ;
 }
 .input-control.modern {
@@ -8994,7 +8994,7 @@ input[type="submit"].link:active {
 .calendar .calendar-cell.year-cell {
   width: 23.4042625%;
 }
-.calendar .calendar-actions .button {
+.calendar .calendar-actions .btn {
   margin: .15625rem;
 }
 .calendar .day-of-week {
@@ -9502,11 +9502,11 @@ input[type="submit"].link:active {
 .wizard2 .action-bar:after {
   clear: both;
 }
-.wizard2 .action-bar .button {
+.wizard2 .action-bar .btn {
   margin: 0 .125rem;
   opacity: .6;
 }
-.wizard2 .action-bar .button:hover {
+.wizard2 .action-bar .btn:hover {
   opacity: 1;
 }
 .countdown {

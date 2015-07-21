@@ -1875,7 +1875,7 @@ function touch2Mouse(e)
 
             if (!element.hasClass('group-of-buttons')) {element.addClass('group-of-buttons');}
 
-            var buttons = element.find('.button, .toolbar-button');
+            var buttons = element.find('.btn, .toolbar-button');
 
             for(var i = 0; i < buttons.length; i++) {
                 $(buttons[i]).data('index', i);
@@ -1885,7 +1885,7 @@ function touch2Mouse(e)
                 buttons.addClass(o.buttonStyle);
             }
 
-            element.on('click', '.button, .toolbar-button', function(){
+            element.on('click', '.btn, .toolbar-button', function(){
 
                 if (typeof o.onChange === 'string') {
                     if (!window[o.onChange]($(this).data('index'), this)) {return false;}
@@ -4130,7 +4130,7 @@ window.METRO_LOCALES = {
             var element = this.element;
             var wrapper, button, input;
             wrapper = $("<input type='text' class='input-file-wrapper' readonly style='z-index: 1; cursor: default;'>");
-            button = element.children('.button');
+            button = element.children('.btn');
             input = element.children('input[type="file"]');
             input.css('z-index', 0);
             wrapper.insertAfter(input);
@@ -4146,7 +4146,7 @@ window.METRO_LOCALES = {
                 }
             });
 
-            element.on('click', '.button, .input-file-wrapper', function(){
+            element.on('click', '.btn, .input-file-wrapper', function(){
                 input.trigger('click');
             });
         },
@@ -4157,7 +4157,7 @@ window.METRO_LOCALES = {
             var helper_reveal = element.find('.helper-button.reveal');
             var input = element.find('input');
             var helpers = element.find('.helper-button');
-            var buttons = element.find('.button');
+            var buttons = element.find('.btn');
             var states = element.find('.input-state-error, .input-state-warning, .input-state-info, .input-state-success, .input-state-required');
             var padding = 0;
 
@@ -7952,10 +7952,10 @@ window.METRO_LOCALES = {
             var bar = $("<div/>").addClass('action-bar').appendTo(element);
             var btn_prev, btn_next, btn_help, btn_finish;
 
-            btn_help = $("<button/>").html(o.buttonLabels.help).addClass('button cycle-button medium-button wiz-btn-help place-left').appendTo(bar);
-            btn_finish = $("<button/>").html(o.buttonLabels.finish).addClass('button cycle-button medium-button wiz-btn-finish place-right').appendTo(bar);
-            btn_next = $("<button/>").html(o.buttonLabels.next).addClass('button cycle-button medium-button wiz-btn-next place-right').appendTo(bar);
-            btn_prev = $("<button/>").html(o.buttonLabels.prev).addClass('button cycle-button medium-button wiz-btn-prev place-right').appendTo(bar);
+            btn_help = $("<button/>").html(o.buttonLabels.help).addClass('btn cycle-button medium-button wiz-btn-help place-left').appendTo(bar);
+            btn_finish = $("<button/>").html(o.buttonLabels.finish).addClass('btn cycle-button medium-button wiz-btn-finish place-right').appendTo(bar);
+            btn_next = $("<button/>").html(o.buttonLabels.next).addClass('btn cycle-button medium-button wiz-btn-next place-right').appendTo(bar);
+            btn_prev = $("<button/>").html(o.buttonLabels.prev).addClass('btn cycle-button medium-button wiz-btn-prev place-right').appendTo(bar);
 
             btn_help.on('click', function(){
                 if (typeof o.onHelpClick === 'string') {

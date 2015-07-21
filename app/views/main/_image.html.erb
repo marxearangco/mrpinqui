@@ -1,9 +1,9 @@
 
-<%= form_for @img, url: {action: "create"}, remote: true, :html => {:multipart => true} do |f| %>
+<%= form_for @img, url: {action: "create"}, remote: true do |f| %>
 <%= f.hidden_field :code, :value=> @id %>
 <%= f.file_field :photo, :required=> true %>
-<%= link_to "Back", view_main_path(params[:id]), remote: true, data: {reveal_id: 'myModal'}, class: 'medium button alert radius' %>
-  <%= f.button "upload", :id=>'select', :class=> "medium alert button radius" %>
+<%= link_to "<<", '#', id: 'back', remote: true, class: 'btn alert' %>
+<%= f.submit "upload", :id=>'select', class: 'btn alert' %>
 <% end %>
 
 
