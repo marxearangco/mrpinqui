@@ -5,29 +5,48 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8" />
+<head>
+  <meta charset="utf-8" />
 
-    <!-- Uncomment to make IE8 render like IE7 -->
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+  <!-- Uncomment to make IE8 render like IE7 -->
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title><%= content_for?(:title) ? yield(:title) : "DMS Inquiry" %></title>
-    <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/custom.modernizr" %>
-    <%= csrf_meta_tags %>
-  </head>
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title><%= content_for?(:title) ? yield(:title) : "DMS Inquiry" %></title>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag    "application" %>
+  <!--%= javascript_include_tag "vendor/custom.modernizr" %-->
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
-<%= render 'layouts/topbar' %>
-<br>
-<div class="row" style="margin-left: 0px">
-  <div class="small-3 columns"><%= render 'main/tree' %></div>
-  <div class="small-9 columns"><%= yield %></div>
+<body>
+  <input type="checkbox" id="offcanvas" class="toggle" />
+  <div class="wrapper">
+    <%= image_tag "bgbike.jpg", class: "img-center" %>
+    <aside>
+      <nav class="navbar navbar-gray hidden-lg hidden-md">
+       <%= render 'layouts/tree' %>
+       <br /><br /><br /><br /><br />
+     </nav>
+   </aside>
+   <section>
+    <%= render 'layouts/topbar' %>
+    <br /><br /><br /><br /><br />
+    <div class="container-fluid">
+      <div class="hidden-sm hidden-xs col-sm-3">
+        <%= render 'layouts/tree' %>
+      </div>
+      <div class="col-sm-9">
+        <!-- <div style="margin-top: 80px"> -->
+        <%= yield %>
+      <!-- </div> -->
+    </div>
+  </div>
+</section>
 </div>
-
 </body>
 </html>
+
+

@@ -1,18 +1,21 @@
 <div class="row">
-	
+	<%= flash[:notice] %>
 	<div class="showpanel">
-	
 	</div>
-
-	<div id="myModal" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style="margin-top: -50px">
-	
+	<div class="modal fade" tabindex="-1" role="dialog" id="inventory">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div id="viewinv">
+				</div>
+			</div>
+		</div>
 	</div>
-   
-	<div id="inventory" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style="margin-top: -50px">
-	
+	<div class="modal fade" tabindex="-1" role="dialog" id="viewitem">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div id="view">
+				</div>
+			</div>
+		</div>
 	</div>
-	
-  		
-	</div>
-
 </div>

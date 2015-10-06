@@ -1,117 +1,67 @@
 <% @inv.each do |i| %>
-<h5 id="inventory" style="text-align: center"><b>Item Code: &nbsp;&nbsp;&nbsp;<%= i.code %></b></h5>
+<div class="modal-header btn-danger">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title">Item Code: <%= i.code %></h4>
+</div>
 	<%= form_tag(save_main_path(i.code), remote: true, id: 'updateinv') do %>
-	<div class="row">
-			<div class="large-12 columns">
-			<div class="row collapse">
-        		<div class="small-3 columns">
-          			<span class="prefix">Item Name</span>
-        		</div>
-        		<div class="small-9 columns">
-          			<%= text_field_tag :itemname, i.itemname, style: "text-align: center" %> 
-        		</div>
-            </div>
-            
-           
-			<div class="row collapse">
-        		<div class="small-3 columns">
-          			<span class="prefix">Details</span>
-        		</div>
-        		<div class="small-9 columns">
-          			<%= text_field_tag :detail, i.detail, style: "text-align: center" %> 
-        		</div>
-            </div>
-            
-			<div class="row collapse">
-        		<div class="small-5 columns">
-        			<div class="small-4 columns">
-          				<span class="prefix">Part Number</span>
-        			</div>
-        			<div class="small-8 columns">
-          				<%= text_field_tag :partnum, i.partnum, style: "text-align: center" %> 
-        			</div>
-        		</div>
-
-        		<div class="small-5 columns">
-	            	<div class="small-4 columns">
-	          			<span class="prefix">Location</span>
-	        		</div>
-	        		<div class="small-8 columns">
-	          			<!--%= text_field_tag :location, i.vin, style: "text-align: center" %--> 
-	          			<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.vin) %>
-	        		</div>
-	        	</div>
-            </div>
-
-			<div class="row collapse">
-        		<div class="small-5 columns">
-        			<div class="small-4 columns">
-          				<span class="prefix">SRP</span>
-        			</div>
-        			<div class="small-8 columns">
-          				<%= number_field_tag :srp, i.srp, style: "text-align: center" %> 
-        			</div>
-        		</div>
-
-        		<div class="small-5 columns">
-	            	<div class="small-4 columns">
-	          			<span class="prefix">cost</span>
-	        		</div>
-	        		<div class="small-8 columns">
-	          			<%= number_field_tag :cost, i.cost, style: "text-align: center" %> 
-	        		</div>
-	        	</div>
-            </div>
-			
-            
-            <hr>
-			
-			<div class="row collapse">
-        		<div class="large-3 columns">
-	        		<div class="small-3 columns">
-	          			<span class="prefix">Beg</span>
-	        		</div>
-	        		<div class="small-9 columns">
-	          			<%= number_field_tag :beg, i.qtyBeg, style: "text-align: center" %>
-	        		</div>
-            	</div>
-
-            	<div class="large-3 columns">
-	            	<div class="small-3 columns">
-	          			<span class="prefix">In</span>
-	        		</div>
-	        		<div class="small-9 columns">
-	          			<%= number_field_tag :in, i.qtyIn, style: "text-align: center" %> 
-	        		</div>
-            	</div>
-
-            	<div class="large-3 columns">
-            		<div class="small-3 columns">
-	          			<span class="prefix">Out</span>
-	        		</div>
-	        		<div class="small-9 columns">
-	          			<%= number_field_tag :out, i.qtyOut, style: "text-align: center" %> 
-	        		</div>
-	            </div>
-
-            	<div class="large-3 columns">
-	        		<div class="small-3 columns">
-	          			<span class="prefix">End</span>
-	        		</div>
-	        		<div class="small-9 columns" >
-	          			<%= number_field_tag :end, i.qtyEnd, style: "text-align: center" %> 
-	        		</div>
-            	</div>
-
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-xs-8">
+				Item Name:
+				<%= text_field_tag :itemname, i.itemname, style: "text-align: center", class: "form-control" %> 
 			</div>
-       </div>
-   </div>
-		<%= link_to "<<", view_main_path(params[:id]), remote: true, data: {reveal_id: 'myModal'}, class: 'btn alert' %>
-		<%= submit_tag "Update", id: 'btnupdate', class: "btn alert" %>
+			<div class="col-xs-4">
+				Part Number:
+				<%= text_field_tag :partnum, i.partnum, style: "text-align: center", class: "form-control" %> 
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				Details:
+				<%= text_field_tag :detail, i.detail, style: "text-align: center", class: "form-control" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+				location:
+				<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.vin), class: "form-control" %>
+			</div>
+			<div class="col-xs-4">
+				Selling Price:
+				<%= text_field_tag :srp, i.srp, style: "text-align: center", class: "form-control" %>
+			</div>
+			<div class="col-xs-4">
+				Unit Cost:
+				<%= text_field_tag :cost, i.cost, style: "text-align: center", class: "form-control" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">
+				Beginning
+				<%= number_field_tag :beg, i.qtyBeg, style: "text-align: center", class: "form-control" %>
+			</div>
+			<div class="col-xs-3">
+				In
+				<%= number_field_tag :in, i.qtyIn, style: "text-align: center", class: "form-control" %>
+			</div>
+			<div class="col-xs-3">
+				Out
+				<%= number_field_tag :out, i.qtyOut, style: "text-align: center", class: "form-control" %>
+			</div>
+			<div class="col-xs-3">
+				Ending
+				<%= number_field_tag :end, i.qtyEnd, style: "text-align: center", class: "form-control" %>
+			</div>
+		</div>
+	</div>
 
+	<div class="modal-footer">
+		<%= link_to raw('<i class="fa fa-angle-double-left fa-lg">‌</i>'), view_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#viewitem" }, class: 'btn danger pull-left' %>
+		<%= submit_tag "Update", class: 'btn alert' %>
+	</div>
 	<% end %>
 <% end %>
 
-<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+
 
 

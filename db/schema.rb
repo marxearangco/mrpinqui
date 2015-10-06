@@ -11,38 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150624070941) do
-
-  create_table "images", force: true do |t|
-    t.integer  "code"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
-  end
-
-  create_table "motorbikes", id: false, force: true do |t|
-    t.integer "idMtrbikes"
-    t.integer "idItem"
-    t.string  "model",       limit: 100
-    t.integer "yearMake"
-    t.string  "color",       limit: 30
-    t.string  "chassisNo",   limit: 80
-    t.string  "plateNo",     limit: 30
-    t.string  "engineNo",    limit: 30
-    t.string  "orcrNo",      limit: 30
-    t.string  "ccDisp",      limit: 100
-    t.string  "vin",         limit: 30
-    t.string  "insurance",   limit: 20
-    t.string  "otherInsur",  limit: 20
-    t.date    "dateExpiry"
-    t.date    "dateAdded"
-    t.date    "dateUpdated"
-    t.string  "type",        limit: 30
-    t.string  "status",      limit: 30
-    t.text    "remarks"
-    t.string  "stockLctn",   limit: 30
-  end
+ActiveRecord::Schema.define(version: 0) do
 
   create_table "tblbikemodels", primary_key: "idModel", force: true do |t|
     t.integer "idBrand"
@@ -64,7 +33,9 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.integer "idCmpny"
     t.string  "company",  limit: 100
     t.string  "detail",   limit: 200
-    t.string  "address",  limit: 200
+    t.string  "address1", limit: 150
+    t.string  "address2", limit: 150
+    t.string  "TIN",      limit: 20
     t.string  "phoneNum", limit: 15
     t.string  "faxNum",   limit: 15
     t.string  "website",  limit: 50
@@ -177,7 +148,6 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.date    "dateInv"
     t.float   "srp",     limit: 15
     t.float   "cost",    limit: 15
-    t.binary  "image"
   end
 
   create_table "tblitem", primary_key: "idItem", force: true do |t|
@@ -330,6 +300,7 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.integer "minutes"
     t.integer "qty"
     t.float   "charge",      limit: 12
+    t.string  "bikeBrand",   limit: 50
   end
 
   create_table "tbllocation", primary_key: "idLocation", force: true do |t|
@@ -389,14 +360,22 @@ ActiveRecord::Schema.define(version: 20150624070941) do
   create_table "tblordereditems", primary_key: "pk", force: true do |t|
     t.integer "idOrder"
     t.integer "idItem"
-    t.integer "quantity",               null: false
+    t.integer "quantity"
     t.integer "idUnit"
-    t.float   "cost",        limit: 12
+    t.float   "cost",          limit: 12
     t.integer "balance"
-    t.string  "status",      limit: 15
-    t.integer "qtypending",             null: false
-    t.integer "qtyreceived",            null: false
-    t.float   "pendingCost", limit: 15, null: false
+    t.string  "status",        limit: 15
+    t.integer "qtypending",                null: false
+    t.integer "qtyreceived",               null: false
+    t.integer "qtyreturned",               null: false
+    t.string  "returnRemarks", limit: 100, null: false
+    t.date    "dateReceived",              null: false
+    t.float   "srp",           limit: 18,  null: false
+    t.float   "dealerPrice",   limit: 18,  null: false
+    t.string  "remarks",       limit: 30,  null: false
+    t.string  "roID",          limit: 15,  null: false
+    t.string  "taxStatus",     limit: 25,  null: false
+    t.string  "code",          limit: 15,  null: false
   end
 
   create_table "tblorderreturn", primary_key: "idReturn", force: true do |t|
@@ -465,7 +444,7 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.integer "idMtrbikes"
     t.integer "idPOI"
     t.integer "idPullOut"
-    t.integer "pulloutID"
+    t.string  "pulloutID",  limit: 50
     t.string  "status",     limit: 25
     t.string  "remarks",    limit: 1000
   end
@@ -483,11 +462,11 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.string  "pulloutID", limit: 15
   end
 
-  create_table "tblqcharges", id: false, force: true do |t|
-    t.integer "idQtrans",              default: 0, null: false
-    t.integer "idCharges"
-    t.string  "details",   limit: 100
-    t.float   "amount",    limit: 15
+  create_table "tblqcharges", primary_key: "idCharges", force: true do |t|
+    t.string  "details",  limit: 100
+    t.float   "amount",   limit: 15
+    t.integer "idQtrans",             null: false
+    t.string  "qno",      limit: 15
   end
 
   create_table "tblqtrans", primary_key: "idQtrans", force: true do |t|
@@ -528,6 +507,7 @@ ActiveRecord::Schema.define(version: 20150624070941) do
   create_table "tblreserveitems", primary_key: "idRsrvItem", force: true do |t|
     t.integer "idItem"
     t.integer "idMtrbikes"
+    t.string  "itemName",   limit: 250
     t.string  "unit",       limit: 15
     t.integer "qty"
     t.float   "unitPrice",  limit: 12
@@ -553,11 +533,81 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.string  "soID",        limit: 25
   end
 
+  create_table "tblrptcost", id: false, force: true do |t|
+    t.integer "idItem"
+    t.integer "code"
+    t.date    "dateBeg"
+    t.date    "dateRcvd"
+    t.integer "qtyBeg"
+    t.float   "costBeg",  limit: 18
+    t.integer "qtyRcvd"
+    t.float   "costRcvd", limit: 18
+    t.integer "invBeg"
+    t.integer "invIn"
+    t.integer "invOut"
+    t.integer "invEnd"
+  end
+
+  create_table "tblrptcostbeg", id: false, force: true do |t|
+    t.integer "idItem"
+    t.integer "code"
+    t.string  "itemName", limit: 200
+    t.string  "partNo",   limit: 50
+    t.string  "brand",    limit: 100
+    t.string  "category", limit: 100
+    t.date    "dateBeg"
+    t.integer "qtyBeg"
+    t.float   "costBeg",  limit: 18
+  end
+
+  create_table "tblrptcostout", id: false, force: true do |t|
+    t.integer "idItem"
+    t.integer "code"
+    t.date    "dateOut"
+    t.integer "qtyOut"
+    t.float   "costOut",   limit: 18
+    t.string  "soID",      limit: 20
+    t.integer "salesInvc"
+    t.integer "salesOR"
+    t.integer "id"
+    t.integer "idSales"
+    t.integer "idPullOut"
+    t.string  "pulloutID", limit: 20
+  end
+
+  create_table "tblrptcostrcv", id: false, force: true do |t|
+    t.integer "idItem"
+    t.integer "code"
+    t.date    "dateRcvd"
+    t.integer "qtyRcvd"
+    t.float   "costRcvd", limit: 18
+    t.string  "roid",     limit: 20
+    t.integer "idOrder"
+    t.integer "pk"
+  end
+
+  create_table "tblrptcostsales", id: false, force: true do |t|
+    t.integer "idItem"
+    t.integer "code"
+    t.string  "partNum",    limit: 30
+    t.string  "itemName",   limit: 500
+    t.string  "category",   limit: 50
+    t.string  "brandName",  limit: 50
+    t.string  "unit",       limit: 30
+    t.integer "qtySold"
+    t.date    "dateSold"
+    t.float   "cost",       limit: 18
+    t.float   "srp",        limit: 18
+    t.integer "itemDscnt"
+    t.integer "totalDscnt"
+  end
+
   create_table "tblsales", primary_key: "idSales", force: true do |t|
     t.integer "idItem"
     t.string  "unit",       limit: 15
     t.integer "qty"
     t.float   "unitPrice",  limit: 15
+    t.float   "cost",       limit: 15
     t.integer "discount"
     t.float   "amount",     limit: 18
     t.integer "id"
@@ -570,6 +620,7 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.integer "idSales",             default: 0, null: false
     t.string  "details", limit: 100
     t.float   "amnt",    limit: 15
+    t.integer "id"
   end
 
   create_table "tblsalesorder", force: true do |t|
@@ -580,7 +631,7 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.string  "preparedBy",    limit: 50
     t.date    "dateSO"
     t.string  "remarks",       limit: 500
-    t.string  "terms",         limit: 25
+    t.string  "terms",         limit: 50
     t.string  "type",          limit: 25
     t.string  "payMode",       limit: 30
     t.string  "checkNo",       limit: 25
@@ -666,12 +717,14 @@ ActiveRecord::Schema.define(version: 20150624070941) do
 
   create_table "tblsupplier", primary_key: "idSupplier", force: true do |t|
     t.string "supplierName", limit: 150
+    t.string "code",         limit: 10
     t.string "detail",       limit: 200
     t.string "address",      limit: 150
     t.string "phoneNum",     limit: 15
     t.string "faxNum",       limit: 15
     t.string "website",      limit: 20
     t.string "status",       limit: 15
+    t.string "taxStatus",    limit: 15
   end
 
   create_table "tblsuppliercontact", id: false, force: true do |t|
@@ -711,9 +764,55 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.string  "joID",      limit: 15
   end
 
+  create_table "tbltmpordereditems", primary_key: "pk", force: true do |t|
+    t.integer "idOrder"
+    t.integer "idItem"
+    t.integer "quantity"
+    t.integer "idUnit"
+    t.float   "cost",          limit: 12
+    t.integer "balance"
+    t.string  "status",        limit: 15
+    t.integer "qtypending",                null: false
+    t.integer "qtyreceived",               null: false
+    t.integer "Column 4",                  null: false
+    t.integer "qtyreturned",               null: false
+    t.string  "returnRemarks", limit: 100, null: false
+    t.date    "dateReceived",              null: false
+    t.float   "srp",           limit: 18,  null: false
+    t.float   "dealerPrice",   limit: 18,  null: false
+    t.string  "remarks",       limit: 30,  null: false
+    t.string  "roID",          limit: 15,  null: false
+    t.string  "taxStatus",     limit: 25,  null: false
+    t.string  "code",          limit: 50
+  end
+
+  create_table "tbltmpqcharges", primary_key: "idCharges", force: true do |t|
+    t.string  "details",  limit: 100
+    t.float   "amount",   limit: 15
+    t.integer "idQtrans",             null: false
+    t.string  "qno",      limit: 15
+  end
+
+  create_table "tbltmpqtrans", primary_key: "idQtrans", force: true do |t|
+    t.string  "qno",        limit: 10
+    t.integer "idItem"
+    t.integer "qty"
+    t.string  "unit",       limit: 15
+    t.float   "amount",     limit: 15
+    t.float   "ciwaog",     limit: 15
+    t.float   "ciwoaog",    limit: 15
+    t.string  "preparedBy", limit: 25
+    t.string  "conforme",   limit: 25
+    t.date    "dateTrans"
+    t.string  "insurance",  limit: 50
+    t.date    "insuExpiry"
+    t.integer "idMtrbikes"
+  end
+
   create_table "tbltmpreserveitems", primary_key: "idRsrvItem", force: true do |t|
     t.integer "idItem"
     t.integer "idMtrbikes"
+    t.string  "itemName",   limit: 250
     t.string  "unit",       limit: 15
     t.integer "qty"
     t.float   "unitPrice",  limit: 12
@@ -722,6 +821,20 @@ ActiveRecord::Schema.define(version: 20150624070941) do
     t.text    "remarks"
     t.integer "idRsrv"
     t.string  "rsrvNo",     limit: 15
+  end
+
+  create_table "tbltmpsales", primary_key: "idSales", force: true do |t|
+    t.integer "idItem"
+    t.string  "unit",       limit: 15
+    t.integer "qty"
+    t.float   "unitPrice",  limit: 15
+    t.float   "cost",       limit: 15
+    t.integer "discount"
+    t.float   "amount",     limit: 18
+    t.integer "id"
+    t.string  "soID",       limit: 25
+    t.string  "status",     limit: 30
+    t.integer "idMtrbikes"
   end
 
   create_table "tbltransaction", id: false, force: true do |t|
@@ -737,13 +850,6 @@ ActiveRecord::Schema.define(version: 20150624070941) do
 
   create_table "tblunit", primary_key: "idUnit", force: true do |t|
     t.string "Unit", limit: 15
-  end
-
-  create_table "users", primary_key: "user", force: true do |t|
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
   end
 
 end

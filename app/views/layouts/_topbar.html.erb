@@ -1,61 +1,25 @@
-
-<div class="contain-to-grid sticky">
-<nav class="top-bar" data-topbar="" data-options="sticky_on: large">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
-        <h1>
-          <a href="#">
-            <span>NORMINRING</span> <span style="color: red">MOTORBIKES</span>
-          </a>
-        </h1>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+     <span class="navbar-brand hidden-md hidden-lg">
+      <label for="offcanvas" class="toggler">
+        <i class="fa fa-bars fa-lg"></i>
+      </label>
+    </span>
+    <span class="navbar-brand">
+      <a style="color:#FFF">NORMINRING</a><a style="color:#C9302C">MOTORBIKES</a>
+    </span>
+  </div>
+  <div class="collapse navbar-collapse" id="navcollapse">
+    <ul class="nav nav-pills navbar-nav navbar-right">
+      <li>
+        <% if session[:acctname] %>
+        <%= link_to raw('<span class="glyphicon glyphicon-user"></span> ' +session[:acctname].to_s),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
+        <% else %>
+        <%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %>
+        <% end %>
       </li>
-      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
     </ul>
-
-    
-  <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider"></li>
-        <li class="has-dropdown not-click">
-          <a href="#">Main Item 1</a>
-          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Main Item 1</a></li>
-            <li><label>Section Name</label></li>
-            <li class="has-dropdown not-click">
-              <a href="#" class="">Has Dropdown, Level 1</a>
-              <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Has Dropdown, Level 1</a></li>
-                <li><a href="#">Dropdown Options</a></li>
-                <li><a href="#">Dropdown Options</a></li>
-                <li><a href="#">Level 2</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-                <li><a href="#">Subdropdown Option</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li class="divider"></li>
-            <li><label>Section Name</label></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li class="divider"></li>
-            <li><a href="#">See all →</a></li>
-          </ul>
-        </li>
-        <li class="divider"></li>
-        <li class="has-dropdown not-click">
-          <a href="#">Main Item 2</a>
-          <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Main Item 2</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li><a href="#">Dropdown Option</a></li>
-            <li class="divider"></li>
-            <li><a href="#">See all →</a></li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-  </nav>
+  </div>
 </div>
+</nav>

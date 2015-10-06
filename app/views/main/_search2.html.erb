@@ -1,24 +1,68 @@
 <div class="row" style="width:80%">
-    <div class="large-5 columns">
-      <div class="row collapse prefix-radius">
-        <div class="small-3 columns">
-          <span class="prefix">Search</span>
-        </div>
-        <div class="small-9 columns">
-          <input type="text" id="search" placeholder="Type here...">
-        </div>
+  <div class="large-5 columns">
+    <div class="row collapse prefix-radius">
+      <div class="small-3 columns">
+        <span class="prefix">Search</span>
+      </div>
+      <div class="small-9 columns">
+        <input type="text" id="search" placeholder="Type here...">
       </div>
     </div>
+  </div>
 </div>
 
 <div class="row" style="width:99%">
-   <div class="large-12 columns">
+ <div class="large-12 columns">
   <div id="pattern" class="pattern panel" style="width:90%; overflow-y: scroll; height: 500px;">
-      <ul class="g" style="list-style: none;">
+    <ul class="g" style="list-style: none;">
   <!--<div class="row small-4 columns">
-    <ul class="small-block-grid-6" style="list-style: none;">-->
-      <%= raw(@photogrid) %>
+  <ul class="small-block-grid-6" style="list-style: none;">-->
+    <%= raw(@photogrid) %>
     <!--</ul>-->
   </div>
-  </div>
 </div>
+</div>
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#togglenavi" aria-expanded="false">
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<thead>
+  <tr>
+    <th style="width: 38px">Code</th>
+    <th style="width: 70px">Part No.</th>
+    <th style="width: 300px">Item Name</th>
+    <th style="text-align: center; width: 100px">Qty Available</th>
+    <th style="text-align: right; width: 100px">Selling Price</th>
+    <th style="text-align: center; width: 100px">Location</th>
+  </tr>
+</thead>
+
+<tr>
+ <td style="width: 30px"><%= i.code %></td>
+ <td style="width: 70px"><%= i.partnum %></td>
+ <td style="width: 300px"><%= link_to i.itemname, view_main_path(i.code), remote: true, data: { toggle: 'modal', target: "#viewitem" } %>
+  <!--<a href="main/<%= i.code %>/view" data-reveal-id="myModal" data-reveal-ajax="true" data-remote="true"></a>--></td>
+  <td style="text-align: center; width: 100px"><%= i.qtyEnd %></td>
+  <td style="text-align: right; width: 100px"><%= number_with_precision(i.srp, precision: 2, separator: '.', delimiter: ',') %></td>
+  <td style="text-align: center; width: 100px"><%= i.vin %></td>
+</tr>
+
+
+<table style="border: 1px solid white; margin-left: 30px">
+  <tr>
+    <td style="width:150px; margin-left: 0px">Part Number: </td>
+    <td><%= i.partnum %></td>
+    <td width="80px"></td>
+    <td width="100px">SRP:</td>
+    <td><%= peso(i.srp) %></td>
+  </tr>
+  <tr>
+    <td style="width:150px; margin-left: 0px">Qty. Available: </td>
+    <td><%= i.qtyEnd %></td>
+    <td width="80px"></td>
+    <td width="100px">Unit Cost:</td>
+    <td><%= peso(i.cost) %></td>
+    <tr>
+    </table>

@@ -1,19 +1,37 @@
-$('#inventory').html('<%= escape_javascript (render "edit") %>');
-
+$('#viewinv').html('<%= escape_javascript (render "edit") %>');
+$('#viewitem').modal('hide');
 $('#updateinv').submit(function(event) {
-  var form = $(this);
-  $.ajax({
-			type: 'POST',
-			url: '<%= save_main_path(params[:id]) %>',
-			data: form.serialize(),
+	var form = $(this);
+	$.ajax({
+		type: 'POST',
+		url: '<%= save_main_path(params[:id]) %>',
+		data: form.serialize(),
 			//processData: false,
         	//contentType: false,
-			success: function(){
-				alert('Data updated!');
+        	success: function(){
+        		alert('Data updated!');
         	},
-						
+        	
+        });
+	
+	event.preventDefault();
+	
+});
+
+$('#inventory').on('hidden.bs.modal', function () {
+	var _search = $('#search').val();
+	var _search2 = $('#search2').val();
+	$.ajax({
+		type: 'GET',
+		url: 'main/<%= session[:category] %>/search',
+		success: function(){
+			$('#search').val(_search);
+			$('#search').focus();
+			$('#search').trigger('keyup');
+
+			$('#search2').val(_search);
+			$('#search2').focus();
+			$('#search2').trigger('keyup');
+			},
 		});
-  
-  event.preventDefault();
-  
 });

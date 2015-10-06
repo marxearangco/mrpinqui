@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  height: 100%;
+}
+.container {
+  margin: 0 15px;
+}
+
+nav li {
+  padding: 8px;
+}
+
+aside {
+  background-color: #383838;
+  color: #fff;
+  width: 60%;
+  margin-left: -60%;
+  float: left;
+  height: 100%;
+  position: absolute;
+}
+section {
+  width: 100%;
+  height: 100%;
+  float: right;
+  margin-right: 0;
+}
+
+.toggle:checked + .wrapper > aside {
+  margin-left: 0;
+}
+
+.toggle:checked + .wrapper > section {
+  margin-right: -60%;
+}
+
+.toggler {
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+.toggle, .biglabel {
+  display: none;
+}
+
+.biglabel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
+}
+
+.toggle:checked + .wrapper > section .biglabel {
+  display: block;
+}
+
+.navicon {
+  width: 28px;
+  height: 28px;
+  background: url('navicon.png') no-repeat;
+  background-size: cover;
+  display: block;
+}
+
+aside, section {
+  -webkit-transition: margin 0.5s ease-in-out;
+  -moz-transition: margin 0.5s ease-in-out;
+  -ms-transition: margin 0.5s ease-in-out;
+  -o-transition: margin 0.5s ease-in-out;
+  transition: margin 0.5s ease-in-out;
+}
+
+.navbar-gray {
+  background-color: #383838;
+  border-color: #383838;
+}

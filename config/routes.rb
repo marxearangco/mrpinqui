@@ -1,5 +1,12 @@
 DMS::Application.routes.draw do
+  
+  get "authenticate/attempt_login"
+  
+  post "authenticate/attempt_login"
+  get "authenticate/login"
+  get "authenticate/logout"
   root "main#index"
+  
   resources :main do
     member do
       get 'search'
@@ -12,8 +19,6 @@ DMS::Application.routes.draw do
     end
   end
 
-
- 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -26,7 +26,7 @@ DMS::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  Paperclip.options[:command_path] = "C:/Program Files/GnuWin32/bin"
+  Paperclip.options[:command_path] = "C:/Program Files/GnuWin32/bin;C:/Program Files/ImageMagick-6.9.1-Q16/"
   #Paperclip.options[:command_path] = "/usr/local/bin/"
   Paperclip.options[:log] = true
   Paperclip.options[:log_command] = true

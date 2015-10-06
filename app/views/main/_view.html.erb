@@ -1,53 +1,53 @@
-<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-<ul class="pricing-table">
 <% @item.each do |i| %>
-  <li class="title"><%= i.itemname %></li>
-  <li class="price">
-  <% if @img %> 
-  	<%= image_tag @img, :id=>"image", :style => "margin: 0 0 auto; max-height: 200px; max-width: 200px" %>
-  <% else %>
-  	<%= image_tag 'ring.png', :style => "margin: 0 0 auto; height: 200px; width: 200px" %>
-  <% end %>
-  </li>
-  <li class="description" style="font-style: italic">Details: <b><%= i.detail %></b></li>
-  <li class="bullet-item" id="detailsform">
-      <table style="border: 1px solid white; margin-left: 30px">
-      <tr>
-        <td style="width:150px; margin-left: 0px">Part Number: </td>
-        <td><%= i.partnum %></td>
-        <td width="80px"></td>
-        <td width="100px">SRP:</td>
-        <td><%= number_with_precision(i.srp, precision: 2, separator: '.', delimiter: ',') %></td>
-      </tr>
-      <tr>
-        <td style="width:150px; margin-left: 0px">Qty. Available: </td>
-        <td><%= i.qtyEnd %></td>
-        <td width="80px"></td>
-        <td width="100px">Unit Cost:</td>
-        <td><%= number_with_precision(i.cost, precision: 2, separator: '.', delimiter: ',') %></td>
-      <tr>
-    </table>
-  </li>
-  <li class="bullet-item" style="text-align: center" id="buttonsform">
-        <% 
-          if @img 
-            @label= 'Edit Photo'
-          else
-            @label= 'Add Photo'
-         end 
-        -%>
+<div class="modal-header btn-danger">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title"><%= i.itemname %></h4>
+</div>
+<div class="modal-body">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="text-center" id="img">
+        <% if @img %> 
+        <%= image_tag @img, :id=>"image", :style => "margin: 0 0 auto; max-height: 300px; max-width: 300px" %>
+        <% else %>
+        <%= image_tag 'ring.png', :style => "margin: 0 0 auto; height: 200px; width: 200px" %>
+        <% end %>
+      </div>
+    </li>
+    <li class="list-group-item text-center">
+      <i><%= i.detail %></i>
+    </li>
 
-        <div id="upload">
-      <%= link_to @label, image_main_path(params[:id]), remote: true, class: 'btn danger text-shadow' %>
-        
-        
-      <%= link_to "Inventory", edit_main_path(params[:id]), remote: true, data: {reveal_id: 'inventory'}, class: 'btn danger text-shadow' %>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-xs-4">
+          PartNumber:<br>
+          <%= text_field_tag '', i.partnum, class: 'form-control text-center' %>
         </div>
-
-  </li>
-  
-
+        <div class="col-xs-4 text-center">
+          SRP:<br>
+          <%= text_field_tag '', peso(i.srp), class: 'form-control text-center' %>
+        </div>
+        <div class="col-xs-4 text-center">
+          Available:<br>
+          <%= text_field_tag '', i.qtyEnd, class: 'form-control text-center' %>
+        </div>
+      </div> 
+    </li>
+    
+  </ul>
+</div>
+<div class="modal-footer" id="upload">
+  <% if session[:role] == 1 %>
+    <% if @img 
+      @label= '<i class="fa fa-camera"></i> Edit Image'
+    else
+      @label= '<i class="fa fa-camera"></i> Add Image'
+    end 
+    -%>
+    <%= link_to raw(@label), image_main_path(params[:id]), remote: true, class: 'btn danger text-shadow' %>
+    <%= link_to raw('<i class="fa fa-pencil"></i> Inventory'), edit_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#inventory" }, class: 'btn danger text-shadow' %>
+  <% end %>
+</div>
 <% end %>
-</ul>
-
 
