@@ -18,7 +18,7 @@ figcaption,
 figure,
 footer,
 header,
-nav,
+nave,
 section {
   display: block;
 }
@@ -6033,7 +6033,7 @@ a.shortcut-button {
 .btn.dropdown-toggle.drop-marker-light:after {
   background-color: #ffffff;
 }
-.nav-button {
+.nave-button {
   width: 2rem;
   height: 2rem;
   background-size: 1rem 1rem;
@@ -6045,7 +6045,7 @@ a.shortcut-button {
   z-index: 2;
   position: relative;
 }
-.nav-button span {
+.nave-button span {
   position: absolute;
   top: 1.2rem;
   left: .5rem;
@@ -6057,8 +6057,8 @@ a.shortcut-button {
   transform: rotate(0);
   transition: all 0.3s linear;
 }
-.nav-button span:before,
-.nav-button span:after {
+.nave-button span:before,
+.nave-button span:after {
   content: '';
   position: absolute;
   top: -0.5rem;
@@ -6070,16 +6070,16 @@ a.shortcut-button {
   transform: rotate(0);
   transition: all 0.3s linear;
 }
-.nav-button span:after {
+.nave-button span:after {
   top: .5rem;
 }
-.nav-button.transform span {
+.nave-button.transform span {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
   background: #1d1d1d;
 }
-.nav-button.transform span:before,
-.nav-button.transform span:after {
+.nave-button.transform span:before,
+.nave-button.transform span:after {
   content: '';
   top: -5px;
   right: 0;
@@ -6087,16 +6087,16 @@ a.shortcut-button {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.nav-button.transform span:after {
+.nave-button.transform span:after {
   top: 5px;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.nav-button.light span {
+.nave-button.light span {
   background-color: #ffffff;
 }
-.nav-button.light span:before,
-.nav-button.light span:after {
+.nave-button.light span:before,
+.nave-button.light span:after {
   background-color: #ffffff;
 }
 .group-of-buttons .btn.active,
@@ -8150,7 +8150,7 @@ input[type="submit"].link:active {
   outline-color: #8a8a8a;
   border-color: #8a8a8a;
 }
-.progress,
+/*.progress,
 .progress-bar {
   display: block;
   position: relative;
@@ -8195,7 +8195,7 @@ input[type="submit"].link:active {
 .progress.gradient-bar .bar,
 .progress-bar.gradient-bar .bar {
   background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
-}
+}*/
 .popover {
   display: block;
   min-width: 12.5rem;
@@ -14484,7 +14484,7 @@ p [data-hint] {
 }
 
 
-.navbar-inverse {
+.navebar-inverse {
 
   border: none;
 }

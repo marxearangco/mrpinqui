@@ -1,7 +1,6 @@
 DMS::Application.routes.draw do
   
   get "authenticate/attempt_login"
-  
   post "authenticate/attempt_login"
   get "authenticate/login"
   get "authenticate/logout"

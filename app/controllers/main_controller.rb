@@ -31,28 +31,6 @@ class MainController < ApplicationController
     end
   end
   
-  def tree
-    cat = Category.order(:category).where("idCategory<>'8'") 
-    @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
-    @treeview << "<div class='accordion' data-role='accordion'>\n"
-    cat.each do |c|
-      @treeview << "<div class='frame'>"
-      @treeview << "<div class='heading'>#{c.Category}</div>\n"
-      brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
-      @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled'>\n"
-      @treeview <<"<li><a href='main/0-#{c.idCategory}/search' data-remote='true'>All</a></li>"
-      brand.each do |b|
-        @treeview <<"<li><a href='main/#{c.idCategory}-#{b.idBrand}/search' data-remote='true'> #{b.brandName}</a></li>"
-      end
-      @treeview << "</ul>\n" << "</div></div>"
-    end
-    @treeview << "</div>"
-    respond_to do |format|
-      format.html
-      format.json
-    end
-  end
-
   def image
     @id = params[:id]
     @img = Image.new
@@ -116,34 +94,73 @@ end
 
 private
 
+def tree
+    cat = Category.order(:category).where("idCategory<>'8'") 
+    @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
+    @treeview << "<div class='accordion' data-role='accordion'>\n"
+    cat.each do |c|
+      @treeview << "<div class='frame'>"
+      @treeview << "<div class='heading'>#{c.Category}</div>\n"
+      brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
+      @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled'>\n"
+      @treeview <<"<li><a href='/main/0-#{c.idCategory}/search'>All</a></li>"
+      brand.each do |b|
+        @treeview <<"<li><a href='/main/#{c.idCategory}-#{b.idBrand}/search'> #{b.brandName}</a></li>"
+      end
+      @treeview << "</ul>\n" << "</div></div>"
+    end
+    @treeview << "</div>"
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
+
+
 def find_item(parm0, parm1)
   if parm0=='0'
     @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=?',parm1)
-    search = Category.where('idCategory=?',parm1)
-    search.each do |s|
-      @search = s.Category
-    end
+    # search = Category.where('idCategory=?',parm1)
+    # search.each do |s|
+    #   @search = s.Category
+    # end
+    @listitems = initialize_grid(Item.where("idBrand=?",parm1),
+    per_page: '10'
+    )
+  tree
   else
     @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm0,parm1)
-    search = Brand.where('idbrand=?',parm1)
-    search.each do |s|
-      @search = s.brandName
-    end
+    # search = Brand.where('idbrand=?',parm1)
+    # search.each do |s|
+    #   @search = s.brandName
+    # end
+    @listitems = initialize_grid(Item.where("idCategory=? and idBrand=?",parm0,parm1),
+    per_page: '10'
+    )
+  tree
   end
-  @photogrid = ''
-  @items.each do |i|
-    @c = i.code
-    @photo = '/assets/ring.png'
-    @photogrid << '<li><a href="/main/'<< @c<<'/view" data-toggle="modal" data-target="#viewitem" data-remote="true">'
-    @image = Image.where("code = ?", i.code)
-    if @image
-      @image.each do |p|
-        @photo = p.photo.url(:medium)
-      end
-    end
-    @photogrid << '<img src="' << @photo << '" style="vertical-align: middle;" />'
-    @photogrid << '</a><p style="font-size: 85%; text-align: center">' << i.itemname << '</p></li>'
-  end
+#  @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm0,parm1)
+ # @listitems = initialize_grid(Item.where("idCategory=? and idBrand=?",parm0,parm1),
+  #  per_page: '10'
+  #  )
+  tree
+    # :include=> [{:inventory=>:code}],
+
+
+  # @photogrid = ''
+  # @items.each do |i|
+  #   @c = i.code
+  #   @photo = '/assets/ring.png'
+  #   @photogrid << '<li><a href="/main/'<< @c<<'/view" data-toggle="modal" data-target="#viewitem" data-remote="true">'
+  #   @image = Image.where("code = ?", i.code)
+  #   if @image
+  #     @image.each do |p|
+  #       @photo = p.photo.url(:medium)
+  #     end
+  #   end
+  #   @photogrid << '<img src="' << @photo << '" style="vertical-align: middle;" />'
+  #   @photogrid << '</a><p style="font-size: 85%; text-align: center">' << i.itemname << '</p></li>'
+  # end
 end 
 
 

@@ -1,33 +1,66 @@
 <br /><br /><br /><br /><br />
-<div class="col-xs-6">
+
+<div class="col-xs-6 hidden-sm hidden-xs">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <%= form_tag(:action=>'attempt_login') do %>
-      <div class="modal-header">
-       <h3>SIGN IN </h3>
-     </div>
-     <div class="modal-body">
-      <ul class="list-group">
-       <li class="list-group-item">
-         <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true' %>
-       </li>
-       <li class="list-group-item">
-        <%= password_field_tag :password, nil, class: "form-control", required: true, placeholder: 'Password'  %>
-      </li>
-      <li class="list-group-item">
-        <input type="checkbox" value="remember-me" id="chk">
-        <label for="chk">Remember me</label>
-      </li>
-      <li class="list-group-item">
-        <span style="color: red; font-style: italic"><%= flash[:notice] %></span>
-      </li>
-    </ul>
-  </div>
-  <div class="modal-footer">
-   <%= submit_tag 'Login' %>
- </div>	
- <% end %>
+      <div class="modal-body">
+       <h3><i class="fa fa-lock fa-lg"></i> &nbsp; &nbsp;&nbsp;Please Login</h3>
+       <!-- </div> -->
+       <!-- <div class="modal-body"> -->
+       <ul class="list-group">
+         <li class="list-group-item">
+           <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true' %>
+         </li>
+         <li class="list-group-item">
+          <%= password_field_tag :password, nil, class: "form-control", required: true, placeholder: 'Password'  %>
+        </li>
+        <li class="list-group-item">
+          <input type="checkbox" value="remember-me" id="chk">
+          <label for="chk">Remember me</label>
+        </li>
+        <li class="list-group-item">
+          <span style="color: red; font-style: italic"><%= flash[:notice] %></span>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+     <%= submit_tag 'Login' %>
+   </div>	
+   <% end %>
+ </div>
 </div>
 </div>
+
+
+<%= form_tag(:action=>'attempt_login') do %>
+<div class="col-xs-12 hidden-md hidden-lg">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+       <h3><i class="fa fa-lock fa-lg"></i> &nbsp; &nbsp;&nbsp;Please Login</h3>
+       <!-- </div> -->
+       <!-- <div class="modal-body"> -->
+       <ul class="list-group">
+         <li class="list-group-item">
+           <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true' %>
+         </li>
+         <li class="list-group-item">
+          <%= password_field_tag :password, nil, class: "form-control", required: true, placeholder: 'Password'  %>
+        </li>
+        <li class="list-group-item">
+          <input type="checkbox" value="remember-me" id="chk">
+          <label for="chk">Remember me</label>
+        </li>
+        <li class="list-group-item">
+          <span style="color: red; font-style: italic"><%= flash[:notice] %></span>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+     <%= submit_tag 'Login' %>
+   </div> 
+ </div>
 </div>
 </div>
+<% end %>

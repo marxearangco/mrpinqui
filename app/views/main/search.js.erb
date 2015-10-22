@@ -1,39 +1,53 @@
-$(".showpanel").html("<%= escape_javascript(render 'search') %>").fadeIn(1000);
-console.log("RENDERED SEARCH..");
+// // $(".showpanel").hide();
+// // $(".showpanel").html("<%= escape_javascript(render 'search') %>");
+// // $(".showpanel").fadeIn(2000);
 
-$("#search").keyup(function(){
-  _this = this;
-  $.each($("#table tbody").find("tr"), function() {
-    if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) == -1)
-     $(this).hide();
-   else
-    $(this).show();
-});
-}); 
-
-$("#search2").keyup(function(){
-  _this = this;
-  $.each($("#table tbody").find("tr"), function() {
-    if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) == -1)
-     $(this).hide();
-   else
-    $(this).show();
-});
-}); 
-
-$("#table tr").not(':first').hover(
-  function () {
-    $(this).css("background","#C0C0C0");
-  }, 
-  function () {
-    $(this).css("background","");
-  }
-);
-
-
-
-
-// $('a[data-toggle="tab"]').on('shown.bs.tab', function(){
-//     $('.sticky-header:visible').floatThead('reflow');
+// // console.log("RENDERED SEARCH..");
+// $("#search").keyup(function(){
+//   _this = this;
+//   $.each($("#table tbody").find("tr"), function() {
+//     if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) == -1)
+//      $(this).hide();
+//    else
+//     $(this).show();
 // });
+// }); 
+
+// $("#search2").keyup(function(){
+//   _this = this;
+//   $.each($("#table tbody").find("tr"), function() {
+//     if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) == -1)
+//      $(this).hide();
+//    else
+//     $(this).show();
+// });
+// }); 
+
+// $("#table tr").not(':first').hover(
+//   function () {
+//     $(this).css("background","#C0C0C0");
+//   }, 
+//   function () {
+//     $(this).css("background","");
+//   }
+// );
+
+
+
+// // $(document).ready(function() {
+// //   // $(document).on('page:fetch', function() {
+// //     NProgress.start(); 
+// //   // });
+
+// //   // $(document).on('page:change', function() {
+// //   //   NProgress.done(); 
+// //   // });
+  
+// //   // $(document).on('page:restore', function() { 
+// //   //   NProgress.remove(); 
+// //   // });
+// // });
+// // $('a[data-toggle="tab"]').on('shown.bs.tab', function(){
+// //     $('.sticky-header:visible').floatThead('reflow');
+// // });
 

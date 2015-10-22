@@ -21,12 +21,11 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body class="img-body">
   <input type="checkbox" id="offcanvas" class="toggle" />
   <div class="wrapper">
-    <%= image_tag "bgbike.jpg", class: "img-center" %>
-    <aside>
-      <nav class="navbar navbar-gray hidden-lg hidden-md">
+    <aside class="hidden-lg hidden-md">
+      <nav class="navbar navbar-gray">
        <%= render 'layouts/tree' %>
        <br /><br /><br /><br /><br />
      </nav>
@@ -39,14 +38,11 @@
         <%= render 'layouts/tree' %>
       </div>
       <div class="col-sm-9">
-        <!-- <div style="margin-top: 80px"> -->
+
         <%= yield %>
-      <!-- </div> -->
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 </div>
 </body>
 </html>
-
-

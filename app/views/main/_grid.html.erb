@@ -1,0 +1,14 @@
+<%= define_grid(@listitems) do |g|
+
+	g.column name: 'Code', attribute: 'code', detach_with_id: :code_filter
+	
+	g.column name: 'Item', attribute: 'itemName', detach_with_id: :item_filter do |i|
+		link_to i.itemName, view_main_path(i.code), remote: true, data: { toggle: 'modal', target: "#viewitem" }
+	end
+	
+
+	g.column name: 'Qty', attribute: 'begBalance', detach_with_id: :qty_filter do |c|
+		number_with_precision(c.cost, precision: 2, separator: '.', delimiter: ',')
+	end
+	g.column name: 'Location', attribute: 'vin', detach_with_id: :vin_filter
+end -%>

@@ -14,5 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require nprogress
+//= require nprogress-turbolinks
+//= require wice_grid
 //= require_tree .
 
+$(document).ready(function() {
+  NProgress.start();
+});
