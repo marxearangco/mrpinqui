@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.5'
-gem 'mysql2', '~> 0.3.18'
 gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -19,4 +18,10 @@ gem "font-awesome-rails"
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'wice_grid', '~> 3.5.0'
 gem 'nprogress-rails'
-gem 'rails_12factor', group: :production
+group :development do
+	gem 'mysql2', '~> 0.3.18'
+end
+group :production do
+	gem 'rails_12factor'
+	gem 'pg'
+end

@@ -30,13 +30,13 @@ test:
   host: localhost
 
 production:
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
   database: invndc
   pool: 5000
   username: root
   password: 
-  host: localhost
+  #host: localhost
 
 localdb:
   adapter: mysql2
