@@ -1,4 +1,6 @@
-* {font-family: "OpenSans";}
+* {
+  font-family: "OpenSans";
+}
 
 /*html {
   overflow-y: scroll;
