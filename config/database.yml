@@ -33,16 +33,16 @@ production:
   adapter: postgresql
   encoding: unicode
   database: invndc
-  pool: 5000
+  pool: 5
   username: root
   password: 
   #host: localhost
 
 localdb:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: imrp
-  pool: 5000
+  pool: 5
   username: root
   password: 
-  host: localhost
+  #host: localhost
