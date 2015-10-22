@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '4.0.5'
 gem 'mysql2', '~> 0.3.18'
@@ -20,4 +20,4 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'wice_grid', '~> 3.5.0'
 gem 'nprogress-rails'
 gem 'rails_12factor', group: :production
-gem 'ruby', '2.0.1'
+gem 'ruby', '2.0.0'
