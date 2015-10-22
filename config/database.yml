@@ -32,17 +32,18 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: invndc
+  database: du0g9t0n533uc
   pool: 5
-  username: root
-  password: 
-  #host: localhost
+  username: iwdvpbitpiecra
+  password: czkOmKxe2xdDFHOaQI6AJirRd5
+  host: ec2-54-83-36-203.compute-1.amazonaws.com
 
 localdb:
   adapter: postgresql
-  encoding: utf8
-  database: imrp
+  encoding: unicode
+  database: du0g9t0n533uc
   pool: 5
-  username: root
-  password: 
+  username: iwdvpbitpiecra
+  password: czkOmKxe2xdDFHOaQI6AJirRd5
+  host: ec2-54-83-36-203.compute-1.amazonaws.com
   #host: localhost
