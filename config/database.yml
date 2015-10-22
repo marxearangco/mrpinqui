@@ -25,18 +25,18 @@ test:
   encoding: utf8
   database: invndccdo_MCA
   pool: 5000
-  username: ndccdo
+  username: root
   password: 
-  host: 192.168.1.88
+  host: localhost
 
 production:
   adapter: mysql2
   encoding: utf8
   database: invndc
   pool: 5000
-  username: test
-  password: test
-  host: 192.168.1.30
+  username: root
+  password: 
+  host: localhost
 
 localdb:
   adapter: mysql2
