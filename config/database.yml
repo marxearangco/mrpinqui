@@ -30,23 +30,19 @@ test:
   host: localhost
 
 production:
-  url: postgres://iwdvpbitpiecra:czkOmKxe2xdDFHOaQI6AJirRd5@ec2-54-83-36-203.compute-1.amazonaws.com:5432/du0g9t0n533uc
-  # adapter: postgresql
-  # encoding: unicode
-  # database: du0g9t0n533uc
-  # port: 5432
-  # pool: 5
-  # username: iwdvpbitpiecra
-  # password: czkOmKxe2xdDFHOaQI6AJirRd5
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: invndc
+  username: floating-ravine-1607
+  password: 
   # host: ec2-54-83-36-203.compute-1.amazonaws.com
 
 localdb:
-  url: postgres://iwdvpbitpiecra:czkOmKxe2xdDFHOaQI6AJirRd5@ec2-54-83-36-203.compute-1.amazonaws.com:5432/du0g9t0n533uc
-  # adapter: postgresql
-  # encoding: unicode
-  # database: du0g9t0n533uc
-  # port: 5432
-  # pool: 5
-  # username: iwdvpbitpiecra
-  # password: czkOmKxe2xdDFHOaQI6AJirRd5
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: iMRP
+  username: floating-ravine-1607
+  password: 
   # host: ec2-54-83-36-203.compute-1.amazonaws.com
