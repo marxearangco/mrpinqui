@@ -30,20 +30,23 @@ test:
   host: localhost
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: du0g9t0n533uc
-  pool: 5
-  username: iwdvpbitpiecra
-  password: czkOmKxe2xdDFHOaQI6AJirRd5
-  host: ec2-54-83-36-203.compute-1.amazonaws.com
+  url: postgres://iwdvpbitpiecra:czkOmKxe2xdDFHOaQI6AJirRd5@ec2-54-83-36-203.compute-1.amazonaws.com:5432/du0g9t0n533uc
+  # adapter: postgresql
+  # encoding: unicode
+  # database: du0g9t0n533uc
+  # port: 5432
+  # pool: 5
+  # username: iwdvpbitpiecra
+  # password: czkOmKxe2xdDFHOaQI6AJirRd5
+  # host: ec2-54-83-36-203.compute-1.amazonaws.com
 
 localdb:
-  adapter: postgresql
-  encoding: unicode
-  database: du0g9t0n533uc
-  pool: 5
-  username: iwdvpbitpiecra
-  password: czkOmKxe2xdDFHOaQI6AJirRd5
-  host: ec2-54-83-36-203.compute-1.amazonaws.com
-  #host: localhost
+  url: postgres://iwdvpbitpiecra:czkOmKxe2xdDFHOaQI6AJirRd5@ec2-54-83-36-203.compute-1.amazonaws.com:5432/du0g9t0n533uc
+  # adapter: postgresql
+  # encoding: unicode
+  # database: du0g9t0n533uc
+  # port: 5432
+  # pool: 5
+  # username: iwdvpbitpiecra
+  # password: czkOmKxe2xdDFHOaQI6AJirRd5
+  # host: ec2-54-83-36-203.compute-1.amazonaws.com
