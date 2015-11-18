@@ -1,66 +1,69 @@
 <br /><br /><br /><br /><br />
 
 <div class="col-xs-6 hidden-sm hidden-xs">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <%= form_tag(:action=>'attempt_login') do %>
-      <div class="modal-body">
-       <h3><i class="fa fa-lock fa-lg"></i> &nbsp; &nbsp;&nbsp;Please Login</h3>
-       <!-- </div> -->
-       <!-- <div class="modal-body"> -->
-       <ul class="list-group">
-         <li class="list-group-item">
-           <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true' %>
-         </li>
-         <li class="list-group-item">
+  <div class="modal-dialog modal-sm" style="border: 1px solid #fff; border-radius: 5px">
+    <!-- <div class="modal-content"> -->
+      <%= form_tag(:action=>'attempt_login', class: 'form-horizontal') do %>
+      <div class="modal-header">
+       <h4 class="modal-title" style="color: #fff"><i class="fa fa-lock fa-lg"></i> &nbsp; &nbsp;&nbsp;Please Login</h4>
+       </div>
+       <div class="modal-body">
+       <div class="row">
+           <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true', data: {content: 'Username is required.', trigger: 'manual', placement: 'top' } %>
+         </div>
+         <br>
+         <div class="row">
           <%= password_field_tag :password, nil, class: "form-control", required: true, placeholder: 'Password'  %>
-        </li>
-        <li class="list-group-item">
+        </div>
+        <br>
+        <div class="row">
           <input type="checkbox" value="remember-me" id="chk">
-          <label for="chk">Remember me</label>
-        </li>
-        <li class="list-group-item">
-          <span style="color: red; font-style: italic"><%= flash[:notice] %></span>
-        </li>
-      </ul>
+          <label for="chk" style="color: #fff">Remember me</label>
+        </div>
+        <br>
+        <div class="row">
+          <span style="color: #EC6E12; font-style: italic"><%= flash[:notice] %></span>
+        </div>
+      
     </div>
     <div class="modal-footer">
-     <%= submit_tag 'Login' %>
+     <%= submit_tag 'Login', class: 'btn btn-default ' %>
    </div>	
    <% end %>
  </div>
-</div>
+<!-- </div> -->
 </div>
 
-
-<%= form_tag(:action=>'attempt_login') do %>
-<div class="col-xs-12 hidden-md hidden-lg">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-       <h3><i class="fa fa-lock fa-lg"></i> &nbsp; &nbsp;&nbsp;Please Login</h3>
-       <!-- </div> -->
-       <!-- <div class="modal-body"> -->
-       <ul class="list-group">
-         <li class="list-group-item">
-           <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true' %>
-         </li>
-         <li class="list-group-item">
+<div class="col-xs-10 hidden-md hidden-lg">
+  <div class="modal-dialog modal-sm" style="border: 1px solid #fff; border-radius: 5px">
+    <!-- <div class="modal-content"> -->
+      <%= form_tag(:action=>'attempt_login', class: 'form-horizontal') do %>
+      <div class="modal-header">
+       <h4 class="modal-title" style="color: #fff"><i class="fa fa-lock fa-lg"></i> &nbsp; &nbsp;&nbsp;Please Login</h4>
+       </div>
+       <div class="modal-body">
+       <div class="row">
+           <%= text_field_tag :user, nil, class: 'form-control', required: true, placeholder: 'User Name', autofocus: 'true', data: {content: 'Username is required.', trigger: 'manual', placement: 'top' } %>
+         </div>
+         <br>
+         <div class="row">
           <%= password_field_tag :password, nil, class: "form-control", required: true, placeholder: 'Password'  %>
-        </li>
-        <li class="list-group-item">
+        </div>
+        <br>
+        <div class="row">
           <input type="checkbox" value="remember-me" id="chk">
-          <label for="chk">Remember me</label>
-        </li>
-        <li class="list-group-item">
+          <label for="chk" style="color: #fff">Remember me</label>
+        </div>
+        <br>
+        <div class="row">
           <span style="color: red; font-style: italic"><%= flash[:notice] %></span>
-        </li>
-      </ul>
+        </div>
+      
     </div>
     <div class="modal-footer">
-     <%= submit_tag 'Login' %>
+     <%= submit_tag 'Login', class: 'btn btn-default ' %>
    </div> 
+   <% end %>
  </div>
+<!-- </div> -->
 </div>
-</div>
-<% end %>

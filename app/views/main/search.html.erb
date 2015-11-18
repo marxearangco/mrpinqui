@@ -1,19 +1,23 @@
 
 <div>
- <%= render 'grid' %>
- <div class="row">
-   <div class="col-xs-6 form-inline">
-    <div class="panel panel-default panel-body">
-     Search 
-     <%= grid_filter @listitems, :item_filter %>
-   </div>
- </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-   <%= render_grid(@listitems) %>
- </div>
-</div>
+	<%= render 'grid' %>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-inline">
+			<div class="panel panel-default panel-body">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					Search 
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+					<%= grid_filter @listitems, :item_filter %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<%= render_grid(@listitems) %>
+		</div>
+	</div>
 
 	<div class="modal fade" tabindex="-1" role="dialog" id="inventory">
 		<div class="modal-dialog">

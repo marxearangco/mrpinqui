@@ -1,0 +1,15 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title">Update Database</h4>
+</div>
+<%= form_tag main_uploadsql_path, :multipart => true, id: "runsql" do %>
+<div class="modal-body">
+	<div class="form-group">
+		<!--%= text_area_tag :sql, nil, class: 'form-control', rows: 3 %-->
+		<%= file_field_tag "file", class: "fileUpload", accept: 'text' %>
+	</div>
+</div>
+<div class="modal-footer" id="upload">
+	<%= submit_tag "Run", class: 'btn alert' %>
+</div>
+<% end %>

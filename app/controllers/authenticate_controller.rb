@@ -18,7 +18,7 @@ class AuthenticateController < ApplicationController
   def attempt_login
     user = Session.find_by(:userName=>params[:user])
     if user
-      if params[:password]==user.passWord
+      unless user.passWord=="#{params[:password]}"
         session[:username]=user.userName
         session[:role] = user.privilege
         acct = Employee.find_by(:idEmp=> user.idEmp)
@@ -29,13 +29,16 @@ class AuthenticateController < ApplicationController
         end
         redirect_to main_index_path
       else
-        flash[:notice] = 'Invalid Username/password'
+        flash[:notice] = user.passWord
+        # 'Username and password did not match.'
         redirect_to(:action=>'login')
       end
     else
-      flash[:notice] = 'Sign in or sign up first.'
+      flash[:notice] = 'Your Username is not recognized. Sign in or sign up first.'
       redirect_to(:action=>'login')
     end
   end
 
 end
+
+

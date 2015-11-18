@@ -19,19 +19,22 @@ $('#updateinv').submit(function(event) {
 });
 
 $('#inventory').on('hidden.bs.modal', function () {
-	var _search = $('#search').val();
-	var _search2 = $('#search2').val();
-	$.ajax({
-		type: 'GET',
-		url: 'main/<%= session[:category] %>/search',
-		success: function(){
-			$('#search').val(_search);
-			$('#search').focus();
-			$('#search').trigger('keyup');
+	// var _search = $('#search').val();
+	// var _search2 = $('#search2').val();
+	// $.ajax({
+	// 	type: 'GET',
+	// 	url: 'main/<%= session[:category] %>/search',
+	// 	success: function(){
+	// 		$('#search').val(_search);
+	// 		$('#search').focus();
+	// 		$('#search').trigger('keyup');
 
-			$('#search2').val(_search);
-			$('#search2').focus();
-			$('#search2').trigger('keyup');
-			},
-		});
+	// 		$('#search2').val(_search);
+	// 		$('#search2').focus();
+	// 		$('#search2').trigger('keyup');
+	// 		},
+	// 	});
+	window.location.reload();
 });
+
+

@@ -4,6 +4,8 @@ DMS::Application.routes.draw do
   post "authenticate/attempt_login"
   get "authenticate/login"
   get "authenticate/logout"
+  get "main/upload"
+  post "main/uploadsql"
   root "main#index"
   
   resources :main do

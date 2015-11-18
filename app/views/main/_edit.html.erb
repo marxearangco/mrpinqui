@@ -6,51 +6,57 @@
 	<%= form_tag(save_main_path(i.code), remote: true, id: 'updateinv') do %>
 	<div class="modal-body">
 		<div class="row">
-			<div class="col-xs-8">
-				Item Name:
-				<%= text_field_tag :itemname, i.itemname, style: "text-align: center", class: "form-control" %> 
-			</div>
-			<div class="col-xs-4">
-				Part Number:
-				<%= text_field_tag :partnum, i.partnum, style: "text-align: center", class: "form-control" %> 
+			<div class="col-xs-12">
+				<label>Item Name:</label>
+				<%= text_field_tag :itemname, i.itemname, style: "text-align: center", class: "form-control input-sm" %> 
 			</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-xs-12">
-				Details:
-				<%= text_field_tag :detail, i.detail, style: "text-align: center", class: "form-control" %>
+				<label>Details:</label>
+				<%= text_field_tag :detail, i.detail, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 		</div>
+		<br>
 		<div class="row">
-			<div class="col-xs-4">
-				location:
-				<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.vin), class: "form-control" %>
-			</div>
-			<div class="col-xs-4">
-				Selling Price:
-				<%= text_field_tag :srp, i.srp, style: "text-align: center", class: "form-control" %>
-			</div>
-			<div class="col-xs-4">
-				Unit Cost:
-				<%= text_field_tag :cost, i.cost, style: "text-align: center", class: "form-control" %>
+			<div class="col-xs-8">
+				<label>Part #:</label>
+				<%= text_field_tag :partnum, i.partnum, style: "text-align: center", class: "form-control input-sm" %> 
 			</div>
 		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-4">
+				<label>BIN:</label>
+				<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.vin), class: "form-control input-sm" %>
+			</div>
+			<div class="col-xs-4">
+				<label>SRP:</label>
+				<%= text_field_tag :srp, i.srp, style: "text-align: center", class: "form-control input-sm" %>
+			</div>
+			<div class="col-xs-4">
+				<label>Cost:</label>
+				<%= text_field_tag :cost, i.cost, style: "text-align: center", class: "form-control input-sm" %>
+			</div>
+		</div>
+		<br>
 		<div class="row">
 			<div class="col-xs-3">
-				Beginning
-				<%= number_field_tag :beg, i.qtyBeg, style: "text-align: center", class: "form-control" %>
+				<label>Beginning</label>
+				<%= number_field_tag :beg, i.qtyBeg, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 			<div class="col-xs-3">
-				In
-				<%= number_field_tag :in, i.qtyIn, style: "text-align: center", class: "form-control" %>
+				<label>In</label>
+				<%= number_field_tag :in, i.qtyIn, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 			<div class="col-xs-3">
-				Out
-				<%= number_field_tag :out, i.qtyOut, style: "text-align: center", class: "form-control" %>
+				<label>Out</label>
+				<%= number_field_tag :out, i.qtyOut, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 			<div class="col-xs-3">
-				Ending
-				<%= number_field_tag :end, i.qtyEnd, style: "text-align: center", class: "form-control" %>
+				<label>Ending</label>
+				<%= number_field_tag :end, i.qtyEnd, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 		</div>
 	</div>

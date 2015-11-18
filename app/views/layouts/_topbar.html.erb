@@ -2,27 +2,28 @@
   <div class="container">
     <div class="row">
       <div class="navbar-header">
-        <span class="navbar-brand pull-left"> 
-          <label for="offcanvas" class="toggler">
-            <i class="fa fa-motorcycle fa-lg"></i>
-          </label>
-        </span>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <span class="navbar-brand" style="font-size: 14px; color: #F1EAEA">
+        <span class="navbar-brand" style="font-size: 1.2em; color: #F1EAEA">
+          <span class="pull-left"> 
+          <label for="offcanvas" class="toggler">
+            <i class="fa fa-motorcycle fa-lg"></i>
+          </label>
+        </span>&nbsp;
           <a style="color:#FFF">NORMINRING</a><a style="color:#C9302C">MOTORBIKES</a>
         </span>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navcollapse">
-        <ul class="nav nav-pills navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
           <% if session[:acctname] %>
-          <li>
-            <%= link_to raw('<span class="glyphicon glyphicon-user"></span> ' +session[:acctname].to_s),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
+          <li><%= link_to raw('<span class="glyphicon glyphicon-user"></span> ' + session[:acctname].to_s),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
+          </li>
+          <li><%= link_to raw('<span class="fa fa-upload"></span> Upload'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
           </li>
           <% else %>
           <li>

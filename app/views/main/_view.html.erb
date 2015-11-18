@@ -1,7 +1,7 @@
 <% @item.each do |i| %>
 <div class="modal-header btn-danger">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title"><%= i.itemname %></h4>
+  <h4 class="modal-title"><%= i.itemName %></h4>
 </div>
 <div class="modal-body">
   <ul class="list-group">
@@ -20,33 +20,32 @@
 
     <li class="list-group-item">
       <div class="row">
+        <div class="col-xs-5">
+          Part #<br>
+          <%= text_field_tag '', i.partNum, class: 'form-control text-center input-sm' %>
+        </div>
         <div class="col-xs-4">
-          PartNumber:<br>
-          <%= text_field_tag '', i.partnum, class: 'form-control text-center' %>
-        </div>
-        <div class="col-xs-4 text-center">
           SRP:<br>
-          <%= text_field_tag '', peso(i.srp), class: 'form-control text-center' %>
+          <%= text_field_tag '', peso(i.srp), class: 'form-control text-center input-sm' %>
         </div>
-        <div class="col-xs-4 text-center">
+        <div class="col-xs-3">
           Available:<br>
-          <%= text_field_tag '', i.qtyEnd, class: 'form-control text-center' %>
+          <%= text_field_tag '', i.qtyEnd, class: 'form-control text-center input-sm' %>
         </div>
-      </div> 
+      </div>
     </li>
-    
   </ul>
 </div>
 <div class="modal-footer" id="upload">
   <% if session[:role] == 1 %>
-    <% if @img 
-      @label= '<i class="fa fa-camera"></i> Edit Image'
-    else
-      @label= '<i class="fa fa-camera"></i> Add Image'
-    end 
-    -%>
-    <%= link_to raw(@label), image_main_path(params[:id]), remote: true, class: 'btn danger text-shadow' %>
-    <%= link_to raw('<i class="fa fa-pencil"></i> Inventory'), edit_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#inventory" }, class: 'btn danger text-shadow' %>
+  <% if @img 
+    @label= '<i class="fa fa-camera"></i> Edit Image'
+  else
+    @label= '<i class="fa fa-camera"></i> Add Image'
+  end 
+  -%>
+  <%= link_to raw(@label), image_main_path(params[:id]), remote: true, class: 'btn danger text-shadow' %>
+  <%= link_to raw('<i class="fa fa-pencil"></i> Inventory'), edit_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#inventory" }, class: 'btn danger text-shadow' %>
   <% end %>
 </div>
 <% end %>

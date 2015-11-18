@@ -18,11 +18,12 @@ class MainController < ApplicationController
     parm = params[:id].split('-')
     find_item(parm[0],parm[1])
     session[:category]=params[:id]
+    tree
   end
 
   def view
-    @item = Inventory.select('tblinventory.code, a.partnum, a.itemname, tblinventory.qtyEnd, tblinventory.srp, tblinventory.cost, a.vin, a.detail').joins('Left Join tblitem a on a.code = tblinventory.code').where('tblinventory.code=?',params[:id])
-    @image = Image.where("code = ?", params[:id])
+    @item = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where(:code=>"#{params[:id]}")
+    @image = Image.where(:code =>"#{params[:id]}")
     @img=nil
     if @image
       @image.each do |i|
@@ -92,19 +93,67 @@ def show
   
 end
 
+def upload
+
+end
+
+def uploadsql1
+  @connection = ActiveRecord::Base.connection
+  result = @connection.execute(params[:sql].to_s)
+  redirect_to :back
+end
+
+def uploadsql
+  @connection = ActiveRecord::Base.connection
+  uploaded_io = params[:file]
+  filename = uploaded_io.original_filename
+  @path = File.join('public/data', filename)
+  File.open(Rails.root.join('public', 'data', filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+  end
+  @data = File.read(@path)
+  @datas = @data.split(";")
+  @readfile = Array.new
+  @datas.each do |d|
+    @read = d.squish.gsub(/`/, '')
+    if @read.first(15)=='INSERT INTO tbl' or @read.first(30) == 'CREATE TABLE IF NOT EXISTS tbl'
+        # @connection.execute(@read)
+
+       @readfile << @read
+    end
+  # File.delete(@path)
+    # if data.start_with? "/*"
+      # @read = data.to(2)
+      # @readfile << @read
+      # if @read.to_s != "/*"
+      #   @readfile << @read.to_s
+      # else
+      #   @readfile << 'cant read'
+      # end
+    # @read = text.gsub(/--/, "replacement string")
+    
+  end
+  
+  # File.foreach(@path) do |line|
+
+  # end
+  # redirect_to :back
+end
+
+
 private
 
 def tree
-    cat = Category.order(:category).where("idCategory<>'8'") 
+    cat = Category.order(:Category)
     @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
     @treeview << "<div class='accordion' data-role='accordion'>\n"
     cat.each do |c|
       @treeview << "<div class='frame'>"
       @treeview << "<div class='heading'>#{c.Category}</div>\n"
-      brand = Brand.where("idCategory=?",c.idCategory).order(:brandName)
+      @brand = Brand.where('"idCategory"=?', c.idCategory)
       @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled'>\n"
       @treeview <<"<li><a href='/main/0-#{c.idCategory}/search'>All</a></li>"
-      brand.each do |b|
+      @brand.each do |b|
         @treeview <<"<li><a href='/main/#{c.idCategory}-#{b.idBrand}/search'> #{b.brandName}</a></li>"
       end
       @treeview << "</ul>\n" << "</div></div>"
@@ -119,31 +168,31 @@ def tree
 
 def find_item(parm0, parm1)
   if parm0=='0'
-    @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=?',parm1)
-    # search = Category.where('idCategory=?',parm1)
-    # search.each do |s|
-    #   @search = s.Category
-    # end
-    @listitems = initialize_grid(Item.where("idBrand=?",parm1),
+    @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin, b.category').joins('Left Join tblitem a on a.code = tblinventory.code left join tblitemcategory b on a.idCategory = b.idCategory').where('a."idCategory"=?',parm1)
+    search = Category.where('"idCategory"=?',parm1)
+    search.each do |s|
+      @search = s.Category
+    end
+    @listitems = initialize_grid(Item.where('"idBrand"=?',parm1),
     per_page: '10'
     )
-  tree
+  #tree
   else
-    @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm0,parm1)
-    # search = Brand.where('idbrand=?',parm1)
-    # search.each do |s|
-    #   @search = s.brandName
-    # end
-    @listitems = initialize_grid(Item.where("idCategory=? and idBrand=?",parm0,parm1),
+    @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin, b.category').joins('Left Join tblitem a on a.code = tblinventory.code left join tblcategory b on a.idCategory = b.idCategory').where('a."idCategory"=? and a."idBrand"=?',parm0,parm1)
+    search = Brand.where('"idBrand"=?',parm1)
+    search.each do |s|
+      @search = s.brandName
+    end
+    @listitems = initialize_grid(Item.where('"idCategory"=? and "idBrand"=?',parm0,parm1),
     per_page: '10'
     )
-  tree
+  #tree
   end
 #  @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm0,parm1)
  # @listitems = initialize_grid(Item.where("idCategory=? and idBrand=?",parm0,parm1),
   #  per_page: '10'
   #  )
-  tree
+  # tree
     # :include=> [{:inventory=>:code}],
 
 
