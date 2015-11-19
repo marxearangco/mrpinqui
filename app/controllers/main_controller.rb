@@ -115,28 +115,47 @@ def uploadsql
   @datas = @data.split(";")
   @readfile = Array.new
   @datas.each do |d|
-    @read = d.squish.gsub(/`/, '')
-    if @read.first(15)=='INSERT INTO tbl' or @read.first(30) == 'CREATE TABLE IF NOT EXISTS tbl'
-        # @connection.execute(@read)
-
-       @readfile << @read
+    @read = d.squish
+    @read = @read.gsub(/`/) { '"' }
+    @read = @read.gsub(/\\'/) {'-'}
+    @read = @read.gsub(/ENGINE=MyISAM DEFAULT CHARSET=latin1/,'')
+    @read = @read.gsub(/ENGINE=InnoDB DEFAULT CHARSET=latin1/,'')
+    @read = @read.gsub(/ENGINE=InnoDB AUTO_INCREMENT=1687 DEFAULT CHARSET=utf8/,'')
+    @read = @read.gsub(/ENGINE=InnoDB AUTO_INCREMENT=2038 DEFAULT CHARSET=latin1/,'')
+    @read = @read.gsub(/INSERT INTO tblitemhistory/,'')
+    @read = @read.gsub(/0000-00-00/,'1901-01-01')
+    @read = @read.gsub(/ char(50)/,' varchar(50)')
+    @read = @read.gsub(/NOT NULL auto_increment/,'')
+    # @read = @read.gsub(/double/, "double precision")
+    @read = @read.gsub("double(15,2)","double precision")
+    @read = @read.gsub("double(18,2)","double precision")
+    @read = @read.gsub("double(12,2)","double precision")
+    @read = @read.gsub("double(21,2)","double precision")
+    (1..20).each do |i|
+      var = "int(" + i.to_s + ")"
+      @read = @read.gsub(var,'integer')
     end
-  # File.delete(@path)
-    # if data.start_with? "/*"
-      # @read = data.to(2)
-      # @readfile << @read
-      # if @read.to_s != "/*"
-      #   @readfile << @read.to_s
-      # else
-      #   @readfile << 'cant read'
-      # end
-    # @read = text.gsub(/--/, "replacement string")
-    
-  end
   
-  # File.foreach(@path) do |line|
+    if @read.first(16)=='INSERT INTO "tbl' or @read.first(31) == 'CREATE TABLE IF NOT EXISTS "tbl'
+      if @read.first(6) == 'CREATE'
+         
+         array_table = @read.split('EXISTS ')
+         array_get_table = array_table.values_at(1).join('')
+         array_get_table = array_get_table.split(' (')
+         table_name = array_get_table.values_at(0).join('')
+         script = 'DROP TABLE ' + table_name + ';'
+         script <<' '<< @read << ';'
+         script << ' TRUNCATE TABLE ' + table_name + ';'
 
-  # end
+      else
+         script = @read
+      end
+      @readfile = script
+      # logger.info script
+      @connection.execute(@readfile)
+    end
+  end
+
   # redirect_to :back
 end
 

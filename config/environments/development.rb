@@ -25,9 +25,12 @@ DMS::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  config.assets.debug = false
+  config.assets.logger = false
+  # config.log_level = :error
   Paperclip.options[:command_path] = "C:/Program Files/GnuWin32/bin;C:/Program Files/ImageMagick-6.9.1-Q16/"
   #Paperclip.options[:command_path] = "/usr/local/bin/"
   Paperclip.options[:log] = true
   Paperclip.options[:log_command] = true
 end
+
