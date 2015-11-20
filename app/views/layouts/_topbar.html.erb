@@ -31,7 +31,7 @@
             <li><%= link_to raw('<span class="fa fa-sign-out"></span> Logout'),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
             </li>
             <li>
-              <% if session[:role] == 'Administrator' %>
+              <% if session[:username] == 'administrator' %>
               <%= link_to raw('<span class="fa fa-upload"></span> Upload'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
               <% end %>
             </li>
