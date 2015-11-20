@@ -2,10 +2,10 @@ $('#viewinv').html('<%= escape_javascript (render "upload") %>');
 
 $('#runsql').submit(function(event) {
 	event.preventDefault();
-	$('#run').attr('value','Please wait this may take a while...');
 	var form = $(this);
 	var fd = new FormData();
 		fd.append("file", $('#file')[0].files[0]);
+	$('#run').attr('value','Please wait this may take a while...');
 	$.ajax({
 		type: 'POST',
 		url: '<%= main_uploadsql_path(params[:sql]) %>',

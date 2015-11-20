@@ -35,9 +35,9 @@ class AuthenticateController < ApplicationController
         redirect_to main_index_path
       else
 
-        flash[:notice] = ""
-        user.passWord + ' ' + user.userName + ' ' + user.privilege
-        # 'Username and password did not match.'
+        flash[:notice] = "Username and password did not match."
+        # user.passWord + ' ' + user.userName + ' ' + user.privilege
+        # 
         redirect_to(:action=>'login')
       end
     else
