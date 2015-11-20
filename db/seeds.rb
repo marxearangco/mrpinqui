@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
   connection=ActiveRecord::Base.connection
-  connection.execute('insert into "tblempauth"("idEmp","userName","passWord","privilege") values(1,"administrator","p@$$w0rd",1)')
-  connection.execute('insert into "tblprivilege"("id","privilege") values(1,"administrator")')
+  strsql = 'insert into "tblempauth"("id","idEmp","userName","passWord","privilege") values(34,1,\'administrator\',\'p@$$w0rd\',1)'
+  connection.execute(strsql)
+  strsql = 'insert into "tblprivilege"("id","privilege") values(30,\'administrator\')'
+  connection.execute(strsql)
