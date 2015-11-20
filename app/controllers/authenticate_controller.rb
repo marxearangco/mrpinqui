@@ -16,11 +16,16 @@ class AuthenticateController < ApplicationController
   end
 
   def attempt_login
+    @connection = ActiveRecord::Base.connection
     user = Session.find_by(:userName=>params[:user])
     if user
       unless user.passWord=="#{params[:password]}"
         session[:username]=user.userName
-        session[:role] = user.privilege
+        session[:role_id] = user.privilege
+        @get_role = @connection.execute("select * from tblprivilege where id = '#{session[:role_id]}'")
+        @get_role.each do |role|
+          session[:role] = role["privilege"]
+        end
         acct = Employee.find_by(:idEmp=> user.idEmp)
         if acct
         	session[:acctname] = acct.fName + ' ' + acct.midInit + '. ' + acct.lName 

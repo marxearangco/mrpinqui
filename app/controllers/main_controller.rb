@@ -38,7 +38,7 @@ class MainController < ApplicationController
   end
 
   def edit
-    sql = 'tblinventory.code, a.partnum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
+    sql = 'tblinventory.code, a.partNum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
     @inv = Inventory.select(sql).joins('Left Join tblitem a on a.code = tblinventory.code').where('tblinventory.code=?',params[:id])
     @cat_params = Item.where(:code=>params[:id])
     @cat_params.each do |c|
@@ -64,7 +64,7 @@ class MainController < ApplicationController
   end
   @item = Item.where("code=?", params[:id])
   @item.each do |j|
-    j.itemName = params[:itemname]
+    j.itemname = params[:itemname]
     j.detail = params[:detail]
     j.partNum = params[:partnum]
     j.vin = params[:location]
@@ -90,17 +90,11 @@ def create
 end
 
 def show
-  
+
 end
 
 def upload
 
-end
-
-def uploadsql1
-  @connection = ActiveRecord::Base.connection
-  result = @connection.execute(params[:sql].to_s)
-  redirect_to :back
 end
 
 def uploadsql
@@ -109,7 +103,7 @@ def uploadsql
   filename = uploaded_io.original_filename
   @path = File.join('public/data', filename)
   File.open(Rails.root.join('public', 'data', filename), 'wb') do |file|
-      file.write(uploaded_io.read)
+    file.write(uploaded_io.read)
   end
   @data = File.read(@path)
   @datas = @data.split(";")
@@ -143,30 +137,32 @@ def uploadsql
     @read = @read.gsub(/ char(50)/,' varchar(50)')
     @read = @read.gsub(/NOT NULL auto_increment/,'')
     @read = @read.gsub("unsigned zerofill ","") 
+    @read = @read.gsub("unsigned","") 
     @read = @read.gsub("double(15,2)","double precision")
     @read = @read.gsub("double(18,2)","double precision")
     @read = @read.gsub("double(12,2)","double precision")
     @read = @read.gsub("double(21,2)","double precision")
+    @read = @read.gsub("itemName","itemname")
     (1..25).each do |i|
       var = "int(" + i.to_s + ")"
       @read = @read.gsub(var,'integer')
     end
-  
+
     if @read.first(16)=='INSERT INTO "tbl' or @read.first(31) == 'CREATE TABLE IF NOT EXISTS "tbl'
       if @read.first(6) == 'CREATE'
-         
+
          array_table = @read.split('EXISTS ')
-         array_get_table = array_table.values_at(1).join('')
-         array_get_table = array_get_table.split(' (')
+       array_get_table = array_table.values_at(1).join('')
+       array_get_table = array_get_table.split(' (')
          table_name = array_get_table.values_at(0).join('')
          script = 'DROP TABLE ' + table_name + ';'
          script <<' '<< @read << ';'
          script << ' TRUNCATE TABLE ' + table_name + ';'
 
-      else
+       else
          script = @read
-      end
-      @readfile = script
+       end
+       @readfile = script
       # logger.info script
       @connection.execute(@readfile)
     end
@@ -179,72 +175,72 @@ end
 private
 
 def tree
-    cat = Category.order(:Category)
-    @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
-    @treeview << "<div class='accordion' data-role='accordion'>\n"
-    cat.each do |c|
-      @treeview << "<div class='frame'>"
-      @treeview << "<div class='heading'>#{c.Category}</div>\n"
-      @brand = Brand.where('"idCategory"=?', c.idCategory)
-      @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled'>\n"
-      @treeview <<"<li><a href='/main/0-#{c.idCategory}/search'>All</a></li>"
-      @brand.each do |b|
-        @treeview <<"<li><a href='/main/#{c.idCategory}-#{b.idBrand}/search'> #{b.brandName}</a></li>"
-      end
-      @treeview << "</ul>\n" << "</div></div>"
+  cat = Category.order(:Category)
+  @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
+  @treeview << "<div class='accordion' data-role='accordion'>\n"
+  cat.each do |c|
+    get_category_icon("#{c.Category}")
+    @treeview << "<div class='frame'>"
+    @treeview << "<div class='heading'><span class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{@cat_icon}</span>" << " &nbsp;&nbsp;&nbsp; #{c.Category}</div>\n"
+    @brand = Brand.where('"idCategory"=?', c.idCategory)
+    @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled' style='margin-left: 10px'>\n"
+    @treeview <<"<li><a href='/main/0-#{c.idCategory}/search'>All</a></li>"
+    @brand.each do |b|
+      @treeview <<"<li><a href='/main/#{c.idCategory}-#{b.idBrand}/search'> #{b.brandName}</a></li>"
     end
-    @treeview << "</div>"
-    respond_to do |format|
-      format.html
-      format.json
-    end
+    @treeview << "</ul>\n" << "</div></div>"
   end
+  @treeview << "</div>"
+  respond_to do |format|
+    format.html
+    format.json
+  end
+end
 
+def get_category_icon(category)
+  @cat_icon = nil
+  case category.first(3)
+  when 'App' then 
+    @cat_icon = "<i class='fa fa-black-tie'></i>"
+  when 'Bat' then
+    @cat_icon = "<i class='fa fa-battery-half'></i>"
+  when 'Mot' then
+    @cat_icon = "<i class='fa fa-motorcycle'></i>"
+  when 'Par' then
+    @cat_icon = "<i class='fa fa-cogs'></i>"
+  when 'Tir' then
+    @cat_icon = "<i class='fa fa-gg-circle'></i>"
+  when 'Con' then
+    @cat_icon = "<i class='fa fa-edit'></i>"
+  when 'Oil' then
+    @cat_icon = "<i class='fa fa-tint'></i>"
+  else
+    @cat_icon = "<i class='fa fa-archive'></i>"
+  end
+    
+end
 
 def find_item(parm0, parm1)
   if parm0=='0'
-    @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin, b.category').joins('Left Join tblitem a on a.code = tblinventory.code left join tblitemcategory b on a.idCategory = b.idCategory').where('a."idCategory"=?',parm1)
+    @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=?', parm1)
     search = Category.where('"idCategory"=?',parm1)
     search.each do |s|
       @search = s.Category
     end
     @listitems = initialize_grid(Item.where('"idBrand"=?',parm1),
-    per_page: '10'
-    )
-  #tree
+      per_page: '10'
+      )
   else
-    @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin, b.category').joins('Left Join tblitem a on a.code = tblinventory.code left join tblcategory b on a.idCategory = b.idCategory').where('a."idCategory"=? and a."idBrand"=?',parm0,parm1)
+    @items = Inventory.select('"tblitem"."itemname","tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=? and "tblitem"."idBrand"=?',parm0,parm1)
     search = Brand.where('"idBrand"=?',parm1)
     search.each do |s|
       @search = s.brandName
     end
     @listitems = initialize_grid(Item.where('"idCategory"=? and "idBrand"=?',parm0,parm1),
-    per_page: '10'
-    )
-  #tree
+      per_page: '10'
+      )
   end
-#  @items = Inventory.select('tblinventory.code, a.partnum, a.itemname, qtyEnd, srp, a.vin').joins('Left Join tblitem a on a.code = tblinventory.code').where('a.idCategory=? and a.idBrand=?',parm0,parm1)
- # @listitems = initialize_grid(Item.where("idCategory=? and idBrand=?",parm0,parm1),
-  #  per_page: '10'
-  #  )
-  # tree
-    # :include=> [{:inventory=>:code}],
 
-
-  # @photogrid = ''
-  # @items.each do |i|
-  #   @c = i.code
-  #   @photo = '/assets/ring.png'
-  #   @photogrid << '<li><a href="/main/'<< @c<<'/view" data-toggle="modal" data-target="#viewitem" data-remote="true">'
-  #   @image = Image.where("code = ?", i.code)
-  #   if @image
-  #     @image.each do |p|
-  #       @photo = p.photo.url(:medium)
-  #     end
-  #   end
-  #   @photogrid << '<img src="' << @photo << '" style="vertical-align: middle;" />'
-  #   @photogrid << '</a><p style="font-size: 85%; text-align: center">' << i.itemname << '</p></li>'
-  # end
 end 
 
 

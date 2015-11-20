@@ -10208,7 +10208,7 @@ input[type="submit"].link:active {
 }
 .accordion > .frame > .heading {
   display: block;
-  padding: 8px 16px 8px 20px;
+  padding: 8px 0px 8px 2px;
   /*background-color: #f6f6f6;*/
   cursor: pointer;
   /*font-size: .6875rem;*/
@@ -10278,7 +10278,7 @@ input[type="submit"].link:active {
   display: block;
 }
 .accordion > .frame > .content {
-  padding: .625rem;
+  padding: 1rem .625rem;
   display: none;
   background-color: #E6E6E6;
   z-index: 1;
@@ -14490,6 +14490,7 @@ p [data-hint] {
 }
 .accordmenu {
   display: block;
+  padding: 2px;
 }
 .accordmenu li:hover{
  background-color: #C0C0C0;

@@ -10,28 +10,38 @@
         </button>
         <span class="navbar-brand" style="font-size: 1.2em; color: #F1EAEA">
           <span class="pull-left"> 
-          <label for="offcanvas" class="toggler">
-            <i class="fa fa-motorcycle fa-lg"></i>
-          </label>
-        </span>&nbsp;
-          <a style="color:#FFF">NORMINRING</a><a style="color:#C9302C">MOTORBIKES</a>
-        </span>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navcollapse">
-        <ul class="nav navbar-nav navbar-right">
-          <% if session[:acctname] %>
-          <li><%= link_to raw('<span class="glyphicon glyphicon-user"></span> ' + session[:acctname].to_s),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
-          </li>
-          <li><%= link_to raw('<span class="fa fa-upload"></span> Upload'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
-          </li>
-          <% else %>
-          <li>
-            <%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %>
-          </li>
-          <% end %>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
-</nav>  
+            <a style="text-decoration: none; color: #fff">
+              <label for="offcanvas" class="toggler">
+                <span><i class="fa fa-navicon fa-lg"></i></span>
+              </label></a>
+            </span>&nbsp;
+            <a style="color:#FFF">NORMINRING</a><a style="color:#C9302C">MOTORBIKES</a>
+          </span>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navcollapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <form class="navbar-form navbar-right">
+                  <input type="text" class="form-control" placeholder="Quick Search..." />
+              </form>
+            </li>
+            <% if session[:acctname] %>
+
+            <li><%= link_to raw('<span class="fa fa-sign-out"></span> Logout'),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
+            </li>
+            <li>
+              <% if session[:role] == 'Administrator' %>
+              <%= link_to raw('<span class="fa fa-upload"></span> Upload'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
+              <% end %>
+            </li>
+            <% else %>
+            <li>
+              <%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %>
+            </li>
+            <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </nav>  

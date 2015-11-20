@@ -4,27 +4,29 @@ $('#back').click(function(){
 	$('#upload').html("<%= escape_javascript(render 'button') %>");
 });
 
-
 $('#new_image').submit(function(event) {
-	var form = $(this).parent('form');
-	var fd = new FormData();
-	fd.append("image[code]", '<%= params[:id] %>');
-	fd.append("image[photo]", $('#image_photo')[0].files[0]);
-	
-	$.ajax({
-		type: 'POST',
-		url: '<%= main_path(params[:id]) %>',
-		data: fd,
-		processData: false,
-		contentType: false,
-		success: function(data){
-			$('#upload').html("<%= escape_javascript(render 'button') %>");
-		},
-		error: function(data){
-			console.log(fd);
-		},
-		
-	});
-	event.preventDefault();
+   var form = $(this).parent('form');
+   var fd = new FormData();
+   $('#select').attr('value','Uploading...');
+
+   fd.append("image[code]", '<%= params[:id] %>');
+   fd.append("image[photo]", $('#image_photo')[0].files[0]);
+
+   $.ajax({
+      type: 'POST',
+      url: '<%= main_path(params[:id]) %>',
+      data: fd,
+      processData: false,
+      contentType: false,
+      success: function(data){
+         $('#upload').html("<%= escape_javascript(render 'button') %>");
+     },
+     error: function(data){
+         console.log(fd);
+     },
+
+ });
+   event.preventDefault();
 });
+
 

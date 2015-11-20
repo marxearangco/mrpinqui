@@ -176,8 +176,6 @@ background-image: url(/assets/bgbike.jpg);
 background-repeat: no-repeat;
 background-size: cover;
 background-position: center center;
-
-
 }
 
 div.fixed-sidebar {
@@ -196,7 +194,8 @@ div.fixed-sidebar {
 .navbar-toggle {
   margin-right: 35px;
 }
-#grid_f_itemName {
+#grid_f_itemname {
   width: 100%;
   font-size: 14px;
 }
+

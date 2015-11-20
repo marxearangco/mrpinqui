@@ -45,7 +45,7 @@ if defined?(Wice::Defaults)
 
 
   # SQL operator used for matching strings in string filters.
-  Wice::Defaults::STRING_MATCHING_OPERATOR = 'LIKE'
+  Wice::Defaults::STRING_MATCHING_OPERATOR = 'ILIKE'
   # STRING_MATCHING_OPERATOR = 'ILIKE' # Use this for Postgresql case-insensitive matching.
 
 

@@ -26,24 +26,27 @@
   <div class="wrapper">
     <aside class="hidden-lg hidden-md">
       <nav class="navbar navbar-gray">
-       <%= render 'layouts/tree' %>
-       <br /><br /><br /><br /><br />
-     </nav>
-   </aside>
-   <section>
-    <%= render 'layouts/topbar' %>
-    <br /><br /><br /><br /><br />
-    <div class="container-fluid">
-      <div class="hidden-sm hidden-xs col-sm-3">
+        <br /><br /><br /><br /><br />
         <%= render 'layouts/tree' %>
-      </div>
-      <div class="col-sm-9">
+        <br /><br /><br /><br /><br />
+      </nav>
+    </aside>
+    <section>
+      <%= render 'layouts/topbar' %>
+      <br /><br /><br /><br />
 
-        <%= yield %>
-       
+      <br />
+      <div class="container">
+        <div class="row">
+          <div class="hidden-sm hidden-xs col-md-4 col-lg-4">
+            <%= render 'layouts/tree' %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pull-right">
+            <%= yield %>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
 </body>
 </html>
