@@ -14,7 +14,7 @@
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navcollapse">
-        <ul class="nav nav-pills navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
           <% if session[:acctname] %>
           <li>
             <%= link_to raw('<span class="glyphicon glyphicon-user"></span> ' +session[:acctname].to_s),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
