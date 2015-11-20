@@ -118,20 +118,36 @@ def uploadsql
     @read = d.squish
     @read = @read.gsub(/`/) { '"' }
     @read = @read.gsub(/\\'/) {'-'}
-    @read = @read.gsub(/ENGINE=MyISAM DEFAULT CHARSET=latin1/,'')
-    @read = @read.gsub(/ENGINE=InnoDB DEFAULT CHARSET=latin1/,'')
-    @read = @read.gsub(/ENGINE=InnoDB AUTO_INCREMENT=1687 DEFAULT CHARSET=utf8/,'')
-    @read = @read.gsub(/ENGINE=InnoDB AUTO_INCREMENT=2038 DEFAULT CHARSET=latin1/,'')
-    @read = @read.gsub(/INSERT INTO tblitemhistory/,'')
+    @read = @read.gsub("ENGINE=MyISAM ",'')
+    @read = @read.gsub("ENGINE=InnoDB ",'')
+    @read = @read.gsub("DEFAULT CHARSET=utf8", '')
+    @read = @read.gsub("DEFAULT CHARSET=latin1", '')
+    @read = @read.gsub("ROW_FORMAT=COMPACT",'')
+    @read = @read.gsub("ROW_FORMAT=DYNAMIC",'')
+    @read = @read.gsub("AUTO_INCREMENT=1687",'')
+    @read = @read.gsub("AUTO_INCREMENT=2038",'')
+    @read = @read.gsub("AUTO_INCREMENT=3010",'')
+    @read = @read.gsub("AUTO_INCREMENT=878",'')
+    @read = @read.gsub("AUTO_INCREMENT=9",'')
+    @read = @read.gsub("AUTO_INCREMENT=15",'')
+    @read = @read.gsub("AUTO_INCREMENT=879",'')
+    @read = @read.gsub("AUTO_INCREMENT=318",'')
+    @read = @read.gsub("AUTO_INCREMENT=3",'')
+    @read = @read.gsub("AUTO_INCREMENT=5",'')
+    @read = @read.gsub("AUTO_INCREMENT=12",'')
+    @read = @read.gsub("AUTO_INCREMENT=7",'')
+    @read = @read.gsub("AUTO_INCREMENT=23",'')
+    @read = @read.gsub("AUTO_INCREMENT=15",'')
+    @read = @read.gsub("INSERT INTO tblitemhistory",'')
     @read = @read.gsub(/0000-00-00/,'1901-01-01')
     @read = @read.gsub(/ char(50)/,' varchar(50)')
     @read = @read.gsub(/NOT NULL auto_increment/,'')
-    # @read = @read.gsub(/double/, "double precision")
+    @read = @read.gsub("unsigned zerofill ","") 
     @read = @read.gsub("double(15,2)","double precision")
     @read = @read.gsub("double(18,2)","double precision")
     @read = @read.gsub("double(12,2)","double precision")
     @read = @read.gsub("double(21,2)","double precision")
-    (1..20).each do |i|
+    (1..25).each do |i|
       var = "int(" + i.to_s + ")"
       @read = @read.gsub(var,'integer')
     end
