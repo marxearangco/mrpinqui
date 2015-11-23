@@ -27,8 +27,6 @@
               <input type="text" class="form-control" placeholder="Quick Search..." />
             </form>
           </li>
-          <% if session[:acctname] %>
-
           <li>
             <% if session[:role] == 'Administrator' %>
             <%= link_to raw('<span class="fa fa-upload"></span>'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
@@ -40,7 +38,7 @@
           <li>
             <%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %>
           </li>
-          <% end %>
+          
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.row -->
