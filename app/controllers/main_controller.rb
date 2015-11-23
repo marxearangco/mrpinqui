@@ -105,72 +105,67 @@ def uploadsql
   File.open(Rails.root.join('public', 'data', filename), 'wb') do |file|
     file.write(uploaded_io.read)
   end
-  @data = File.read(@path)
-  @datas = @data.split(";")
+  @datas = File.read(@path)
+  @datas = @datas.split(";")
   @readfile = Array.new
+  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblitemlocation","tblempauth","tblposition"]
   @datas.each do |d|
-    @read = d.squish
-    @read = @read.gsub(/`/) { '"' }
-    @read = @read.gsub(/\\'/) {'-'}
-    @read = @read.gsub("ENGINE=MyISAM ",'')
-    @read = @read.gsub("ENGINE=InnoDB ",'')
-    @read = @read.gsub("DEFAULT CHARSET=utf8", '')
-    @read = @read.gsub("DEFAULT CHARSET=latin1", '')
-    @read = @read.gsub("ROW_FORMAT=COMPACT",'')
-    @read = @read.gsub("ROW_FORMAT=DYNAMIC",'')
-    @read = @read.gsub("AUTO_INCREMENT=1687",'')
-    @read = @read.gsub("AUTO_INCREMENT=2038",'')
-    @read = @read.gsub("AUTO_INCREMENT=3010",'')
-    @read = @read.gsub("AUTO_INCREMENT=878",'')
-    @read = @read.gsub("AUTO_INCREMENT=9",'')
-    @read = @read.gsub("AUTO_INCREMENT=15",'')
-    @read = @read.gsub("AUTO_INCREMENT=879",'')
-    @read = @read.gsub("AUTO_INCREMENT=318",'')
-    @read = @read.gsub("AUTO_INCREMENT=3",'')
-    @read = @read.gsub("AUTO_INCREMENT=5",'')
-    @read = @read.gsub("AUTO_INCREMENT=12",'')
-    @read = @read.gsub("AUTO_INCREMENT=7",'')
-    @read = @read.gsub("AUTO_INCREMENT=23",'')
-    @read = @read.gsub("AUTO_INCREMENT=15",'')
-    @read = @read.gsub("INSERT INTO tblitemhistory",'')
-    @read = @read.gsub(/0000-00-00/,'1901-01-01')
-    @read = @read.gsub(/ char(50)/,' varchar(50)')
-    @read = @read.gsub(/NOT NULL auto_increment/,'')
-    @read = @read.gsub("unsigned zerofill ","") 
-    @read = @read.gsub("unsigned","") 
-    @read = @read.gsub("double(15,2)","double precision")
-    @read = @read.gsub("double(18,2)","double precision")
-    @read = @read.gsub("double(12,2)","double precision")
-    @read = @read.gsub("double(21,2)","double precision")
-    @read = @read.gsub("itemName","itemname")
-    (1..25).each do |i|
-      var = "int(" + i.to_s + ")"
-      @read = @read.gsub(var,'integer')
-    end
-
-    if @read.first(16)=='INSERT INTO "tbl' or @read.first(31) == 'CREATE TABLE IF NOT EXISTS "tbl'
-      if @read.first(6) == 'CREATE'
-
-         array_table = @read.split('EXISTS ')
-       array_get_table = array_table.values_at(1).join('')
-       array_get_table = array_get_table.split(' (')
-         table_name = array_get_table.values_at(0).join('')
-         script = 'DROP TABLE ' + table_name + ';'
-         script <<' '<< @read << ';'
-         script << ' TRUNCATE TABLE ' + table_name + ';'
-
-       else
-         script = @read
-       end
-       @readfile = script
-      # logger.info script
+    tbl_array.each do |table_name|
+      if table_name.in? d
+        script= ''
+        @read = d.squish
+        @read = @read.gsub(/`/) { '"' }
+        @read = @read.gsub(/\\'/) {'-'}
+        @read = @read.gsub("ENGINE=MyISAM ",'')
+        @read = @read.gsub("ENGINE=InnoDB ",'')
+        @read = @read.gsub("DEFAULT CHARSET=utf8", '')
+        @read = @read.gsub("DEFAULT CHARSET=latin1", '')
+        @read = @read.gsub("ROW_FORMAT=COMPACT",'')
+        @read = @read.gsub("ROW_FORMAT=DYNAMIC",'')
+        @read = @read.gsub("AUTO_INCREMENT=1687",'')
+        @read = @read.gsub("AUTO_INCREMENT=2038",'')
+        @read = @read.gsub("AUTO_INCREMENT=3010",'')
+        @read = @read.gsub("AUTO_INCREMENT=878",'')
+        @read = @read.gsub("AUTO_INCREMENT=9",'')
+        @read = @read.gsub("AUTO_INCREMENT=15",'')
+        @read = @read.gsub("AUTO_INCREMENT=879",'')
+        @read = @read.gsub("AUTO_INCREMENT=318",'')
+        @read = @read.gsub("AUTO_INCREMENT=3",'')
+        @read = @read.gsub("AUTO_INCREMENT=5",'')
+        @read = @read.gsub("AUTO_INCREMENT=12",'')
+        @read = @read.gsub("AUTO_INCREMENT=7",'')
+        @read = @read.gsub("AUTO_INCREMENT=23",'')
+        @read = @read.gsub("AUTO_INCREMENT=15",'')
+        @read = @read.gsub("INSERT INTO tblitemhistory",'')
+        @read = @read.gsub(/0000-00-00/,'1901-01-01')
+        @read = @read.gsub(/ char(50)/,' varchar(50)')
+        @read = @read.gsub(/NOT NULL auto_increment/,'')
+        @read = @read.gsub("unsigned zerofill ","") 
+        @read = @read.gsub("unsigned","") 
+        @read = @read.gsub("double(15,2)","double precision")
+        @read = @read.gsub("double(18,2)","double precision")
+        @read = @read.gsub("double(12,2)","double precision")
+        @read = @read.gsub("double(21,2)","double precision")
+        @read = @read.gsub("itemName","itemname")
+        (1..25).each do |i|
+          var = "int(" + i.to_s + ")"
+          @read = @read.gsub(var,'integer')
+        end
+        if @read.first(12) == 'CREATE TABLE'
+          script = 'DROP TABLE ' + table_name + ';'
+          script <<' '<< @read << ';'
+          script << ' TRUNCATE TABLE ' + table_name + ';'
+        else #create code from mysqladmin
+          if @read.first(6) == 'INSERT'
+            script = @read
+          end
+        end
+      @readfile = script unless script.blank?
       @connection.execute(@readfile)
+      end
     end
   end
-
-  # redirect_to :back
 end
-
 
 private
 
