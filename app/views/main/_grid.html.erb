@@ -1,6 +1,6 @@
 <%= define_grid(@listitems) do |g|
 	g.blank_slate  do
-    	"<h1><i>There are no records...</i></h1>"
+    	"<h3><i>There are no records...</i></h3>"
   	end
 
 
@@ -15,8 +15,8 @@
 	end
 	
 
-	g.column name: 'Qty', attribute: 'begBalance', detach_with_id: :qty_filter do |c|
-		number_with_precision(c.cost, precision: 2, separator: '.', delimiter: ',')
+	g.column name: 'Qty', attribute: 'qtyEnd', model: 'Inventory', detach_with_id: :qty_filter do |c|
+		c.inventory.qtyEnd
 	end
 	g.column name: 'Location', attribute: 'vin', detach_with_id: :vin_filter
 end -%>

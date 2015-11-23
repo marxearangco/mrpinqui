@@ -38,8 +38,8 @@ class MainController < ApplicationController
   end
 
   def edit
-    sql = 'tblinventory.code, a.partNum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
-    @inv = Inventory.select(sql).joins('Left Join tblitem a on a.code = tblinventory.code').where('tblinventory.code=?',params[:id])
+    # sql = 'tblinventory.code, a.partNum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
+    @inv = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where(:code=>params[:id])
     @cat_params = Item.where(:code=>params[:id])
     @cat_params.each do |c|
       @catid = c.idCategory.to_s << "-" << c.idBrand.to_s
@@ -167,6 +167,7 @@ def uploadsql
   end
 end
 
+
 private
 
 def tree
@@ -231,7 +232,7 @@ def find_item(parm0, parm1)
     search.each do |s|
       @search = s.brandName
     end
-    @listitems = initialize_grid(Item.where('"idCategory"=? and "idBrand"=?',parm0,parm1),
+    @listitems = initialize_grid(Item.joins(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1),
       per_page: '10'
       )
   end

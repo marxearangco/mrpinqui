@@ -4,4 +4,5 @@ class Item < ActiveRecord::Base
 	has_one :image, foreign_key: 'code'
 	has_one :category, foreign_key: 'idCategory'
 	has_one :brand, foreign_key: 'idBrand'
+
 end
