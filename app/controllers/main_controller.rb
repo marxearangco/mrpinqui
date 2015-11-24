@@ -11,7 +11,7 @@ class MainController < ApplicationController
   end
 
   def index
-  	tree
+    tree
   end
   
   def search
@@ -107,64 +107,57 @@ def uploadsql
   end
   @datas = File.read(@path)
   @datas = @datas.split(";")
-  @readfile = Array.new
-  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblitemlocation","tblempauth","tblposition"]
+  # @readfile = Array.new
+  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblempauth","tblposition"]
   @datas.each do |d|
-    tbl_array.each do |table_name|
-      if table_name.in? d
+    # tbl_array.each do |table_name|
+      # if tbl_array.any?{|e| d.index(e) }
+      table_name = d.match(/tbl\w+/).to_s
+      if table_name.in? tbl_array
         script= ''
         @read = d.squish
         @read = @read.gsub(/`/) { '"' }
         @read = @read.gsub(/\\'/) {'-'}
+        @read = @read.gsub(/AUTO_INCREMENT=\d+/,'')
         @read = @read.gsub("ENGINE=MyISAM ",'')
         @read = @read.gsub("ENGINE=InnoDB ",'')
         @read = @read.gsub("DEFAULT CHARSET=utf8", '')
         @read = @read.gsub("DEFAULT CHARSET=latin1", '')
         @read = @read.gsub("ROW_FORMAT=COMPACT",'')
         @read = @read.gsub("ROW_FORMAT=DYNAMIC",'')
-        @read = @read.gsub("AUTO_INCREMENT=1687",'')
-        @read = @read.gsub("AUTO_INCREMENT=2038",'')
-        @read = @read.gsub("AUTO_INCREMENT=3010",'')
-        @read = @read.gsub("AUTO_INCREMENT=878",'')
-        @read = @read.gsub("AUTO_INCREMENT=9",'')
-        @read = @read.gsub("AUTO_INCREMENT=15",'')
-        @read = @read.gsub("AUTO_INCREMENT=879",'')
-        @read = @read.gsub("AUTO_INCREMENT=318",'')
-        @read = @read.gsub("AUTO_INCREMENT=3",'')
-        @read = @read.gsub("AUTO_INCREMENT=5",'')
-        @read = @read.gsub("AUTO_INCREMENT=12",'')
-        @read = @read.gsub("AUTO_INCREMENT=7",'')
-        @read = @read.gsub("AUTO_INCREMENT=23",'')
-        @read = @read.gsub("AUTO_INCREMENT=15",'')
+        @read = @read.gsub("AUTO_INCREMENT",'')
         @read = @read.gsub("INSERT INTO tblitemhistory",'')
         @read = @read.gsub(/0000-00-00/,'1901-01-01')
         @read = @read.gsub(/ char(50)/,' varchar(50)')
         @read = @read.gsub(/NOT NULL auto_increment/,'')
         @read = @read.gsub("unsigned zerofill ","") 
-        @read = @read.gsub("unsigned","") 
-        @read = @read.gsub("double(15,2)","double precision")
-        @read = @read.gsub("double(18,2)","double precision")
-        @read = @read.gsub("double(12,2)","double precision")
-        @read = @read.gsub("double(21,2)","double precision")
+        @read = @read.gsub("unsigned","")
+        @read = @read.gsub(/double\(\d+,\d+\)/,"double precision") 
         @read = @read.gsub("itemName","itemname")
-        (1..25).each do |i|
-          var = "int(" + i.to_s + ")"
-          @read = @read.gsub(var,'integer')
-        end
-        if @read.first(12) == 'CREATE TABLE'
-          script = 'DROP TABLE ' + table_name + ';'
+        @read = @read.gsub("tblitembarcode",'')
+        @read = @read.gsub("tblitemhistory",'')
+        @read = @read.gsub("tblitemlocation",'')
+        @read = @read.gsub("tblitemmaintenance",'')
+        @read = @read.gsub("tblitemstatus",'')
+        @read = @read.gsub("tblitemtax",'')
+        @read = @read.gsub("tblitemvin",'')
+        @read = @read.gsub("INSERT INTO TEMP",'')
+        @read = @read.gsub(/int\(\d+\)/,'integer')
+        if @read.first(17) == 'CREATE TABLE "tbl' or @read.first(26) == 'CREATE TABLE IF NOT EXISTS'
+          script = 'DROP TABLE IF EXISTS ' + table_name + ';'
           script <<' '<< @read << ';'
           script << ' TRUNCATE TABLE ' + table_name + ';'
+          @connection.execute(script)
         else #create code from mysqladmin
-          if @read.first(6) == 'INSERT'
+          if @read.first(16) == 'INSERT INTO "tbl'
             script = @read
           end
+          @connection.execute(script)
         end
-      @readfile = script unless script.blank?
-      @connection.execute(@readfile)
+        # @readfile << script
       end
-    end
   end
+  redirect_to 'logout'
 end
 
 
@@ -213,7 +206,7 @@ def get_category_icon(category)
   else
     @cat_icon = "<i class='fa fa-archive'></i>"
   end
-    
+
 end
 
 def find_item(parm0, parm1)

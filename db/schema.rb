@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20151116091036) do
     t.float   "cost"
   end
 
-  create_table "tblitem", primary_key: "idItem", force: true do |t|
+  create_table "tblitem",  id: false, force: true do |t|
     t.integer "idSupplier"
     t.integer "idBrand"
     t.string  "itemName",     limit: 250

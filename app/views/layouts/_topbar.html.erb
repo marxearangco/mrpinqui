@@ -22,11 +22,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navcollapse">
         <ul class="nav navbar-nav navbar-right">
+          <li><a><%= session[:acctname] + ' - ' + session[:role] %></a></li>
           <li>
             <form class="navbar-form navbar-right">
               <input type="text" class="form-control" placeholder="Quick Search..." />
             </form>
           </li>
+          <% if session[:role] %>
           <li>
             <% if session[:role] == 'Administrator' %>
             <%= link_to raw('<span class="fa fa-upload"></span>'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
@@ -38,7 +40,7 @@
           <li>
             <%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %>
           </li>
-          
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.row -->

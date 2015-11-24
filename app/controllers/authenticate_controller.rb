@@ -21,29 +21,20 @@ class AuthenticateController < ApplicationController
     if user
       pw = Session.find_by(:userName=>params[:user],:passWord=>params[:password])
       if pw
-          session[:username]=user.userName
-          session[:role_id] = user.privilege
-          @get_role = @connection.execute("select * from tblprivilege where id = '#{session[:role_id]}'")
-          @get_role.each do |role|
-            session[:role] = role["privilege"]
-          end
+          session[:username]= pw.userName
+          role_id = pw.privilege.id
+          session[:role]= pw.privilege.privilege
+          
           acct = Employee.find_by(:idEmp=> user.idEmp)
           if acct
           	session[:acctname] = acct.fName + ' ' + acct.midInit + '. ' + acct.lName 
           else
-            session[:acctname] = 'Logout'
+            session[:acctname] = session[:username]
           end
           redirect_to main_index_path
       else
-        if params[:password]==user.passWord
-          cond = 'true'  
-        else 'false'
-          cond = 'false'
-        end
+
         flash[:notice] = "Username and password did not match."
-         # + ' ' + cond + ' ' + user.passWord
-        # user.passWord + ' ' + user.userName + ' ' + user.privilege
-        # 
         redirect_to(:action=>'login')
       end
     else

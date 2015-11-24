@@ -10,5 +10,5 @@
   connection=ActiveRecord::Base.connection
   strsql = 'insert into "tblempauth"("id","idEmp","userName","passWord","privilege") values(1,1,\'administrator\',\'p@$$w0rd\',1)'
   connection.execute(strsql)
-  strsql = 'insert into "tblprivilege"("id","privilege") values(1,\'administrator\')'
+  strsql = 'insert into "tblprivilege"("id","privilege") values(1,\'Administrator\')'
   connection.execute(strsql)

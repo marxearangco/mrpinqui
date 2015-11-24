@@ -8,7 +8,7 @@ $('#runsql').submit(function(event) {
 	$('#run').attr('value','Please wait this may take a while...');
 	$.ajax({
 		type: 'POST',
-		url: '<%= main_uploadsql_path(params[:sql]) %>',
+		url: '<%= main_uploadsql_path %>',
 		data: fd,
 			processData: false,
         	contentType: false,
