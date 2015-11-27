@@ -1,4 +1,4 @@
 class Session < ActiveRecord::Base
 	self.table_name = 'tblempauth'
-	has_one :privilege, foreign_key: 'id',  primary_key: 'privilege'
+	belongs_to :privilege, foreign_key: 'privilege_id'
 end

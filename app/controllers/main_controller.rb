@@ -13,7 +13,7 @@ class MainController < ApplicationController
   def index
     tree
   end
-  
+
   def search
     parm = params[:id].split('-')
     find_item(parm[0],parm[1])
@@ -31,7 +31,7 @@ class MainController < ApplicationController
       end
     end
   end
-  
+
   def image
     @id = params[:id]
     @img = Image.new
@@ -108,7 +108,8 @@ def uploadsql
   @datas = File.read(@path)
   @datas = @datas.split(";")
   # @readfile = Array.new
-  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblempauth","tblposition"]
+  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblempauth","tblposition","tblprivilege"]
+  @connection.execute('Truncate table images')
   @datas.each do |d|
     # tbl_array.each do |table_name|
       # if tbl_array.any?{|e| d.index(e) }
@@ -116,8 +117,8 @@ def uploadsql
       if table_name.in? tbl_array
         script= ''
         @read = d.squish
-        @read = @read.gsub(/`/) { '"' }
-        @read = @read.gsub(/\\'/) {'-'}
+        @read = @read.gsub(/\`/, "\"")
+        @read = @read.gsub(/\\'/, "-")
         @read = @read.gsub(/AUTO_INCREMENT=\d+/,'')
         @read = @read.gsub("ENGINE=MyISAM ",'')
         @read = @read.gsub("ENGINE=InnoDB ",'')
@@ -134,6 +135,9 @@ def uploadsql
         @read = @read.gsub("unsigned","")
         @read = @read.gsub(/double\(\d+,\d+\)/,"double precision") 
         @read = @read.gsub("itemName","itemname")
+        @read = @read.gsub(/\"privilege\" int/,"\"privilege_id\" int")
+        @read = @read.gsub(/\"passWord\"\,\ \"privilege\"/,"\"passWord\", \"privilege_id\"")
+        @read = @read.gsub(/\"passWord\"\,\"privilege\"/,"\"passWord\", \"privilege_id\"")
         @read = @read.gsub("tblitembarcode",'')
         @read = @read.gsub("tblitemhistory",'')
         @read = @read.gsub("tblitemlocation",'')
@@ -145,6 +149,9 @@ def uploadsql
         @read = @read.gsub(/int\(\d+\)/,'integer')
         if @read.first(17) == 'CREATE TABLE "tbl' or @read.first(26) == 'CREATE TABLE IF NOT EXISTS'
           script = 'DROP TABLE IF EXISTS ' + table_name + ';'
+          if table_name ='tblprivilege'
+            @read = @read.gsub(/\"privilege\" varchar\(50\) DEFAULT NULL/,"\"privilege\" varchar(50) DEFAULT NULL, CONSTRAINT tblprivilege_pkey PRIMARY KEY (id)")
+          end
           script <<' '<< @read << ';'
           script << ' TRUNCATE TABLE ' + table_name + ';'
           @connection.execute(script)
@@ -153,84 +160,87 @@ def uploadsql
             script = @read
           end
           @connection.execute(script)
+
         end
         # @readfile << script
       end
-  end
-  redirect_to 'logout'
-end
-
-
-private
-
-def tree
-  cat = Category.order(:Category)
-  @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
-  @treeview << "<div class='accordion' data-role='accordion'>\n"
-  cat.each do |c|
-    get_category_icon("#{c.Category}")
-    @treeview << "<div class='frame'>"
-    @treeview << "<div class='heading'><span class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{@cat_icon}</span>" << " &nbsp;&nbsp;&nbsp; #{c.Category}</div>\n"
-    @brand = Brand.where('"idCategory"=?', c.idCategory)
-    @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled' style='margin-left: 10px'>\n"
-    @treeview <<"<li><a href='/main/0-#{c.idCategory}/search'>All</a></li>"
-    @brand.each do |b|
-      @treeview <<"<li><a href='/main/#{c.idCategory}-#{b.idBrand}/search'> #{b.brandName}</a></li>"
     end
-    @treeview << "</ul>\n" << "</div></div>"
-  end
-  @treeview << "</div>"
-  respond_to do |format|
-    format.html
-    format.json
-  end
-end
-
-def get_category_icon(category)
-  @cat_icon = nil
-  case category.first(3)
-  when 'App' then 
-    @cat_icon = "<i class='fa fa-black-tie'></i>"
-  when 'Bat' then
-    @cat_icon = "<i class='fa fa-battery-half'></i>"
-  when 'Mot' then
-    @cat_icon = "<i class='fa fa-motorcycle'></i>"
-  when 'Par' then
-    @cat_icon = "<i class='fa fa-cogs'></i>"
-  when 'Tir' then
-    @cat_icon = "<i class='fa fa-gg-circle'></i>"
-  when 'Con' then
-    @cat_icon = "<i class='fa fa-edit'></i>"
-  when 'Oil' then
-    @cat_icon = "<i class='fa fa-tint'></i>"
-  else
-    @cat_icon = "<i class='fa fa-archive'></i>"
+    # redirect_to 'logout'
   end
 
-end
 
-def find_item(parm0, parm1)
-  if parm0=='0'
-    @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=?', parm1)
-    search = Category.where('"idCategory"=?',parm1)
-    search.each do |s|
-      @search = s.Category
+  private
+
+  def tree
+    cat = Category.order(:Category)
+    if cat != nil
+      @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
+      @treeview << "<div class='accordion' data-role='accordion'>\n"
+      cat.each do |c|
+        get_category_icon("#{c.Category}")
+        @treeview << "<div class='frame'>"
+        @treeview << "<div class='heading'><span class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{@cat_icon}</span>" << " &nbsp;&nbsp;&nbsp; #{c.Category}</div>\n"
+        @brand = Brand.where('"idCategory"=?', c.idCategory)
+        @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled' style='margin-left: 10px'>\n"
+        @treeview <<"<li><a href='/main/0-#{c.idCategory}/search'>All</a></li>"
+        @brand.each do |b|
+          @treeview <<"<li><a href='/main/#{c.idCategory}-#{b.idBrand}/search'> #{b.brandName}</a></li>"
+        end
+        @treeview << "</ul>\n" << "</div></div>"
+      end
+      @treeview << "</div>"
+      respond_to do |format|
+        format.html
+        format.json
+      end
     end
-    @listitems = initialize_grid(Item.where('"idBrand"=?',parm1),
-      per_page: '10'
-      )
-  else
-    @items = Inventory.select('"tblitem"."itemname","tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=? and "tblitem"."idBrand"=?',parm0,parm1)
-    search = Brand.where('"idBrand"=?',parm1)
-    search.each do |s|
-      @search = s.brandName
-    end
-    @listitems = initialize_grid(Item.joins(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1),
-      per_page: '10'
-      )
   end
 
-end 
+  def get_category_icon(category)
+    @cat_icon = nil
+    case category.first(3)
+    when 'App' then 
+      @cat_icon = "<i class='fa fa-black-tie'></i>"
+    when 'Bat' then
+      @cat_icon = "<i class='fa fa-battery-half'></i>"
+    when 'Mot' then
+      @cat_icon = "<i class='fa fa-motorcycle'></i>"
+    when 'Par' then
+      @cat_icon = "<i class='fa fa-cogs'></i>"
+    when 'Tir' then
+      @cat_icon = "<i class='fa fa-gg-circle'></i>"
+    when 'Con' then
+      @cat_icon = "<i class='fa fa-edit'></i>"
+    when 'Oil' then
+      @cat_icon = "<i class='fa fa-tint'></i>"
+    else
+      @cat_icon = "<i class='fa fa-archive'></i>"
+    end
+
+  end
+
+  def find_item(parm0, parm1)
+    if parm0=='0'
+      @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=?', parm1)
+      search = Category.where('"idCategory"=?',parm1)
+      search.each do |s|
+        @search = s.Category
+      end
+      @listitems = initialize_grid(Item.where('"idBrand"=?',parm1),
+        per_page: '10'
+        )
+    else
+      @items = Inventory.select('"tblitem"."itemname","tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=? and "tblitem"."idBrand"=?',parm0,parm1)
+      search = Brand.where('"idBrand"=?',parm1)
+      search.each do |s|
+        @search = s.brandName
+      end
+      @listitems = initialize_grid(Item.joins(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1),
+        per_page: '10'
+        )
+    end
+
+  end 
 
 
 end

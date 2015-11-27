@@ -1,4 +1,4 @@
 class Privilege < ActiveRecord::Base
 	self.table_name = 'tblprivilege'
-	belongs_to :session
+	has_many :session, primary_key: 'id'
 end

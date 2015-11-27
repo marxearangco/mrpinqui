@@ -10,16 +10,16 @@ $('#runsql').submit(function(event) {
 		type: 'POST',
 		url: '<%= main_uploadsql_path %>',
 		data: fd,
-			processData: false,
-        	contentType: false,
-        	success: function(){
-        		alert('Database Loaded!');
-        	},
-        	error: function(){
-        		alert('Runtime Error. Please check the script.');
-        		console.log(fd);
-        	}
-        });
+		processData: false,
+    	contentType: false,
+    	success: function(){
+    		alert('Database Loaded!');
+    	},
+    	error: function(){
+    		alert('Runtime Error. Please check the script.');
+    		console.log(fd);
+    	}
+    });
 	event.preventDefault();
 	
 });
