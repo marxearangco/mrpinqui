@@ -16,7 +16,7 @@
 }*/
 
 aside {
-  background-color: #383838;
+  background-color: #222222;
   color: #fff;
   width: 60%;
   margin-left: -60%;
@@ -77,6 +77,6 @@ aside, section {
 }
 
 .navbar-gray {
-  background-color: #383838;
-  border-color: #383838;
+  background-color: #222222;
+  border-color: #222222;
 }
