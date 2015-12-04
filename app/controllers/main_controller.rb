@@ -15,9 +15,26 @@ class MainController < ApplicationController
   end
 
   def search
+    add_breadcrumb "Home", root_path
     parm = params[:id].split('-')
-    find_item(parm[0],parm[1])
-    session[:category]=params[:id]
+    unless params[:id]== '0-0'
+      if parm[0] == '0' then
+        @cat = Category.find_by(:idCategory=>parm[1])
+        add_breadcrumb @cat.Category, search_main_path(params[:id])
+      else
+        @brand = Brand.find(parm[1])
+        add_breadcrumb @brand.category.Category, search_main_path(params[:id])
+        add_breadcrumb @brand.brandName, search_main_path(params[:id])
+      end
+      find_item(parm[0],parm[1])
+    else
+      @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where("itemname like ?","%#{params[:searchtext]}%")
+      @listitems = initialize_grid(Item.where("itemname Ilike ?","%#{params[:searchtext]}%"),
+        per_page: '10',
+        )
+      add_breadcrumb params[:searchtext].titleize, search_main_path('0-0')
+    end
+
     tree
   end
 
@@ -30,6 +47,8 @@ class MainController < ApplicationController
         @img = i.photo.url(:medium)
       end
     end
+    item = Item.find_by(:code=>params[:id])
+    add_breadcrumb item.itemname, view_main_path(params[:id])
   end
 
   def image
@@ -108,7 +127,8 @@ def uploadsql
   @datas = File.read(@path)
   @datas = @datas.split(";")
   # @readfile = Array.new
-  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblempauth","tblposition","tblprivilege"]
+  @maxcount = @datas.size
+  tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblempauth","tblposition","tblprivilege","tblitemvin"]
   @connection.execute('Truncate table images')
   @datas.each do |d|
     # tbl_array.each do |table_name|
@@ -144,7 +164,6 @@ def uploadsql
         @read = @read.gsub("tblitemmaintenance",'')
         @read = @read.gsub("tblitemstatus",'')
         @read = @read.gsub("tblitemtax",'')
-        @read = @read.gsub("tblitemvin",'')
         @read = @read.gsub("INSERT INTO TEMP",'')
         @read = @read.gsub(/int\(\d+\)/,'integer')
         if @read.first(17) == 'CREATE TABLE "tbl' or @read.first(26) == 'CREATE TABLE IF NOT EXISTS'
@@ -173,7 +192,7 @@ def uploadsql
 
   def tree
     cat = Category.order(:Category)
-    if cat != nil
+    if cat
       @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
       @treeview << "<div class='accordion' data-role='accordion'>\n"
       cat.each do |c|
@@ -194,27 +213,28 @@ def uploadsql
         format.json
       end
     end
+
   end
 
   def get_category_icon(category)
     @cat_icon = nil
     case category.first(3)
     when 'App' then 
-      @cat_icon = "<i class='fa fa-black-tie'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-black-tie'></i>"
     when 'Bat' then
-      @cat_icon = "<i class='fa fa-battery-half'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-battery-half'></i>"
     when 'Mot' then
-      @cat_icon = "<i class='fa fa-motorcycle'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-motorcycle'></i>"
     when 'Par' then
-      @cat_icon = "<i class='fa fa-cogs'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-cogs'></i>"
     when 'Tir' then
-      @cat_icon = "<i class='fa fa-gg-circle'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-gg-circle'></i>"
     when 'Con' then
-      @cat_icon = "<i class='fa fa-edit'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-edit'></i>"
     when 'Oil' then
-      @cat_icon = "<i class='fa fa-tint'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-tint'></i>"
     else
-      @cat_icon = "<i class='fa fa-archive'></i>"
+      @cat_icon = "<i style='color: #FA6800' class='fa fa-archive'></i>"
     end
 
   end
@@ -222,20 +242,21 @@ def uploadsql
   def find_item(parm0, parm1)
     if parm0=='0'
       @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=?', parm1)
-      search = Category.where('"idCategory"=?',parm1)
-      search.each do |s|
-        @search = s.Category
-      end
-      @listitems = initialize_grid(Item.where('"idBrand"=?',parm1),
-        per_page: '10'
+      # search = Category.where('"idCategory"=?',parm1)
+      # search.each do |s|
+      #   @search = s.Category
+      # end
+      @listitems = initialize_grid(Item.where('"idBrand"=?',parm1).order(:code),
+        per_page: '10',
+
         )
     else
       @items = Inventory.select('"tblitem"."itemname","tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=? and "tblitem"."idBrand"=?',parm0,parm1)
-      search = Brand.where('"idBrand"=?',parm1)
-      search.each do |s|
-        @search = s.brandName
-      end
-      @listitems = initialize_grid(Item.joins(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1),
+      # search = Brand.where('"idBrand"=?',parm1)
+      # search.each do |s|
+      #   @search = s.brandName
+      # end
+      @listitems = initialize_grid(Item.joins(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1).order(:code),
         per_page: '10'
         )
     end

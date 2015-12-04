@@ -4,19 +4,24 @@
   	end
 
 
-	g.column name: 'Code', attribute: 'code', detach_with_id: :code_filter
+	g.column name: 'Code', attribute: 'code', html: {style: 'text-align: Center'}, detach_with_id: :code_filter 
+		
 	
 	g.column name: 'Item', attribute: 'itemname', detach_with_id: :item_filter do |i|
-		if i.idCategory == '1' 
-			link_to raw('<i class="fa fa-motorcyle"></i>' + i.itemname), view_main_path(i.code), remote: true, data: { toggle: 'modal', target: "#viewitem" }
-		else
-			link_to raw('<i class="fa fa-motorcyle"></i>' + i.itemname), view_main_path(i.code), remote: true, data: { toggle: 'modal', target: "#viewitem" }
-		end
+		get_category_icon(i.idCategory)
+		buffer = link_to raw(@cat_icon) +" "+ i.itemname, view_main_path(i.code), remote: true, data: { toggle: 'modal', target: "#viewitem" } 
+		buffer += raw("<br>")
+		buffer += raw("<small>" << i.detail << "</small>")
+		
 	end
 	
 
-	g.column name: 'Qty', attribute: 'qtyEnd', model: 'Inventory', detach_with_id: :qty_filter do |c|
-		c.inventory.qtyEnd
+	g.column name: 'Qty', attribute: 'qtyEnd', model: 'Inventory', html: {style: 'text-align: Center'}, detach_with_id: :qty_filter do |c|
+		if c.inventory != nil
+			c.inventory.qtyEnd
+		else
+			0
+		end
 	end
-	g.column name: 'Location', attribute: 'vin', detach_with_id: :vin_filter
+	g.column name: 'Location', attribute: 'vin', html: {style: 'text-align: Center'}, detach_with_id: :vin_filter 
 end -%>

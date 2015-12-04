@@ -1,6 +1,12 @@
-// // $(".showpanel").hide();
-// // $(".showpanel").html("<%= escape_javascript(render 'search') %>");
-// // $(".showpanel").fadeIn(2000);
+// $(".showpanel").hide();
+$(".showpanel").html("<%= escape_javascript(render 'search') %>");
+$(".showpanel").fadeIn(2000);
+
+$('.frame').on("click", function(e) {
+  $(".frame").removeClass("active");
+  $(this).addClass("active");
+});
+
 
 // // console.log("RENDERED SEARCH..");
 // $("#search").keyup(function(){

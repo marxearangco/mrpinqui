@@ -1298,7 +1298,7 @@ function touch2Mouse(e)
         version: "3.0.0",
 
         options: {
-            closeAny: false,
+            closeAny: true, //override accordion default false
             speed: 'fast',
             onFrameOpen: function(frame){return true;},
             onFrameOpened: function(frame){},

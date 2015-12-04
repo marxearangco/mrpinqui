@@ -12,6 +12,10 @@ $('#runsql').submit(function(event) {
 		data: fd,
 		processData: false,
     	contentType: false,
+    	beforeSend: function(){
+	   		currentValue = '<%= @maxcount %>';
+			console.log(currentValue);
+    	},
     	success: function(){
     		alert('Database Loaded!');
     	},

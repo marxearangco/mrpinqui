@@ -32,3 +32,4 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-ui-rails'
+gem "breadcrumbs_on_rails"

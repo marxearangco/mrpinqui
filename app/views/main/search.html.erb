@@ -1,41 +1,44 @@
-
-
-	<%= render 'grid' %>
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-horizontal">
-			<div class="panel panel-default panel-body">
-				<div class="form-group">
+<%= render 'grid' %>
+<div class="row">
+	<div style="margin-left: 10px">
+		<ol class="breadcrumb">
+			<%= render_breadcrumbs :tag => :li, :separator => "" %>
+		</ol>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-horizontal">
+		<div class="panel panel-default panel-body">
+			<div class="form-group">
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 					<%= label_tag "Search",nil, class: "control-label" %> 
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 					<%= grid_filter @listitems, :item_filter %>
 				</div>
-				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<%= render_grid(@listitems) %>
-		</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<%= render_grid(@listitems) %>
 	</div>
+</div>
 
-	<div class="modal fade" tabindex="-1" role="dialog" id="inventory">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div id="viewinv">
-				</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="inventory">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div id="viewinv">
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" tabindex="-1" role="dialog" id="viewitem">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div id="view">
-				</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="viewitem">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div id="view">
 			</div>
 		</div>
 	</div>
+</div>
 
 
