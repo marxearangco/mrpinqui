@@ -2,18 +2,20 @@
   <div class="container">
     <div class="row">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+        <span class="pull-right">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </span>
         <span class="navbar-brand"> <!-- style="font-size: 1.2em; color: #F1EAEA" -->
           <span class="pull-left"> 
             <a class="hidden-md hidden-lg" style="text-decoration: none; color: #fff">
               <label for="offcanvas" class="toggler">
                 <span>
-                  <i class="fa fa-navicon fa-lg"></i> &nbsp;<%= image_tag "logo.png", class: 'img-responsive', style: 'max-width: 250px; margin-top: -40px; margin-left:15px' %>
+                  <i class="fa fa-navicon fa-lg"></i> &nbsp;<%= image_tag "logo.png", class: 'img-responsive', style: 'max-width: 250px; margin-top: -40px; margin-left: 15px' %>
                 </span>
               </label>
             </a>
@@ -30,7 +32,7 @@
            <% end %>
            <li>
             <%= form_tag(search_main_path('0-0'), class: 'navbar-form', method: 'get') do %>
-            <%= text_field_tag :searchtext, nil, class: 'form-control', placeholder: 'Quick Search...' %>
+            <%= text_field_tag :searchtext, params[:searchtext], class: 'form-control', placeholder: 'Quick Search...', autofocus: 'true' %>
 
             <% end %>
           </li>

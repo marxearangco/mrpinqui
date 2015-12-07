@@ -29,12 +29,11 @@ class MainController < ApplicationController
       find_item(parm[0],parm[1])
     else
       @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where("itemname like ?","%#{params[:searchtext]}%")
-      @listitems = initialize_grid(Item.where("itemname Ilike ?","%#{params[:searchtext]}%"),
+      @listitems = initialize_grid(Item.includes(:inventory).where("itemname Ilike ?","%#{params[:searchtext]}%"),
         per_page: '10',
         )
       add_breadcrumb params[:searchtext].titleize, search_main_path('0-0')
     end
-
     tree
   end
 
@@ -57,7 +56,6 @@ class MainController < ApplicationController
   end
 
   def edit
-    # sql = 'tblinventory.code, a.partNum, a.itemname, tblinventory.qtyEnd, tblinventory.qtyBeg, tblinventory.qtyIn, tblinventory.qtyOut, tblinventory.srp, tblinventory.cost, a.vin, a.detail'
     @inv = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where(:code=>params[:id])
     @cat_params = Item.where(:code=>params[:id])
     @cat_params.each do |c|
@@ -131,8 +129,6 @@ def uploadsql
   tbl_array=["tblitembrand","tblitemcategory","tblemployee","tblinventory","tblitem","tblempauth","tblposition","tblprivilege","tblitemvin"]
   @connection.execute('Truncate table images')
   @datas.each do |d|
-    # tbl_array.each do |table_name|
-      # if tbl_array.any?{|e| d.index(e) }
       table_name = d.match(/tbl\w+/).to_s
       if table_name.in? tbl_array
         script= ''
@@ -184,9 +180,7 @@ def uploadsql
         # @readfile << script
       end
     end
-    # redirect_to 'logout'
   end
-
 
   private
 
@@ -241,22 +235,14 @@ def uploadsql
 
   def find_item(parm0, parm1)
     if parm0=='0'
-      @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=?', parm1)
-      # search = Category.where('"idCategory"=?',parm1)
-      # search.each do |s|
-      #   @search = s.Category
-      # end
-      @listitems = initialize_grid(Item.where('"idBrand"=?',parm1).order(:code),
+      # @items = Inventory.select('"tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=?', parm1)
+      @listitems = initialize_grid(Item.includes(:inventory).where('"idCategory"=?',parm1).order(:code),
         per_page: '10',
 
         )
     else
-      @items = Inventory.select('"tblitem"."itemname","tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=? and "tblitem"."idBrand"=?',parm0,parm1)
-      # search = Brand.where('"idBrand"=?',parm1)
-      # search.each do |s|
-      #   @search = s.brandName
-      # end
-      @listitems = initialize_grid(Item.joins(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1).order(:code),
+      # @items = Inventory.select('"tblitem"."itemname","tblitem".*, "tblinventory".*').joins(:item).where('"tblitem"."idCategory"=? and "tblitem"."idBrand"=?',parm0,parm1)
+      @listitems = initialize_grid(Item.includes(:inventory).where('"idCategory"=? and "idBrand"=?',parm0,parm1).order(:code),
         per_page: '10'
         )
     end

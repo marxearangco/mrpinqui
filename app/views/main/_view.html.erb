@@ -7,11 +7,14 @@
   <ul class="list-group">
     <li class="list-group-item">
       <div class="text-center" id="img">
+        <div id='img-spinner' style="display:none"></div>
+        <div class="img-pic">
         <% if @img %> 
         <%= image_tag @img, :id=>"image", :style => "margin: 0 0 auto; max-height: 300px; max-width: 300px" %>
         <% else %>
-        <%= image_tag 'ring.png', :style => "margin: 0 0 auto; height: 200px; width: 200px" %>
+        <%= image_tag 'ring.png', :id=>"image", :style => "margin: 0 0 auto; height: 200px; width: 200px" %>
         <% end %>
+      </div>
       </div>
     </li>
     <li class="list-group-item text-center">
@@ -47,6 +50,7 @@
   <%= link_to raw(@label), image_main_path(params[:id]), remote: true, class: 'btn danger text-shadow' %>
   <%= link_to raw('<i class="fa fa-pencil"></i> Inventory'), edit_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#inventory" }, class: 'btn danger text-shadow' %>
   <% end %>
+
 </div>
 <% end %>
 

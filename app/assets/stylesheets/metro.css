@@ -3029,8 +3029,12 @@ a.tag {
   cursor: pointer;
 }
 .container {
-  width: 960px;
-  margin: 0 auto;
+  /*width: 960px;
+  margin: 0 auto;*/
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 @media screen and (min-width: 1401px) {
   .container:not(.no-responsive-future) {

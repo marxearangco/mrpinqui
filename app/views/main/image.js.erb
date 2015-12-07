@@ -8,7 +8,8 @@ $('#new_image').submit(function(event) {
    var form = $(this).parent('form');
    var fd = new FormData();
    $('#select').attr('value','Uploading...');
-
+   $('#img-spinner').show();
+   
    fd.append("image[code]", '<%= params[:id] %>');
    fd.append("image[photo]", $('#image_photo')[0].files[0]);
 
@@ -20,6 +21,8 @@ $('#new_image').submit(function(event) {
       contentType: false,
       success: function(data){
          $('#upload').html("<%= escape_javascript(render 'button') %>");
+         $('#img-spinner').hide();
+         
      },
      error: function(data){
          console.log(fd);

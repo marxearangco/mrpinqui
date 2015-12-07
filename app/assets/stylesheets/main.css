@@ -199,3 +199,41 @@ div.fixed-sidebar {
   font-size: 14px;
 }
 
+#spinner {
+  background: url("/assets/spinner.gif") no-repeat scroll center center #FFF;
+  position: absolute;
+  opacity: 0.8;
+ /* top: 50%;
+  left: 50%;*/
+  height:100%;
+  width:100%;
+  z-index: 9999;
+}
+
+#img-spinner {
+  background: url("/assets/spinner.gif") no-repeat scroll center center #FFF;
+  position: absolute;
+  opacity: 0.8;
+ /* top: 50%;
+  left: 50%;*/
+  height:100%;
+  width:100%;
+  z-index: 9999;
+}
+
+#img-loading {
+/*  background-image: url("/assets/spinner.gif") no-repeat scroll center center #FFF;*/
+  position: relative;
+  /*opacity: 0.8;*/
+  /*top: 50%;
+  left: 50%;*/
+  margin: 0 0 auto; 
+/*  max-height: 150px; 
+  max-width: 150px;*/
+ /* z-index: 9999;*/
+}
+
+#img-spinner-container {
+  max-height: 150px; 
+  max-width: 150px;
+}

@@ -6,6 +6,7 @@ $('#runsql').submit(function(event) {
 	var fd = new FormData();
 		fd.append("file", $('#file')[0].files[0]);
 	$('#run').attr('value','Please wait this may take a while...');
+	$('#spinner').show();
 	$.ajax({
 		type: 'POST',
 		url: '<%= main_uploadsql_path %>',
@@ -18,6 +19,8 @@ $('#runsql').submit(function(event) {
     	},
     	success: function(){
     		alert('Database Loaded!');
+    		$('#run').attr('value','Run');
+    		$('#spinner').hide();
     	},
     	error: function(){
     		alert('Runtime Error. Please check the script.');

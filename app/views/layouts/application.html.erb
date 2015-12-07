@@ -22,6 +22,7 @@
 </head>
 
 <body class="img-body">
+	<div id="spinner" style="display:none"><div class="img-center" style="z-index: 9999">Uploading Please Wait...</div></div>
 	<input type="checkbox" id="offcanvas" class="toggle" />
 	<div class="wrapper">
 		<aside class="hidden-lg hidden-md">
@@ -42,7 +43,9 @@
 						<%= render 'layouts/tree' %>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 pull-right">
+
 						<%= yield %>
+
 					</div>
 				</div>
 			</div>
