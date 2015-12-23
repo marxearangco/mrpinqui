@@ -3,69 +3,99 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<h4 class="modal-title">Item Code: <%= i.code %></h4>
 </div>
-	<%= form_tag(save_main_path(i.code), remote: true, id: 'updateinv') do %>
-	<div class="modal-body">
-		<div class="row">
-			<div class="col-xs-12">
+<%= form_tag(save_main_path(i.code), remote: true, id: 'updateinv') do %>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="form-group">
 				<label>Item Name:</label>
-				<%= text_field_tag :itemname, i.itemname, style: "text-align: center", class: "form-control input-sm" %> 
+				<%= text_field_tag :itemname, i.item.itemname, style: "text-align: center", class: "form-control input-sm" %> 
 			</div>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-12">
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="form-group">
 				<label>Details:</label>
-				<%= text_field_tag :detail, i.detail, style: "text-align: center", class: "form-control input-sm" %>
+				<%= text_field_tag :detail, i.item.detail, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-8">
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<div class="form-group">
 				<label>Part #:</label>
-				<%= text_field_tag :partnum, i.partNum, style: "text-align: center", class: "form-control input-sm" %> 
+				<%= text_field_tag :partnum, i.item.partNum, style: "text-align: center", class: "form-control input-sm" %> 
 			</div>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-4">
-				<label>BIN:</label>
-				<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.vin), class: "form-control input-sm" %>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<div class="form-group">
+				<label>Category</label>
+				<%= text_field_tag :category, i.item.category.category, style: "text-align: center", class: "form-control input-sm" %> 
 			</div>
-			<div class="col-xs-4">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<div class="form-group">
+				<label>Brand</label>
+				<%= text_field_tag :brand, i.item.brand.brandname, style: "text-align: center", class: "form-control input-sm" %> 
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<div class="form-group">
+				<label>BIN:</label>
+				<%= select_tag :location, options_from_collection_for_select(@location, "vin", "vin", i.item.vin), class: "form-control input-sm" %>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<div class="form-group">
 				<label>SRP:</label>
 				<%= text_field_tag :srp, i.srp, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
-			<div class="col-xs-4">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+			<div class="form-group">
 				<label>Cost:</label>
 				<%= text_field_tag :cost, i.cost, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-3">
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			<div class="form-group">
 				<label>Beginning</label>
 				<%= number_field_tag :beg, i.qtyBeg, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
-			<div class="col-xs-3">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			<div class="form-group">
 				<label>In</label>
 				<%= number_field_tag :in, i.qtyIn, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
-			<div class="col-xs-3">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			<div class="form-group">
 				<label>Out</label>
 				<%= number_field_tag :out, i.qtyOut, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
-			<div class="col-xs-3">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			<div class="form-group">
 				<label>Ending</label>
 				<%= number_field_tag :end, i.qtyEnd, style: "text-align: center", class: "form-control input-sm" %>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="modal-footer">
-		<%= link_to raw('<i class="fa fa-angle-double-left fa-lg">‌</i>'), view_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#viewitem" }, class: 'btn danger pull-left' %>
-		<%= submit_tag "Update", class: 'btn alert' %>
-	</div>
-	<% end %>
+<div class="modal-footer">
+	<%= link_to raw('<i class="fa fa-angle-double-left fa-lg">‌</i>'), view_main_path(params[:id]), remote: true, data: { toggle: 'modal', target: "#viewitem" }, class: 'btn danger pull-left' %>
+	<%= submit_tag "Update", class: 'btn alert' %>
+</div>
+<% end %>
 <% end %>
 
 

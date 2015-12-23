@@ -21,12 +21,13 @@ $('#runsql').submit(function(event) {
     		alert('Database Loaded!');
     		$('#run').attr('value','Run');
     		$('#spinner').hide();
+    		location.href('/main');
     	},
     	error: function(){
     		alert('Runtime Error. Please check the script.');
     		console.log(fd);
     	}
     });
-	event.preventDefault();
+	// event.preventDefault();
 	
 });

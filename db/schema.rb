@@ -24,60 +24,101 @@ ActiveRecord::Schema.define(version: 20151116091036) do
     t.datetime "photo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "branch"
   end
 
   create_table "tblempauth", force: true do |t|
+    t.integer "employee_id"
     t.integer "idEmp"
     t.string  "userName"
     t.string  "passWord"
     t.integer "privilege_id"
+    t.string  "branch"
   end
 
   add_index "tblempauth", ["privilege_id"], name: "index_tblempauth_on_privilege_id", using: :btree
 
-  create_table "tblemployee", primary_key: "idEmp", force: true do |t|
-    t.string  "fName",      limit: 25
-    t.string  "midInit",    limit: 2
-    t.string  "lName",      limit: 25
-    t.integer "idPosition",            null: false
-    t.integer "idCmpny",               null: false
-    t.string  "empStatus",  limit: 20
+  create_table "tblemployee", force: true do |t|
+    t.integer "employee_id"
+    t.integer "idEmp"
+    t.string  "fName",       limit: 25
+    t.string  "midInit",     limit: 2
+    t.string  "lName",       limit: 25
+    t.integer "idPosition",             null: false
+    t.integer "idCmpny",                null: false
+    t.string  "empStatus",   limit: 20
+    t.string  "branch"
+  end
+
+  create_table "tblitem", force: true do |t|
+    t.integer "idItem"
+    t.integer "idSupplier"
+    t.integer "brand_id"
+    t.string  "itemname",     limit: 100
+    t.text    "detail"
+    t.integer "category_id"
+    t.integer "idUnit"
+    t.integer "code"
+    t.string  "barcode",      limit: 10
+    t.float   "cost"
+    t.float   "sellingPrice"
+    t.integer "begBalance",               null: false
+    t.date    "dateInput"
+    t.integer "percent"
+    t.float   "dealerPrice"
+    t.date    "dateUpdated"
+    t.string  "itemStatus",   limit: 20
+    t.integer "idLocation"
+    t.string  "partNum",      limit: 20
+    t.string  "bikeModel",    limit: 100
+    t.string  "vin",          limit: 15
+    t.integer "idSkRm"
+    t.string  "branch"
+  end
+  add_index "tblitem", ["category_id"], name: "index_tblitemcategory_on_category_id", using: :btree
+  add_index "tblitem", ["brand_id"], name: "index_tblitembrand_on_category_id", using: :btree
+
+  create_table "tblitembrand", force: true do |t|
+    t.integer "brand_id"
+    t.string  "brandname"
+    t.integer "category_id", null: false
+    t.string  "branch"
+  end
+  add_index "tblitembrand", ["category_id"], name: "index_Brand_on_Category", using: :btree
+
+  create_table "tblitemcategory", force: true do |t|
+    t.integer "category_id"
+    t.string  "category"
+    t.string  "branch"
+  end
+
+  create_table "tbllocation", force: true do |t|
+    t.integer "idLocation"
+    t.string  "locationCode"
+    t.string  "location"
   end
 
   create_table "tblprivilege", force: true do |t|
     t.string "privilege"
   end
 
-  create_table "tblitem", primary_key: "idItem", force: true do |t|
-    t.integer "idSupplier"
-    t.integer "idBrand"
-    t.string  "itemName",     limit: 100
-    t.text    "detail"
-    t.integer "idCategory"
-    t.integer "idUnit"
+  create_table "tblinventory", force: true do |t|
+    t.integer "inventory_id"
     t.integer "code"
-    t.string  "barcode",      limit: 10
-    t.float   "cost",         limit: 12
-    t.float   "sellingPrice", limit: 12
-    t.integer "begBalance",               null: false
-    t.date    "dateInput"
-    t.integer "percent"
-    t.float   "dealerPrice",  limit: 15
-    t.date    "dateUpdated"
-    t.string  "itemStatus",   limit: 20
-    t.integer "idLocation"
-    t.string  "partNum",      limit: 20
-    t.string  "itemModel",    limit: 100
-    t.string  "vin",          limit: 15
+    t.integer "qtyBeg"
+    t.integer "qtyIn"
+    t.integer "qtyOut"
+    t.integer "qtyEnd"
+    t.string  "remarks"
+    t.date    "dateInv"
+    t.float   "srp"
+    t.float   "cost"
+    t.string  "branch"
+  end
+
+  create_table "tblitemvin", force: true do |t|
+    t.string  "vin"
     t.integer "idSkRm"
-  end
-
-  create_table "tblitembrand", primary_key: "idBrand", force: true do |t|
-    t.string  "brandName",  limit: 100
-    t.integer "idCategory",             null: false
-  end
-
-  create_table "tblitemcategory", primary_key: "idCategory", force: true do |t|
-    t.string "Category", limit: 60
+    t.string  "branch"
   end
 end

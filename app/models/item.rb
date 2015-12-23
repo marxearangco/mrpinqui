@@ -1,8 +1,8 @@
 class Item < ActiveRecord::Base
 	self.table_name = 'tblitem'
-	belongs_to :inventory, foreign_key: 'code'
+	belongs_to :inventory, primary_key: 'code', foreign_key: 'code'
 	has_one :image, foreign_key: 'code'
-	has_one :category, foreign_key: 'idCategory'
-	has_one :brand, foreign_key: 'idBrand'
+	has_one :category, primary_key: 'category_id', foreign_key: 'category_id'
+	has_one :brand, primary_key: 'brand_id', foreign_key: 'brand_id'
 
 end

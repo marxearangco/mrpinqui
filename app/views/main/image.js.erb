@@ -10,8 +10,10 @@ $('#new_image').submit(function(event) {
    $('#select').attr('value','Uploading...');
    $('#img-spinner').show();
    
-   fd.append("image[code]", '<%= params[:id] %>');
+   fd.append("image[code]", $('#image_code').val());
+   fd.append("image[branch]", $('#image_branch').val());
    fd.append("image[photo]", $('#image_photo')[0].files[0]);
+
 
    $.ajax({
       type: 'POST',

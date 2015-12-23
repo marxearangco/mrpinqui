@@ -1,22 +1,50 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
   # connection=ActiveRecord::Base.connection
   # strsql = 'insert into "tblempauth"("id","idEmp","userName","passWord","privilege") values(1,1,\'administrator\',\'p@$$w0rd\',1)'
   # connection.execute(strsql)
   # strsql = 'insert into "tblprivilege"("id","privilege") values(1,\'Administrator\')'
   # connection.execute(strsql)
-  privilege = Privilege.create([{id: '1', privilege: 'Administrator'}])
+
+  priv_list = ['Administrator','Inventory','Sales','Servicing','MRP']
+  
+  priv_list.each do |p|
+    privilege = Privilege.create(privilege: p)
+  end
+
   s = Session.new
-  s.id = '1'
+  s.employee_id = '1'
   s.idEmp= '1'
   s.userName= 'administrator'
   s.passWord= 'p@$$w0rd'
-  s.privilege= privilege.first
+  s.branch = 'CDO'
+  s.privilege= Privilege.first
   s.save
+
+  loc = Area.new
+  loc.idLocation = '1'
+  loc.locationCode = 'CDO'
+  loc.location =  'Cagayan de Oro City'
+  loc.save
+
+  loc = Area.new
+  loc.idLocation = '2'
+  loc.locationCode = 'DVO'
+  loc.location =  'Davao City'
+  loc.save  
+
+  loc = Area.new
+  loc.idLocation = '3'
+  loc.locationCode = 'ZBO'
+  loc.location =  'Zamboanga City'
+  loc.save  
+
+  loc = Area.new
+  loc.idLocation = '4'
+  loc.locationCode = 'TAC'
+  loc.location =  'Tacloban City'
+  loc.save  
+
+  loc = Area.new
+  loc.idLocation = '5'
+  loc.locationCode = 'BXU'
+  loc.location =  'Butuan City'
+  loc.save  

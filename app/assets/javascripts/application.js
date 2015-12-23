@@ -21,5 +21,7 @@
 
 $(document).ready(function() {
   NProgress.start();
+
 });
 
+ 

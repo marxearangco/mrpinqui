@@ -12,7 +12,7 @@ module MainHelper
 		@cat_icon = nil
 		cat = Category.find(category_id)
 
-		case cat.Category.first(3)
+		case cat.category.first(3)
 		when 'App' then 
 			@cat_icon = "<i style='color: #FA6800' class='fa fa-black-tie'></i>"
 		when 'Bat' then

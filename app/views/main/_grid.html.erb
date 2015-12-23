@@ -1,27 +1,34 @@
 <%= define_grid(@listitems) do |g|
+
 	g.blank_slate  do
     	"<div class='panel panel-danger'><h5><i>There are no records...</i></h5></div>"
   	end
 
+  	if session[:role]=='Administrator'
+		g.column name: 'Branch', attribute: 'branch', html: {style: 'text-align: Center'}, detach_with_id: :branch_filter, custom_filter: :auto, auto_reload: true  do |i|
+			raw("<i style='color: #C9302C' class='fa fa-map-marker'></i> ") + i.branch
+		end
+  	end
 
 	g.column name: 'Code', attribute: 'code', html: {style: 'text-align: Center'}, detach_with_id: :code_filter 
 		
 	
-	g.column name: 'Item', attribute: 'itemname', detach_with_id: :item_filter do |i|
-		get_category_icon(i.idCategory)
-		buffer = link_to raw(@cat_icon) +" "+ i.itemname, view_main_path(i.code), remote: true, data: { toggle: 'modal', target: "#viewitem" } 
+	g.column name: 'Item', attribute: 'itemname', model: 'Item', detach_with_id: :item_filter do |i|
+		
+		get_category_icon(i.category_id.to_s)
+		buffer = link_to raw(@cat_icon) +" "+ i.itemname, view_main_path(i.code.to_s + '-' + i.branch), remote: true, data: { toggle: 'modal', target: "#viewitem" } 
 		buffer += raw("<br>")
 		buffer += raw("<small>" << i.detail << "</small>")
 		
 	end
 	
 
-	g.column name: 'Qty', attribute: 'qtyEnd', model: 'Inventory', html: {style: 'text-align: Center'}, detach_with_id: :qty_filter do |c|
-		if c.inventory != nil
-			c.inventory.qtyEnd
+	g.column name: 'Qty', attribute: 'qtyEnd', html: {style: 'text-align: Center'}, detach_with_id: :qty_filter do |c|
+		if c.qtyEnd != nil
+			c.qtyEnd
 		else
 			0
 		end
 	end
-	g.column name: 'Location', attribute: 'vin', html: {style: 'text-align: Center'}, detach_with_id: :vin_filter 
+	g.column name: 'Location', attribute: 'vin', model: 'Item', html: {style: 'text-align: Center'}, detach_with_id: :vin_filter 
 end -%>

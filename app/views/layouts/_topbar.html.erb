@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navcollapse">
           <ul class="nav navbar-nav navbar-right">
            <% if session[:acctname] %>
-           <li><a><%= session[:acctname] + ', '+ session[:role]%></a></li>
+           <li><a><%= session[:acctname] + ', '+ session[:role] + ' - ' + session[:branch]%></a></li>
            <% end %>
            <li>
             <%= form_tag(search_main_path('0-0'), class: 'navbar-form', method: 'get') do %>
