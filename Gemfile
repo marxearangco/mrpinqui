@@ -1,9 +1,9 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '4.0.5'
 
 group :production do
-  ruby '2.1.6'
+  ruby '2.0.0'
   gem 'puma'
   gem 'rails_12factor'
 end
@@ -33,3 +33,5 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-ui-rails'
 gem "breadcrumbs_on_rails"
+gem 'parallax-rails'
+gem 'modernizr-rails'

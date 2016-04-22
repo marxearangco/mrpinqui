@@ -1875,7 +1875,7 @@ function touch2Mouse(e)
 
             if (!element.hasClass('group-of-buttons')) {element.addClass('group-of-buttons');}
 
-            var buttons = element.find('.btn, .toolbar-button');
+            var buttons = element.find('.btnmetro, .toolbar-button');
 
             for(var i = 0; i < buttons.length; i++) {
                 $(buttons[i]).data('index', i);
@@ -1885,7 +1885,7 @@ function touch2Mouse(e)
                 buttons.addClass(o.buttonStyle);
             }
 
-            element.on('click', '.btn, .toolbar-button', function(){
+            element.on('click', '.btnmetro, .toolbar-button', function(){
 
                 if (typeof o.onChange === 'string') {
                     if (!window[o.onChange]($(this).data('index'), this)) {return false;}
@@ -2462,13 +2462,13 @@ window.METRO_LOCALES = {
                 table = this.element.find('.calendar-grid');
 
             if (this._mode === 'day') {
-                table.find('.btn-select-month').on('click', function(e){
+                table.find('.btnmetro-select-month').on('click', function(e){
                     e.preventDefault();
                     e.stopPropagation();
                     that._mode = 'month';
                     that._renderCalendar();
                 });
-                table.find('.btn-previous-month').on('click', function(e){
+                table.find('.btnmetro-previous-month').on('click', function(e){
                     that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
@@ -2479,7 +2479,7 @@ window.METRO_LOCALES = {
                     }
                     that._renderCalendar();
                 });
-                table.find('.btn-next-month').on('click', function(e){
+                table.find('.btnmetro-next-month').on('click', function(e){
                     that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
@@ -2490,14 +2490,14 @@ window.METRO_LOCALES = {
                     }
                     that._renderCalendar();
                 });
-                table.find('.btn-previous-year').on('click', function(e){
+                table.find('.btnmetro-previous-year').on('click', function(e){
                     that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year -= 1;
                     that._renderCalendar();
                 });
-                table.find('.btn-next-year').on('click', function(e){
+                table.find('.btnmetro-next-year').on('click', function(e){
                     that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
@@ -2553,21 +2553,21 @@ window.METRO_LOCALES = {
                     that._mode = 'day';
                     that._renderCalendar();
                 });
-                table.find('.btn-previous-year').on('click', function(e){
+                table.find('.btnmetro-previous-year').on('click', function(e){
                     that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year -= 1;
                     that._renderCalendar();
                 });
-                table.find('.btn-next-year').on('click', function(e){
+                table.find('.btnmetro-next-year').on('click', function(e){
                     that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
                     that._year += 1;
                     that._renderCalendar();
                 });
-                table.find('.btn-select-year').on('click', function(e){
+                table.find('.btnmetro-select-year').on('click', function(e){
                     that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
@@ -2583,14 +2583,14 @@ window.METRO_LOCALES = {
                     that._mode = 'month';
                     that._renderCalendar();
                 });
-                table.find('.btn-previous-year').on('click', function(e){
+                table.find('.btnmetro-previous-year').on('click', function(e){
                     that._event = 'eventPrevious';
                     e.preventDefault();
                     e.stopPropagation();
                     that._distance -= 10;
                     that._renderCalendar();
                 });
-                table.find('.btn-next-year').on('click', function(e){
+                table.find('.btnmetro-next-year').on('click', function(e){
                     that._event = 'eventNext';
                     e.preventDefault();
                     e.stopPropagation();
@@ -4130,7 +4130,7 @@ window.METRO_LOCALES = {
             var element = this.element;
             var wrapper, button, input;
             wrapper = $("<input type='text' class='input-file-wrapper' readonly style='z-index: 1; cursor: default;'>");
-            button = element.children('.btn');
+            button = element.children('.btnmetro');
             input = element.children('input[type="file"]');
             input.css('z-index', 0);
             wrapper.insertAfter(input);
@@ -4146,7 +4146,7 @@ window.METRO_LOCALES = {
                 }
             });
 
-            element.on('click', '.btn, .input-file-wrapper', function(){
+            element.on('click', '.btnmetro, .input-file-wrapper', function(){
                 input.trigger('click');
             });
         },
@@ -4157,7 +4157,7 @@ window.METRO_LOCALES = {
             var helper_reveal = element.find('.helper-button.reveal');
             var input = element.find('input');
             var helpers = element.find('.helper-button');
-            var buttons = element.find('.btn');
+            var buttons = element.find('.btnmetro');
             var states = element.find('.input-state-error, .input-state-warning, .input-state-info, .input-state-success, .input-state-required');
             var padding = 0;
 
@@ -7437,9 +7437,9 @@ window.METRO_LOCALES = {
             if (capt.length === 0) {return;}
 
             if (o.buttons) {
-                var btnMin = o.buttons.btnMin;
-                var btnMax = o.buttons.btnMax;
-                var btnClose = o.buttons.btnClose;
+                var btnMin = o.buttons.btnmetroMin;
+                var btnMax = o.buttons.btnmetroMax;
+                var btnClose = o.buttons.btnmetroClose;
 
                 if (btnMin && btnMin !== false) {
                     bMin = $("<span/>").addClass('btn-min').appendTo(capt);
@@ -7773,19 +7773,19 @@ window.METRO_LOCALES = {
 
             var finish = o.finishStep === 'default' ? this._steps.length - 1 : o.finishStep;
             if (new_step === finish) {
-                this.element.find('.btn-finish').attr('disabled', false);
+                this.element.find('.btnmetro-finish').attr('disabled', false);
             } else {
-                this.element.find('.btn-finish').attr('disabled', true);
+                this.element.find('.btnmetro-finish').attr('disabled', true);
             }
 
             if (new_step === this._steps.length - 1) {
-                this.element.find('.btn-next').attr('disabled', true);
+                this.element.find('.btnmetro-next').attr('disabled', true);
             } else {
-                this.element.find('.btn-next').attr('disabled', false);
+                this.element.find('.btnmetro-next').attr('disabled', false);
             }
 
             if (new_step > 0) {
-                this.element.find('.btn-prior').attr('disabled', false);
+                this.element.find('.btnmetro-prior').attr('disabled', false);
             }
 
             return true;
@@ -7811,19 +7811,19 @@ window.METRO_LOCALES = {
 
             var finish = o.finishStep === 'default' ? this._steps.length - 1 : o.finishStep;
             if (new_step === finish) {
-                this.element.find('.btn-finish').attr('disabled', false);
+                this.element.find('.btnmetro-finish').attr('disabled', false);
             } else {
-                this.element.find('.btn-finish').attr('disabled', true);
+                this.element.find('.btnmetro-finish').attr('disabled', true);
             }
 
             if (new_step === 0) {
-                this.element.find('.btn-prior').attr('disabled', true);
+                this.element.find('.btnmetro-prior').attr('disabled', true);
             } else {
-                this.element.find('.btn-prior').attr('disabled', false);
+                this.element.find('.btnmetro-prior').attr('disabled', false);
             }
 
             if (new_step < finish) {
-                this.element.find('.btn-next').attr('disabled', false);
+                this.element.find('.btnmetro-next').attr('disabled', false);
             }
 
             return true;
@@ -7848,13 +7848,13 @@ window.METRO_LOCALES = {
 
             var finish = (o.finishStep === 'default' ? this._steps.length - 1 : o.finishStep);
             if (new_step === finish) {
-                this.element.find('.btn-finish').attr('disabled', false);
+                this.element.find('.btnmetro-finish').attr('disabled', false);
             } else {
-                this.element.find('.btn-finish').attr('disabled', true);
+                this.element.find('.btnmetro-finish').attr('disabled', true);
             }
 
-            this.element.find('.btn-next').attr('disabled', (new_step >= finish));
-            this.element.find('.btn-prior').attr('disabled', (new_step <= 0));
+            this.element.find('.btnmetro-next').attr('disabled', (new_step >= finish));
+            this.element.find('.btnmetro-prior').attr('disabled', (new_step <= 0));
 
             return true;
         },

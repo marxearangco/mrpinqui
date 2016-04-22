@@ -6,14 +6,18 @@ class AuthenticateController < ApplicationController
   	session[:username]=nil
   end
 
-  def login
-    @branch = Area.all
+  def index
     render layout: 'loginlayout'
   end
 
+  def login
+    @branch = Area.all
+    
+  end
+
   def logout
-  	session.clear
-  	redirect_to(:action=>'login')
+    reset_session
+   	redirect_to(:action=>'index')
   end
 
   def attempt_login
@@ -40,11 +44,12 @@ class AuthenticateController < ApplicationController
         redirect_to main_index_path
       else
         flash[:notice] = "Username and password did not match."
-        redirect_to(:action=>'login')
+        redirect_to(:action=>'index')
       end
     else
       flash[:notice] = 'Your Username is not recognized. Sign in or sign up first.'
-      redirect_to(:action=>'login')
+      @branch = Area.all
+      redirect_to(:action=>'index')
     end
   end
 end

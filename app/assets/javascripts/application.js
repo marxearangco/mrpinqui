@@ -13,15 +13,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-sprockets
 //= require nprogress
 //= require nprogress-turbolinks
 //= require wice_grid
+//= require parallax
+//= require jquery.parallax
+//= require SmoothScroll
+//= require script
+//= require bootstrap-sprockets
 //= require_tree .
 
 $(document).ready(function() {
-  NProgress.start();
-
+	NProgress.configure({
+		showSpinner: false,
+		speed: 1000
+	});
+	NProgress.start();
 });
 
  

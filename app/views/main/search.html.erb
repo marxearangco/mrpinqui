@@ -3,6 +3,7 @@
 	<div style="margin-left: 10px">
 		<ol class="breadcrumb">
 			<%= render_breadcrumbs :tag => :li, :separator => "" %>
+
 		</ol>
 	</div>
 <!-- 	<div class="row">
@@ -18,8 +19,8 @@
 					<%= label_tag "Search",nil, class: "control-label" %> 
 					<%= grid_filter @listitems, :item_filter %>
 				</div>
-			</div>
-			<div class="form-group">
+			<!-- </div>
+			<div class="form-group"> -->
 				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 					<%= label_tag "Location",nil, class: "control-label" %> 
 					<%= grid_filter @listitems, :branch_filter %>

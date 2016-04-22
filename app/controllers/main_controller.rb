@@ -4,7 +4,7 @@ class MainController < ApplicationController
   
   def confirm_logged_in
     unless session[:username]
-      redirect_to authenticate_login_path
+      redirect_to authenticate_index_path
     else
       true
     end
@@ -15,27 +15,10 @@ class MainController < ApplicationController
   end
 
   def search
+    @listitems = nil
     add_breadcrumb "Home", root_path
     parm = params[:id].split('-')
-    unless params[:id]== '0-0'
-      if parm[0] == '0' then
-        if session[:role]=='Administrator'
-          @cat = Category.find_by(:category_id=>parm[1])
-        else
-          @cat = Category.find_by(:category_id=>parm[1], :branch=> session[:branch])
-        end
-        add_breadcrumb @cat.category, search_main_path(params[:id])
-      else
-        if session[:role]=='Administrator'
-          @brand = Brand.find_by(:brand_id=>parm[1])
-        else
-          @brand = Brand.find_by(:brand_id=>parm[1], :branch=> session[:branch])
-        end
-        add_breadcrumb @brand.category.category, search_main_path(params[:id])
-        add_breadcrumb @brand.brandname, search_main_path(params[:id])
-      end
-      find_item(parm[0],parm[1])
-    else
+    if params[:id]=='0-0'
       if session[:role]=='Administrator'
         @listitems = initialize_grid(
           Inventory.select('"tblinventory".branch, "tblinventory".code, "tblinventory"."qtyEnd", "tblitem".itemname, "tblitem".vin, "tblitem".category_id, "tblitem".detail')
@@ -52,6 +35,24 @@ class MainController < ApplicationController
           )
       end
       add_breadcrumb params[:searchtext].titleize, search_main_path('0-0')
+    else
+       if parm[0] == '0'
+        if session[:role]=='Administrator'
+          @cat = Category.find_by(:category_id=>parm[1])
+        else
+          @cat = Category.find_by(:category_id=>parm[1], :branch=> session[:branch])
+        end
+        add_breadcrumb @cat.category, search_main_path(params[:id])
+      else
+        if session[:role]=='Administrator'
+          @brand = Brand.find_by(:brand_id=>parm[1])
+        else
+          @brand = Brand.find_by(:brand_id=>parm[1], :branch=> session[:branch])
+        end
+        add_breadcrumb @brand.category.category, search_main_path(params[:id])
+        add_breadcrumb @brand.brandname, search_main_path(params[:id])
+      end
+      find_item(parm[0],parm[1])
     end
     tree
   end
@@ -238,7 +239,7 @@ class MainController < ApplicationController
     if session[:role]=='Administrator'
       cat = Category.select("distinct category, category_id").order(:category)
     else
-      cat = Category.where(:branch=>session[:branch]).order(:category)
+      cat = Category.select("distinct category, category_id").where(:branch=>session[:branch]).order(:category)
     end
     if cat
       @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
@@ -248,13 +249,13 @@ class MainController < ApplicationController
         @treeview << "<div class='frame'>"
         @treeview << "<div class='heading'><span class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{@cat_icon}</span>" << " &nbsp;&nbsp;&nbsp; #{c.category}</div>\n"
         if session[:role]=='Administrator'
-          @brand = Brand.select(:brandname,:brand_id).uniq.joins(:category).where("category like '%#{c.category}%'")
+          brand = c.brand.where(:category_id=>c.id)
         else
-          @brand = Brand.select(:brandname,:brand_id).uniq.joins(:category).where("category like '%#{c.category}%' and \"tblitembrand\".branch='#{session[:branch]}'")
+          brand= c.brand.where(:branch=>"#{session[:branch]}")
         end
         @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled' style='margin-left: 10px'>\n"
         @treeview <<"<li><a href='/main/0-#{c.category_id}/search'>All</a></li>"
-        @brand.each do |b|
+        brand.each do |b|
           @treeview <<"<li><a href='/main/#{c.category_id}-#{b.brand_id}/search'> #{b.brandname}</a></li>"
         end
         @treeview << "</ul>\n" << "</div></div>"
@@ -266,6 +267,38 @@ class MainController < ApplicationController
       end
     end
   end
+  # def tree
+  #   if session[:role]=='Administrator'
+  #     cat = Category.select("distinct category, category_id").order(:category)
+  #   else
+  #     cat = Category.where(:branch=>session[:branch]).order(:category)
+  #   end
+  #   if cat
+  #     @treeview = "<div><h3>CATEGORIES:</h3></div>\n"
+  #     @treeview << "<div class='accordion' data-role='accordion'>\n"
+  #     cat.each do |c|
+  #       get_category_icon("#{c.category}")
+  #       @treeview << "<div class='frame'>"
+  #       @treeview << "<div class='heading'><span class='col-xs-1 col-sm-1 col-md-1 col-lg-1'>#{@cat_icon}</span>" << " &nbsp;&nbsp;&nbsp; #{c.category}</div>\n"
+  #       if session[:role]=='Administrator'
+  #         @brand = Brand.select(:brandname,:brand_id).uniq.joins(:category).where("category like '%#{c.category}%'")
+  #       else
+  #         @brand = Brand.select(:brandname,:brand_id).uniq.joins(:category).where("category like '%#{c.category}%' and \"tblitembrand\".branch='#{session[:branch]}'")
+  #       end
+  #       @treeview << "<div class='content'>\n<ul class='accordmenu list-unstyled' style='margin-left: 10px'>\n"
+  #       @treeview <<"<li><a href='/main/0-#{c.category_id}/search'>All</a></li>"
+  #       @brand.each do |b|
+  #         @treeview <<"<li><a href='/main/#{c.category_id}-#{b.brand_id}/search'> #{b.brandname}</a></li>"
+  #       end
+  #       @treeview << "</ul>\n" << "</div></div>"
+  #     end
+  #     @treeview << "</div>"
+  #     respond_to do |format|
+  #       format.html
+  #       format.json
+  #     end
+  #   end
+  # end
 
   def get_category_icon(category)
     @cat_icon = nil

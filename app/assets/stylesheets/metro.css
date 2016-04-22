@@ -3920,8 +3920,8 @@ a.tag {
 .app-bar .app-bar-menu > li > a > .input-control.password input {
   border-color: transparent;
 }
-.app-bar .app-bar-menu > li > .btn,
-.app-bar .app-bar-menu > li > a > .btn {
+.app-bar .app-bar-menu > li > .btnmetro,
+.app-bar .app-bar-menu > li > a > .btnmetro {
   margin-top: -0.15rem;
 }
 .app-bar .app-bar-menu > li > .image-button,
@@ -4035,7 +4035,7 @@ a.tag {
 .app-bar .app-bar-element > .input-control.password input {
   border-color: transparent;
 }
-.app-bar .app-bar-element > .btn {
+.app-bar .app-bar-element > .btnmetro {
   margin-top: -0.15rem;
 }
 .app-bar .app-bar-element > .image-button {
@@ -4120,7 +4120,7 @@ a.tag {
 .app-bar .app-bar-pullbutton > .input-control.password input {
   border-color: transparent;
 }
-.app-bar .app-bar-pullbutton > .btn {
+.app-bar .app-bar-pullbutton > .btnmetro {
   margin-top: -0.15rem;
 }
 .app-bar .app-bar-pullbutton > .image-button {
@@ -4284,7 +4284,7 @@ a.tag {
   color: #ffffff;
 }
 .h-menu > li .input-control,
-.h-menu > li .btn {
+.h-menu > li .btnmetro {
   margin-top: 10px;
 }
 .h-menu > li.active a {
@@ -5064,7 +5064,7 @@ a.tag {
   position: absolute;
   z-index: 1000;
 }
-.btn {
+.btnmetro {
   padding: 0 1rem;
   height: 2.125rem;
   text-align: center;
@@ -5080,44 +5080,44 @@ a.tag {
   margin: .15625rem 0;
   position: relative;
 }
-.btn.default {
+.btnmetro.default {
   background-color: #008287;
   color: #fff;
 }
-.btn:hover {
+.btnmetro:hover {
   border-color: #787878;
 }
-.btn:active {
+.btnmetro:active {
   background: #eeeeee;
   color: #262626;
   box-shadow: none;
 }
-.btn:focus {
+.btnmetro:focus {
   outline: 0;
 }
-.btn:disabled,
-.btn.disabled {
+.btnmetro:disabled,
+.btnmetro.disabled {
   background-color: #eaeaea;
   color: #bebebe;
   cursor: default;
   border-color: transparent;
 }
-.btn * {
+.btnmetro * {
   color: inherit;
 }
-.btn *:hover {
+.btnmetro *:hover {
   color: inherit;
 }
-.btn.rounded {
+.btnmetro.rounded {
   border-radius: .325rem;
 }
-.btn > [class*=mif-] {
+.btnmetro > [class*=mif-] {
   vertical-align: middle;
 }
-.btn.btn-shadow {
+.btnmetro.btnmetro-shadow {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
 }
-.btn img {
+.btnmetro img {
   height: .875rem;
   vertical-align: middle;
   margin: 0;
@@ -5374,21 +5374,21 @@ a.tag {
 .square-button {
   border-radius: 0;
 }
-a.btn,
+a.btnmetro,
 a.round-button,
 a.square-button {
   color: inherit;
 }
-a.btn:hover,
+a.btnmetro:hover,
 a.round-button:hover,
 a.square-button:hover {
   text-decoration: none;
 }
-.btn.loading-pulse {
+.btnmetro.loading-pulse {
   position: relative;
   padding: 0 1.325rem;
 }
-.btn.loading-pulse:before {
+.btnmetro.loading-pulse:before {
   position: absolute;
   content: "";
   left: 0;
@@ -5401,15 +5401,15 @@ a.square-button:hover {
   -webkit-animation: scaleout 1s infinite ease-in-out;
   animation: scaleout 1s infinite ease-in-out;
 }
-.btn.loading-pulse.lighten:before {
+.btnmetro.loading-pulse.lighten:before {
   background-color: #fff;
 }
-.btn.loading-cube {
+.btnmetro.loading-cube {
   position: relative;
   padding: 0 1.325rem;
 }
-.btn.loading-cube:before,
-.btn.loading-cube:after {
+.btnmetro.loading-cube:before,
+.btnmetro.loading-cube:after {
   content: "";
   background-color: #333;
   width: 5px;
@@ -5421,12 +5421,12 @@ a.square-button:hover {
   -webkit-animation: cubemove 1.8s infinite ease-in-out;
   animation: cubemove 1.8s infinite ease-in-out;
 }
-.btn.loading-cube:after {
+.btnmetro.loading-cube:after {
   -webkit-animation-delay: -0.9s;
   animation-delay: -0.9s;
 }
-.btn.loading-cube.lighten:before,
-.btn.loading-cube.lighten:after {
+.btnmetro.loading-cube.lighten:before,
+.btnmetro.loading-cube.lighten:after {
   background-color: #fff;
 }
 .command-button {
@@ -6030,11 +6030,11 @@ a.image-button {
 a.shortcut-button {
   padding-top: 10px;
 }
-.btn.dropdown-toggle {
+.btnmetro.dropdown-toggle {
   padding-right: 1.625rem;
 }
-.btn.dropdown-toggle.drop-marker-light:before,
-.btn.dropdown-toggle.drop-marker-light:after {
+.btnmetro.dropdown-toggle.drop-marker-light:before,
+.btnmetro.dropdown-toggle.drop-marker-light:after {
   background-color: #ffffff;
 }
 .nave-button {
@@ -6103,12 +6103,12 @@ a.shortcut-button {
 .nave-button.light span:after {
   background-color: #ffffff;
 }
-.group-of-buttons .btn.active,
+.group-of-buttons .btnmetro.active,
 .group-of-buttons .toolbar-button.active {
   background-color: #00ccff;
   color: #ffffff;
 }
-.group-of-buttons .btn:active,
+.group-of-buttons .btnmetro:active,
 .group-of-buttons .toolbar-button:active {
   background-color: #1ba1e2;
   color: #ffffff;
@@ -6125,7 +6125,7 @@ a.shortcut-button {
 .split-button:after {
   clear: both;
 }
-.split-button .btn,
+.split-button .btnmetro,
 .split-button .split {
   display: block;
   float: left;
@@ -6286,68 +6286,68 @@ a.shortcut-button {
   width: 3.125rem;
   height: 3.125rem;
 }
-.btn.primary {
+.btnmetro.primary {
   background: #2086bf;
   color: #ffffff;
   border-color: #2086bf;
 }
-.btn.primary:active {
+.btnmetro.primary:active {
   background: #1b6eae;
   color: #ffffff;
 }
-.btn.success {
+.btnmetro.success {
   background: #60a917;
   color: #ffffff;
   border-color: #60a917;
 }
-.btn.success:active {
+.btnmetro.success:active {
   background: #128023;
   color: #ffffff;
 }
-.btn.danger,
-.btn.alert {
+.btnmetro.danger,
+.btnmetro.alert {
   background: #ce352c;
   color: #ffffff;
   border-color: #ce352c;
 }
-.btn.danger:active,
-.btn.alert:active {
+.btnmetro.danger:active,
+.btnmetro.alert:active {
   background: #9a1616;
   color: #ffffff;
 }
-.btn.info {
+.btnmetro.info {
   background: #59cde2;
   color: #ffffff;
   border-color: #59cde2;
 }
-.btn.info:active {
+.btnmetro.info:active {
   background: #1ba1e2;
   color: #ffffff;
 }
-.btn.warning {
+.btnmetro.warning {
   background: #fa6800;
   color: #ffffff;
   border-color: #fa6800;
 }
-.btn.warning:active {
+.btnmetro.warning:active {
   background: #bf5a15;
   color: #ffffff;
 }
-.btn.link {
+.btnmetro.link {
   background: transparent;
   color: #2086bf;
   border-color: transparent;
   text-decoration: underline;
 }
-.btn.link:hover,
-.btn.link:active {
+.btnmetro.link:hover,
+.btnmetro.link:active {
   background: transparent;
   color: #114968;
   border-color: transparent;
 }
-a.btn,
-span.btn,
-div.btn,
+a.btnmetro,
+span.btnmetro,
+div.btnmetro,
 a.round-button,
 span.round-button,
 div.round-button,
@@ -6359,9 +6359,9 @@ span.square-button,
 div.square-button {
   padding-top: .53125rem;
 }
-a.btn.big-button,
-span.btn.big-button,
-div.btn.big-button,
+a.btnmetro.big-button,
+span.btnmetro.big-button,
+div.btnmetro.big-button,
 a.round-button.big-button,
 span.round-button.big-button,
 div.round-button.big-button,
@@ -6619,8 +6619,8 @@ div.square-button.big-button {
 .toolbar-section.condensed:after {
   clear: both;
 }
-.toolbar-group.condensed .btn,
-.toolbar-section.condensed .btn,
+.toolbar-group.condensed .btnmetro,
+.toolbar-section.condensed .btnmetro,
 .toolbar-group.condensed .toolbar-button,
 .toolbar-section.condensed .toolbar-button {
   display: block;
@@ -7160,13 +7160,13 @@ div.square-button.big-button {
 .input-control.tel {
   width: 10.875rem;
 }
-.input-control.text .btn,
-.input-control.select .btn,
-.input-control.file .btn,
-.input-control.password .btn,
-.input-control.number .btn,
-.input-control.email .btn,
-.input-control.tel .btn {
+.input-control.text .btnmetro,
+.input-control.select .btnmetro,
+.input-control.file .btnmetro,
+.input-control.password .btnmetro,
+.input-control.number .btnmetro,
+.input-control.email .btnmetro,
+.input-control.tel .btnmetro {
   position: absolute;
   top: 0;
   right: 0;
@@ -7192,13 +7192,13 @@ div.square-button.big-button {
   top: -1rem;
   font-size: .875rem;
 }
-.input-control.text > input:disabled + .btn,
-.input-control.select > input:disabled + .btn,
-.input-control.file > input:disabled + .btn,
-.input-control.password > input:disabled + .btn,
-.input-control.number > input:disabled + .btn,
-.input-control.email > input:disabled + .btn,
-.input-control.tel > input:disabled + .btn {
+.input-control.text > input:disabled + .btnmetro,
+.input-control.select > input:disabled + .btnmetro,
+.input-control.file > input:disabled + .btnmetro,
+.input-control.password > input:disabled + .btnmetro,
+.input-control.number > input:disabled + .btnmetro,
+.input-control.email > input:disabled + .btnmetro,
+.input-control.tel > input:disabled + .btnmetro {
   display: none;
 }
 .input-control.text .prepend-icon,
@@ -7285,7 +7285,7 @@ div.square-button.big-button {
   font-size: 1.875rem;
   padding-left: 1.25rem ;
 }
-.input-control.big-input .btn {
+.input-control.big-input .btnmetro {
   height: 3.25rem;
   top: 50%;
   margin-top: -1.625rem;
@@ -7406,14 +7406,14 @@ textarea.required {
   height: 0.0625rem;
 }
 .input-control.file input[type=file]:disabled ~ input[type=text],
-.input-control.file input[type=file]:disabled ~ .btn {
+.input-control.file input[type=file]:disabled ~ .btnmetro {
   background-color: #EBEBE4;
 }
 .input-control.file:hover input[type=text],
 .input-control.file:hover button {
   border-color: #787878;
 }
-.input-control .btn-group {
+.input-control .btnmetro-group {
   position: absolute;
   right: 0;
   top: 0;
@@ -7421,21 +7421,21 @@ textarea.required {
   padding: 0;
   z-index: 2;
 }
-.input-control .btn-group:before,
-.input-control .btn-group:after {
+.input-control .btnmetro-group:before,
+.input-control .btnmetro-group:after {
   display: table;
   content: "";
 }
-.input-control .btn-group:after {
+.input-control .btnmetro-group:after {
   clear: both;
 }
-.input-control .btn-group .btn {
+.input-control .btnmetro-group .btnmetro {
   position: relative;
   float: left;
   margin: 0;
 }
 .input-control > .helper-button,
-.input-control > .btn-group > .helper-button {
+.input-control > .btnmetro-group > .helper-button {
   visibility: hidden;
   margin: 0;
   border: 0;
@@ -7444,25 +7444,25 @@ textarea.required {
   z-index: 100;
   font-size: .75rem;
 }
-.input-control > .btn.helper-button {
+.input-control > .btnmetro.helper-button {
   margin: 2px 2px 0;
 }
-.input-control > .btn-group > .btn.helper-button {
+.input-control > .btnmetro-group > .btnmetro.helper-button {
   margin: 2px 0 ;
 }
-.input-control > .btn-group > .btn.helper-button:last-child {
+.input-control > .btnmetro-group > .btnmetro.helper-button:last-child {
   margin-right: 2px ;
 }
 .input-control input:focus ~ .helper-button,
-.input-control input:focus ~ .btn-group > .helper-button {
+.input-control input:focus ~ .btnmetro-group > .helper-button {
   visibility: visible;
 }
 .input-control input ~ .helper-button:active,
-.input-control input ~ .btn-group > .helper-button:active {
+.input-control input ~ .btnmetro-group > .helper-button:active {
   visibility: visible;
 }
 .input-control input:disabled ~ .helper-button,
-.input-control input:disabled ~ .btn-group > .helper-button {
+.input-control input:disabled ~ .btnmetro-group > .helper-button {
   display: none ;
 }
 .input-control.modern {
@@ -8287,9 +8287,9 @@ input[type="submit"].link:active {
 .window-caption .window-caption-icon ~ .window-caption-title {
   padding-left: .3125rem;
 }
-.window-caption .btn-close,
-.window-caption .btn-min,
-.window-caption .btn-max {
+.window-caption .btnmetro-close,
+.window-caption .btnmetro-min,
+.window-caption .btnmetro-max {
   position: absolute;
   height: 1.5rem;
   width: 1.5rem;
@@ -8308,26 +8308,26 @@ input[type="submit"].link:active {
   top: .25rem;
   right: .25rem;
 }
-.window-caption .btn-close:hover,
-.window-caption .btn-min:hover,
-.window-caption .btn-max:hover {
+.window-caption .btnmetro-close:hover,
+.window-caption .btnmetro-min:hover,
+.window-caption .btnmetro-max:hover {
   background-color: #cde6f7;
   color: #2a8dd4;
 }
-.window-caption .btn-close:hover:after,
-.window-caption .btn-min:hover:after,
-.window-caption .btn-max:hover:after {
+.window-caption .btnmetro-close:hover:after,
+.window-caption .btnmetro-min:hover:after,
+.window-caption .btnmetro-max:hover:after {
   border-color: #2a8dd4;
 }
-.window-caption .btn-close:active,
-.window-caption .btn-min:active,
-.window-caption .btn-max:active {
+.window-caption .btnmetro-close:active,
+.window-caption .btnmetro-min:active,
+.window-caption .btnmetro-max:active {
   background-color: #92c0e0;
   color: #ffffff;
 }
-.window-caption .btn-close:after,
-.window-caption .btn-min:after,
-.window-caption .btn-max:after {
+.window-caption .btnmetro-close:after,
+.window-caption .btnmetro-min:after,
+.window-caption .btnmetro-max:after {
   border-color: #777777;
   content: '\D7';
   position: absolute;
@@ -8335,8 +8335,8 @@ input[type="submit"].link:active {
   top: -2px;
   margin-left: -0.25em;
 }
-.window-caption .btn-min:after,
-.window-caption .btn-max:after {
+.window-caption .btnmetro-min:after,
+.window-caption .btnmetro-max:after {
   display: block;
   position: absolute;
   width: .625rem;
@@ -8349,18 +8349,18 @@ input[type="submit"].link:active {
   margin-left: -0.375rem;
   top: auto;
 }
-.window-caption .btn-max:after {
+.window-caption .btnmetro-max:after {
   height: .375rem;
   border: 1px #000 solid;
   border-top-width: 2px;
 }
-.window-caption .btn-max {
+.window-caption .btnmetro-max {
   right: 1.8125rem;
 }
-.window-caption .btn-min {
+.window-caption .btnmetro-min {
   right: 3.375rem;
 }
-.window-caption .btn-close:after {
+.window-caption .btnmetro-close:after {
   margin-top: .1875rem;
   margin-left: -0.3125rem;
 }
@@ -8998,7 +8998,7 @@ input[type="submit"].link:active {
 .calendar .calendar-cell.year-cell {
   width: 23.4042625%;
 }
-.calendar .calendar-actions .btn {
+.calendar .calendar-actions .btnmetro {
   margin: .15625rem;
 }
 .calendar .day-of-week {
@@ -9390,7 +9390,7 @@ input[type="submit"].link:active {
 .wizard .actions button:last-child {
   margin-right: 0;
 }
-.wizard .actions button.btn-finish {
+.wizard .actions button.btnmetro-finish {
   background-color: #60a917;
   color: #ffffff;
 }
@@ -9506,11 +9506,11 @@ input[type="submit"].link:active {
 .wizard2 .action-bar:after {
   clear: both;
 }
-.wizard2 .action-bar .btn {
+.wizard2 .action-bar .btnmetro {
   margin: 0 .125rem;
   opacity: .6;
 }
-.wizard2 .action-bar .btn:hover {
+.wizard2 .action-bar .btnmetro:hover {
   opacity: 1;
 }
 .countdown {

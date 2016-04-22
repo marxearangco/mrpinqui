@@ -15,7 +15,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<title><%= content_for?(:title) ? yield(:title) : "DMS Inquiry" %></title>
-	<%= favicon_link_tag 'logo2.png' %>
+	
 	<%= javascript_include_tag 'application' %>
 	<%= stylesheet_link_tag    "application" %>
 	<!--%= javascript_include_tag "vendor/custom.modernizr" %-->
@@ -23,7 +23,9 @@
 </head>
 
 <body class="img-body">
-	<div id="spinner" style="display:none"><div class="img-center" style="z-index: 9999">Uploading Please Wait...</div></div>
+	<div id="spinner" style="display:none">
+		<div class="img-center" style="z-index: 9999">Uploading Please Wait...</div>
+	</div>
 	<input type="checkbox" id="offcanvas" class="toggle" />
 	<div class="wrapper">
 		<aside class="hidden-lg hidden-md">
@@ -34,7 +36,7 @@
 			</nav>
 		</aside>
 		<section>
-			<%= render 'layouts/topbar' %>
+			<%= render 'layouts/topbar1' %>
 			<br /><br /><br /><br />
 
 			<br />
@@ -50,6 +52,7 @@
 					</div>
 				</div>
 			</div>
+			<!--%= render 'layouts/footer' %-->
 		</section>
 	</div>
 </body>

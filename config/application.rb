@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module DMS
   class Application < Rails::Application
+    config.assets.paths << "#{Rails.root}/vendor/assets"
+    #config.assets.paths << Rails.root.join("#{Rails.root}/app/assets", "#{Rails.root}/vendor/assets")
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -1,32 +1,63 @@
-<nav class="navbar navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="row">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <span class="navbar-brand" style="color: #F1EAEA">
-          <a class="text-center"><%= image_tag "logo.png", class: 'img-responsive', style: 'max-width: 350px; margin-top: -20px;' %></a>
-          <!-- <a style="color:#FFF">NORMINRING</a><a style="color:#C9302C">MOTORBIKES</a> -->
+        <span class="pull-right">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </span>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <!-- <div class="collapse navbar-collapse" id="navcollapse">
-      <ul class="nav navbar-nav navbar-right"> -->
-        <!--% if session[:acctname] %-->
-        <!-- <li> -->
-        <!--%= link_to raw('<span class="glyphicon glyphicon-user"></span> ' +session[:acctname].to_s),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %-->
-        <!-- </li> -->
-        <!--% else %-->
-        <!-- <li> -->
-        <!--%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %-->
-        <!-- </li> -->
-        <!--% end %-->
-        <!-- </ul> -->
-        <!-- </div> --><!-- /.navbar-collapse -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </nav>  
+        <span class="navbar-brand"> <!-- style="font-size: 1.2em; color: #F1EAEA" -->
+          <span class="pull-left"> 
+            <a class="hidden-md hidden-lg">
+              <label for="offcanvas" class="toggler">
+                <span>
+                  <i class="fa fa-navicon fa-lg"></i> &nbsp;
+                  <span style="font: normal 20px 'Venus Rising';text-decoration: none; color: #fff">NORMINRING MOTORBIKES</span>
+                </span>
+              </label>
+            </a>
+
+            <a class="text-center hidden-xs hidden-sm">
+              <span style="font: normal .8em 'Venus Rising';text-decoration: none; color: #fff">NORMINRING MOTORBIKES</span>
+            </a>
+          </span>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navcollapse">
+          <ul class="nav navbar-nav navbar-right">
+           <% if session[:acctname] %>
+           <li><a><%= session[:acctname] + ', '+ session[:role].first(3) + ' - ' + session[:branch]%></a></li>
+           <% end %>
+           <li>
+            <%= form_tag(search_main_path('0-0'), class: 'navbar-form', method: 'get') do %>
+            <%= text_field_tag :searchtext, params[:searchtext], class: 'form-control', placeholder: 'Quick Search...', autofocus: 'true' %>
+
+            <% end %>
+          </li>
+          <!-- <li>
+            <form class="navbar-form navbar-right">
+              <input type="text" class="form-control" placeholder="Quick Search..." />
+            </form>
+          </li> -->
+          <% if session[:role] %>
+          <li>
+            <% if session[:role] == 'Administrator' %>
+            <%= link_to raw('<span class="fa fa-upload"></span> Upload'),  main_upload_path, remote: true, data: { toggle: 'modal', target: "#inventory" }, style: 'color : #fff' %>
+            <% end %>
+          </li>
+          <li><%= link_to raw('<span class="fa fa-sign-out"></span> Logout'),  authenticate_logout_path, style: 'color : #fff', data: { confirm: 'Are you sure do you want to logout?' } %>
+          </li>
+          <% else %>
+          <li>
+            <%= link_to raw('Sign Up <span class="glyphicon glyphicon-user"></span>'),  '#', style: 'color : #fff', data: { confirm: 'Sign up form on progress' } %>
+          </li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</nav>  

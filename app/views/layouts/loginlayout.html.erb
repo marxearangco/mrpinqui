@@ -15,18 +15,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title><%= content_for?(:title) ? yield(:title) : "DMS Inquiry" %></title>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag :modernizr %>
     <%= stylesheet_link_tag    "application" %>
     <!--%= javascript_include_tag "vendor/custom.modernizr" %-->
     <%= csrf_meta_tags %>
 </head>
 
-<body class="img">
-    <%= render 'layouts/topbar1' %>
+<!-- <body class="img"> -->
+<body>
+    <%= render 'layouts/topbarmobi' %>
     <div>
         <%= yield %>
     </div>
+    <%= javascript_include_tag :application %>
+    <%= render 'layouts/footer' %>
 </body>
 </html>
-
-
